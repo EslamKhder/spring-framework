@@ -1,0 +1,17 @@
+Please 
+create interface UserService with 2 function 
+
+void save (String name);
+void update (String name);
+
+create class PersonService that implement UserService
+create class MangerService that implement UserService
+
+create Container on your project 
+create bean of PersonService
+create bean of MangerService
+
+call two bean on main class and call save and update function
+----------------------------------------------------------------------------
+apply Container xml
+apply container java no xml

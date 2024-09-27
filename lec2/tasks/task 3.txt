@@ -1,0 +1,16 @@
+Please 
+create interface UserService with 2 function 
+
+void save (String name);
+
+create class PersonService that implement UserService
+
+make scope prototype
+
+please implement 
+init mathod
+destroy mathod
+
+----------------------------------------------------------------------------
+apply Container xml
+apply container java no xml
