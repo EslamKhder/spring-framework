@@ -1,0 +1,47 @@
+data Base Relationship
+please write query to create the following
+
+create Hospital Table with 
+
+id
+name
+numberOfDoctors
+numberOfPatient
+
+-------------------------
+
+create Doctor Table with 
+
+id
+userName
+salary
+
+-------------------------
+create DoctorData Table with 
+
+id
+fukkAddress
+firstName
+lastName
+age
+-------------------------
+
+create Patient Table with 
+
+id
+name
+typeOfDisease
+----------------------------------------
+the relation between Doctor and DoctorData
+one to one
+-------------------------
+the relation between Hospital and Doctor
+one to many
+----------------------------------------
+the relation between Doctor and Patient
+one to many
+----------------------------------------
+the relation between Hospital and Patient
+many to many
+--------------
+
