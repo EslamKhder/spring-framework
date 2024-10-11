@@ -1,0 +1,5 @@
+based on task 1
+
+please using featch lazy between user and user details and get data
+
+please using featch EAGER between user and user details and get data

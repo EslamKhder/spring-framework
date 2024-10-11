@@ -1,0 +1,3 @@
+based on task 1
+
+please apply inhertance on hibernate

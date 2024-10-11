@@ -1,0 +1,14 @@
+create entity 
+- User with attribute id , name , age
+- User details with attribute id , address, phone
+- Frinds with attribute id , name 
+- Post with attribute id , header, content
+
+relationShip:
+- user has only userDetails
+- user has many friends
+- friends has many user
+- user has many post
+- post has only one user
+
+please apply relationShip

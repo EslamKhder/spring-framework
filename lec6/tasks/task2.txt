@@ -1,0 +1,7 @@
+based on task 1
+
+without using cascade
+
+add user with user details 
+add user with frinds  
+add user with post  
