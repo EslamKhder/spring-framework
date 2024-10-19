@@ -1,0 +1,17 @@
+please Create Teacher Class with id, name , salary with java code
+
+Apply on this class 
+
+- create teble
+- create Repo or Dao
+- create Service
+- create Controller 
+
+create apis
+- to add Teacher    Post API
+- to Update Teacher    PUT API
+- to Delete Teacher    DELETE API
+- to get Teacher by ID    Get API
+- to get All Teacher From DB    Get API
+
+
