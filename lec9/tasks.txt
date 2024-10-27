@@ -1,0 +1,56 @@
+Spring boot application
+- create spring boot application then apply :
+
+create Employee Entity 
+(id, name , age, salary)
+-------------------------------
+create Email Entity 
+(id, name , content)
+name refere to email type such as (gmail, yahoo, etc..)
+content refere to email content such as (eslam@gmail.com)
+-------------------------------
+relation ship between Employee and Email  onetomaney
+relation ship between Email and Employee  maneytoone
+-------------------------------
+
+create Controller , service and DAO(Repo) of Employee and Email
+-------------------------------
+create API to create Employee
+create API to update Employee
+create API to remove Employee
+create API to get all Employee
+create API to get Employee by Id
+create API to get Employee by List of ID
+create API to get Employee by List of name 
+-------------------------------------------------
+create API to create Email
+create API to update Email
+create API to remove Email
+create API to get all Email
+create API to get Email by name
+create API to get Email by List of name
+create API to get Email by content
+--------------------------------------------------
+create api to take Employee with List of address and save all
+--------------------------------------------------
+for request related to all APIS above PLEASE user Dto and Apply mapper
+---------------------------------------------------
+for all apis on controller please make any api return Response Entity with valid status code response
+---------------------------------------------------
+apply lombok
+---------------------------------------------------
+apply validation on dto
+for Employee 
+name must be not null and not empty
+age must be greater than 15 and less than 40, 
+salary must be greater than 5000 and less than 10000
+-------------------------------------------------------
+apply validation on dto
+for email
+name must be not null and not empty
+content must be on email pattern 
+-------------------------------------------------------
+
+
+
+
