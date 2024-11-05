@@ -1,0 +1,9 @@
+create api on teacher to get all teacher and students related to this teacher
+create api on teacher to get all teacher and students related to this teacher by Id
+note ---> by id mean that api will take id of teacher and techaer will return with related students
+------------------------------
+
+create api on Student to get all Students and teachers related to this Students 
+create api on Student to get all Students and teachers related to this Students by Id
+note --> by id mean that api will take id of student and student will return with related teachers
+------------------------------
