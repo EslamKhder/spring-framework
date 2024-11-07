@@ -1,0 +1,45 @@
+create User and and post  entity 
+
+user has id, name, age and password
+post has id, text and imagePath
+------------------------------------------
+Create Java classes annotated with @Entity to define fields for each entity (id, name, age, password for User; id, text, imagePath for Post).
+user can have multiple posts, define a @OneToMany relationship in the User entity.
+Define UserRepository(dao) and PostRepository(dao) as interfaces extending JpaRepository.
+---------------------------------------------------------------------------------
+pls create services for user and post
+pls create controller  for user and post
+-------------------------------------------------
+please apply dto and mapper
+-----------------------------------------------
+please apply validation on dto
+
+For user dto  name size must be > 7
+For user dto  age size must be 18
+For user dto  password must be has upper case , lower case , number and special char
+----------------------------------------------------
+For user dto text must be not null and size of char >= 20
+-----------------------------------------------------------------
+Create an 
+endpoint: POST /users with a User payload. This would handle user creation.
+Endpoint: GET /users/{id} to retrieve a specific user by ID.
+Endpoint: GET /users to retrieve a list of all users.
+Endpoint: PUT /users/{id} with a payload containing updated user information.
+Endpoint: DELETE /users/{id} to remove a user.
+---------------------------------
+Endpoint: POST /posts with a Post payload. Optionally, associate it with a user if there’s a relationship.
+Endpoint: GET /posts/{id} to retrieve a specific post by ID.
+Endpoint: GET /posts to retrieve a list of all posts.
+Endpoint: PUT /posts/{id} with a payload containing updated post information.
+Endpoint: DELETE /posts/{id} to remove a post.
+Endpoint: GET /users/{id}/posts to list all posts created by a particular user.
+----------------------------------------------------------------------------------
+Endpoint: GET  /users/usersWithPost             to get all users with all posts
+Endpoint: GET  /users/userWithPost/{id}         to get only user with id on url with all posts
+Endpoint: GET  /posts/postsWithUsers             to get all posts with user
+Endpoint: GET  /posts/postWithUsers/{id}         to get only post with id on url with user
+
+
+
+
+
