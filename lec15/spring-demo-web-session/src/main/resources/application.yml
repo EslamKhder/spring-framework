@@ -1,0 +1,25 @@
+# spring
+server:
+  port: 9090
+
+# Oracle Database Configuration
+spring:
+#  security:
+#    user:
+#      name: eslam
+#      password: eslam123
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/xe
+    username: hr
+    password: hr
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true
+  messages.:
+    basename: i18n/messages
+    local-default:
+
+management-token:
+  secret: dshfksdjhk#$^sfddsmnmcfdmn_++#@$fsdfmns,fs@$RGDSF$@%<<<.hfh
+  time: 5h

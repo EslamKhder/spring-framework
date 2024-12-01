@@ -1,0 +1,29 @@
+http://localhost:9090/student/addListOfStudent
+[
+    {
+        "name": "John Doe",
+        "password": "password123",
+        "phoneNumber": "+001113"
+    },
+    {
+        "name": "John Doe",
+        "password": "password123",
+        "phoneNumber": "+201113"
+    }
+]
+----------------------------------------------------
+http://localhost:9090/user/login
+{
+    "email": "eslam",
+    "password": "12345"
+}
+-------------------------------------------------------
+http://localhost:9090/student/addSudent
+{
+  "name": "John Doe",
+  "password": "password123",
+  "phoneNumber": "+001113"
+}
+-----------------------------------------
+http://localhost:9090/student/allStudent
+--------------------------------------------
