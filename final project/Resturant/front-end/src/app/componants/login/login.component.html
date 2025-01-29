@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">Login Form</div>
+  </div>
+  <div class="form-container">
+    <div class="form-inner">
+      <div class="login spec-login">
+        <div class="field">
+          <input #email type="text" placeholder="Email Address" required>
+        </div>
+        <div class="field">
+          <input #password type="password" placeholder="Password" required>
+        </div>
+        <div class="field btn spec-style">
+          <div class="btn-layer"></div>
+          <button class="submit" (click)="login(email.value, password.value)">Login</button>
+        </div>
+        <div class="signup-link">Not a member? <a routerLink="/signup">Signup now</a></div>
+      </div>
+    </div>
+  </div>
+</div>

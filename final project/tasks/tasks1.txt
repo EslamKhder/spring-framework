@@ -1,0 +1,41 @@
+Category Entity
+(id, name, logoPath, flag)
+
+Product Entity
+(id, name, logoPath, desc, price)
+
+one to many
+many to one
+--------------------------------------------
+
+api to get all Category
+api to get all Product by CategoryID
+-----------------------------------
+api to get all Product based on key for 
+(name or desc)
+
+note 
+if not found Products pls return Bundel message
+with English and Arabic text
+--------------------------------------------------
+api to get all Products based on letters 
+for 
+(name and desc)
+
+(like letters)
+
+note 
+if not found Products pls return Bundel message
+with English and Arabic text
+-----------------------------------------------
+
+create new Entity Chefs 
+(id, name , spec, logoPath, faceLink, tweLink, instaLink)
+--------------------------------------------
+api to get All Chefs
+--------------------------------------------
+
+
+
+
+
