@@ -12,8 +12,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
-
-
     private Client client;
 
     public CustomUserDetails(Client client) {

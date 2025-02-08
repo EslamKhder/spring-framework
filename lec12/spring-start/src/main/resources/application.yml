@@ -1,0 +1,24 @@
+spring:
+  security:
+    user:
+      name: eslam
+      password: 123
+  application:
+    name: spring-start
+
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/orclpdb
+    username: hr
+    password: hr
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  messages:
+    baseName: i18n/messages
+    local-default: fr
+server:
+  port: 9090
