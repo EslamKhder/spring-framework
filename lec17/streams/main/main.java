@@ -17,23 +17,7 @@ public class main {
     public static void main(String[] args) {
 
 
-        List<Student> students = List.of(
-                new Student(10, 40),
-                new Student(1, 2),
-                new Student(4, 3),
-                new Student(4, 44),
-                new Student(10, 55)
-        );
-
-        System.out.println(
-                students.stream().collect(Collectors.groupingBy(Student::getX, Collectors.counting()))
-        );
-        Map<Integer, Optional<Student>> students1 = students.stream()
-                .collect(Collectors.groupingBy(Student::getX, Collectors.maxBy(
-                        Comparator.comparing(Student::getX)
-                )));
-        /*
-
+/*
 //groupingBy with max by
 List<Student> students = List.of(
                 new Student(10, 40),
@@ -46,10 +30,7 @@ List<Student> students = List.of(
         System.out.println(
                 students.stream().collect(Collectors.groupingBy(Student::getX, Collectors.counting()))
         );
-        Map<Integer, Optional<Student>> students1 = students.stream()
-                .collect(Collectors.groupingBy(Student::getX, Collectors.maxBy(
-                        Comparator.comparing(Student::getX)
-                )));
+
 // groupingBy with counting
 List<Student> students = List.of(
                 new Student(10, 40),
@@ -153,7 +134,7 @@ System.out.println(
         );
 
 
-         //example  input    input     output any thing not return such sout
+        //example  input    input     output any thing not return such sout
         BiConsumer<Integer, Integer> println = (x, y) -> System.out.println(x + "  " + y);
         println.accept(5,10);
 
@@ -163,29 +144,8 @@ System.out.println(
         //example     input   input        output       result must be boolean
         BiPredicate<Integer, Integer> integerStringBiPredicate = (x,y)-> x==y;
 
-        // example input and output same datatype
-        UnaryOperator<Integer> integerUnaryOperator = x -> x * 3;
-        System.out.println(integerUnaryOperator.apply(10));
-
         // example  (no input return Supplier)
         Supplier<Integer> supplier = ()-> 2;
-
-        List<Integer> numbersV1 = Arrays.asList(5,4,3);
-
-        BinaryOperator binaryOperator = new BinaryOperator() {
-            @Override
-            public Object apply(Object o, Object o2) {
-                return (Integer)o + (Integer)o2;
-            }
-        };
-
-        System.out.println(numbersV1.stream().filter().reduce(binaryOperator).get());
-//        System.out.println(numbersV1.stream().reduce((integer, integer2) -> integer + integer2));
-
-        // example ---------------------------------------------------------------
-        List<Integer> numbersV1 = Arrays.asList(1001);
-
-        System.out.println(numbersV1.stream().reduce(1000, Integer::compareTo));
 
 
         // example ---------------------------------------------------------------
