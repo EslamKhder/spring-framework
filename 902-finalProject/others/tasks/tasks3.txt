@@ -1,0 +1,53 @@
+please create Client Entity
+
+private Long id;
+private String name;
+private String password;
+String email;
+String phoneNumber;
+Set<RequestOrder> requestOrders = new HashSet<>(); //  @OneToMany
+set<Role> //   @OneToMany
+ContactInfo contactInfo; // one to many
+----------------------------------------------------------------
+// create role entity
+Role
+
+private Long id;
+private String code;
+Client client; // many to one
+-------------------------------------------------------
+please create RequestOrder Entity Contain
+
+private Long id;
+private String code;
+private String totalPrice;
+private String totalQuantity;
+private List<Product>    //@many to many
+private Client client; // many to one
+------------------------------------------
+please create entity with Name ContactInfo
+private Long id;
+private String name;
+private String email;
+private String subject;
+private String message; // make this 1000 as size
+Client client;   // many to one
+-------------------------------------------------------------
+in product please add List<RequestOrder>
+
+many to many
+----------------------------------------------------------
+
+with client and role apply spring security with all apis (JWT and filters)
+
+api to login    when login return token
+api to create account    when create account return token
+
+with token you can access all apis 
+-----------------------------------------------------------------------------------
+api to save order from front-end
+------------------------------------------
+
+
+
+
