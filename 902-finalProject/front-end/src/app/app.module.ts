@@ -18,6 +18,8 @@ import {HttpClientModule} from "@angular/common/http";
 export const routes: Routes = [
 
   // http://localhost:4200/active
+  {path: 'category/:id', component: ProductsComponent},
+  {path: 'search/:key', component: ProductsComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'cardDetails', component: CardDetailsComponent},
   {path: 'contact-info', component: ContactInfoComponent},

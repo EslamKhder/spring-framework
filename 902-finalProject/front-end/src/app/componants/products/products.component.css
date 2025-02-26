@@ -1,0 +1,53 @@
+.no-products-message, .no-products-message-ar {
+  font-family: 'Arial', sans-serif; /* Clean and modern font */
+  font-size: 1.2rem; /* Slightly larger text */
+  color: #555; /* Neutral gray color for readability */
+  background-color: #f9f9f9; /* Subtle background color */
+  padding: 15px; /* Add spacing inside the box */
+  border: 1px solid #ddd; /* Light border for structure */
+  border-radius: 8px; /* Rounded corners */
+  text-align: center; /* Center the text */
+  margin: 10px auto; /* Add space around and center on the page */
+  max-width: 500px; /* Limit the width of the message box */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a slight shadow for depth */
+}
+
+.no-products-message {
+  color: #007BFF; /* Blue color for English text */
+}
+
+.no-products-message-ar {
+  color: #FF5722; /* Orange color for Arabic text */
+  direction: rtl; /* Right-to-left text for Arabic */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Beautiful gradient */
+  color: #fff;
+}
+
+.waiting-message {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2); /* Transparent white background */
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

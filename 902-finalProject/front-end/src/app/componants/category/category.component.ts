@@ -12,10 +12,10 @@ export class CategoryComponent implements OnInit{
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.loadAllProduct()
+    this.loadAllCategory()
   }
 
-  loadAllProduct(){
+  loadAllCategory(){
     this.categoryService.getAllCategory().subscribe(
       response => {
         this.category = response

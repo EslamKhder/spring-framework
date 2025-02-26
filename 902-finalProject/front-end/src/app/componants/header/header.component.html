@@ -9,8 +9,8 @@
       <span class="fa fa-bars"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search" #key (input)="search(key.value)">
+      <button class="btn btn-outline-success" type="submit" (click)="search(key.value)">Search</button>
       <div class="navbar-nav ms-auto py-0 pe-4">
         <div class="nav-item nav-link active"><a routerLink="/contact-info">Contact</a></div>
         <div class="nav-item nav-link active"> </div>
@@ -21,13 +21,14 @@
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
           <div class="dropdown-menu m-0">
-            <a href="booking.html" class="dropdown-item">ALL</a>
-            <a href="team.html" class="dropdown-item">Breakfast</a>
+
+            <a [routerLink]="cat.name === 'ALL'? '/products' : 'category/' + cat.id" *ngFor="let cat of category" href="booking.html" class="dropdown-item">{{cat.name}}</a>
+            <!--<a href="team.html" class="dropdown-item">Breakfast</a>
             <a href="testimonial.html" class="dropdown-item">Launch</a>
             <a href="testimonial.html" class="dropdown-item">Dinner</a>
             <a href="testimonial.html" class="dropdown-item">Ice Cream</a>
             <a href="testimonial.html" class="dropdown-item">Coffee</a>
-            <a href="testimonial.html" class="dropdown-item">Cake</a>
+            <a href="testimonial.html" class="dropdown-item">Cake</a>-->
           </div>
         </div>
         <!--<a href="contact.html" class="nav-item nav-link">Contact</a>-->
