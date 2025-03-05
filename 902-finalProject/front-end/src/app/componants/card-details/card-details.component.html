@@ -24,21 +24,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="alert" role="alert">
+            <tr class="alert" role="alert" *ngFor="let or of order">
               <td>
                 <label class="checkbox-wrap checkbox-primary">
                 </label>
               </td>
               <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
+                <img class="img" src="../../../assets/img/{{or.logoPath}}.jpg" />
               </td>
               <td>
                 <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
+                  <span>{{or.name}}</span>
+                  <span>{{or.description}}</span>
                 </div>
               </td>
-              <td>$44.99</td>
+              <td>${{or.price}}</td>
               <td class="quantity">
                 <div class="input-group">
                   <a href="#">
@@ -48,7 +48,7 @@
               </td>
               <td class="quantity">
                 <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
+                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="{{or.quantity}}" min="1" max="100">
                 </div>
               </td>
               <td class="quantity">
@@ -58,177 +58,14 @@
                   </a>
                 </div>
               </td>
-              <td>$89.98</td>
+              <td>${{or.quantity * or.price}}</td>
               <td>
                 <button type="button" class="close"  aria-label="Close">
                   X
                 </button>
               </td>
             </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
+
             </tbody>
           </table>
           <button type="button" class="btn btn-success col-12">Take Order</button>

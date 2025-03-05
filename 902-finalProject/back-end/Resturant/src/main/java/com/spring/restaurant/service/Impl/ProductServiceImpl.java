@@ -1,5 +1,6 @@
 package com.spring.restaurant.service.Impl;
 
+import com.spring.restaurant.controller.vm.ProductResponseVM;
 import com.spring.restaurant.mapper.ProductMapper;
 import com.spring.restaurant.model.Product;
 import com.spring.restaurant.repository.ProductRepository;
@@ -20,25 +21,41 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<ProductDto> getProductsByCategoryId(Long categoryId) {
-        return ProductMapper.PRODUCT_MAPPER.toDtoList(productRepository.findAllByCategoryId(categoryId));
+    public ProductResponseVM getProductsByCategoryId(Long categoryId, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Product> productPage = productRepository.findAllByCategoryId(categoryId, pageable);
+
+        return new ProductResponseVM(
+                ProductMapper.PRODUCT_MAPPER.toDtoList(productPage.getContent()),
+                productPage.getTotalElements()
+        );
     }
 
 
     @Override
-    public List<ProductDto> getProductByLetters(String letter) { //
-        List<Product> products = productRepository.getProductByLetters(letter);
-
-        //<Product> products = productRepository.getProductByLetters(letter);
+    public ProductResponseVM getProductByLetters(String letter, Integer pageNo, Integer pageSize) { //
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Product> productPage = productRepository.getProductByLetters(letter, pageable);
+        List<Product> products = productPage.getContent();
 
         if (products.isEmpty()) {
             throw new RuntimeException("error.noSuchLetter");
         }
-        return ProductMapper.PRODUCT_MAPPER.toDtoList(products);
+        return new ProductResponseVM(
+                ProductMapper.PRODUCT_MAPPER.toDtoList(products),
+                productPage.getTotalElements()
+        );
     }
 
     @Override
-    public List<ProductDto> getProducts() {
-        return ProductMapper.PRODUCT_MAPPER.toDtoList(productRepository.findAll());
+    public ProductResponseVM getProducts(Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+
+        Page<Product> productPage = productRepository.findAll(pageable);
+
+        return new ProductResponseVM(
+                ProductMapper.PRODUCT_MAPPER.toDtoList(productPage.getContent()),
+                productPage.getTotalElements()
+        );
     }
 }

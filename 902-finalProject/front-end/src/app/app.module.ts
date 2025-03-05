@@ -12,6 +12,7 @@ import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {HttpClientModule} from "@angular/common/http";
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 // name : type
 // http://localhost:4200/
@@ -51,7 +52,8 @@ export const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbPaginationModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [

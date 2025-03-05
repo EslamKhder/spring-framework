@@ -14,24 +14,24 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
 
-  getAllProduct(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl).pipe(
+  getAllProduct(pageNo, pageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl + '/pageNo/' + pageNo + '/pageSize/' + pageSize).pipe(
       map(
         response => response
       )
     )
   }
 
-  getProductByCategoryId(categoryId): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + '/category/categoryId/' + categoryId).pipe(
+  getProductByCategoryId(categoryId, pageNo, pageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl + '/category/categoryId/' + categoryId+ '/pageNo/' + pageNo + '/pageSize/' + pageSize).pipe(
       map(
         response => response
       )
     )
   }
 
-  search(key): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + '/search/' + key).pipe(
+  search(key, pageNo, pageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl + '/search/' + key+ '/pageNo/' + pageNo + '/pageSize/' + pageSize).pipe(
       map(
         response => response
       )
