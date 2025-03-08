@@ -1,4 +1,4 @@
-<section class="ftco-section">
+<section class="ftco-section" *ngIf="order.length !== 0">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center mb-4">
@@ -29,8 +29,8 @@
                 <label class="checkbox-wrap checkbox-primary">
                 </label>
               </td>
-              <td>
-                <img class="img" src="../../../assets/img/{{or.logoPath}}.jpg" />
+              <td class="widthHeight" >
+                <img class="widthHeight"  class="img" src="../../../assets/img/{{or.logoPath}}.jpg" />
               </td>
               <td>
                 <div class="email">
@@ -41,7 +41,7 @@
               <td>${{or.price}}</td>
               <td class="quantity">
                 <div class="input-group">
-                  <a href="#">
+                  <a (click)="increaseOrder(or)">
                     <i class="fa fa-plus"></i>
                   </a>
                 </div>
@@ -53,14 +53,14 @@
               </td>
               <td class="quantity">
                 <div class="input-group">
-                  <a href="#">
+                  <a (click)="deCreaseOrder(or)">
                     <i class="fa fa-minus"></i>
                   </a>
                 </div>
               </td>
               <td>${{or.quantity * or.price}}</td>
               <td>
-                <button type="button" class="close"  aria-label="Close">
+                <button type="button" class="close"  aria-label="Close" (click)="removeOrder(or)">
                   X
                 </button>
               </td>
@@ -74,3 +74,6 @@
     </div>
   </div>
 </section>
+
+
+<p *ngIf="order.length === 0" class="no-order">No order Selected</p>

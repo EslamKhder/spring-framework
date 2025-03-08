@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Create Account</h2>
+  <input type="text" placeholder="Name" required #name>
+  <input type="text" placeholder="phone number" required #phone>
+  <input type="email" placeholder="Email" required #email>
+  <input type="password" placeholder="Password" required #password>
+  <input type="password" placeholder="Confirm Password" required #confirmPassword>
+  <button (click)="createAccount(name.value, phone.value, email.value, password.value, confirmPassword.value)">signup</button>
+</div>
+
+
+
+<p class="notification error notificationAr" *ngIf="messageAr != ''">{{messageAr}}</p>
+<p class="notification error notificationEn" *ngIf="messageEn != ''">{{messageEn}}</p>

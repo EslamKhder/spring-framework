@@ -24,4 +24,17 @@ export class CardDetailsComponent implements OnInit {
   }
 
 
+  increaseOrder(order: CardOrder) {
+    this.cartService.addProductToOrder(order)
+  }
+
+  deCreaseOrder(order: CardOrder) {
+    this.cartService.deCreaseOrder(order)
+  }
+
+
+  removeOrder(order: CardOrder){
+    this.cartService.removeOrder(order)
+  }
+
 }

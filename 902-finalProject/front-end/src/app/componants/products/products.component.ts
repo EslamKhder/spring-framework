@@ -32,7 +32,6 @@ export class ProductsComponent implements OnInit{
 
 
   finalProduct(pageNo){
-    debugger
     let categoryIdExist = this.activatedRoute.snapshot.paramMap.has("id");
     let keyExist = this.activatedRoute.snapshot.paramMap.has("key");
     if (categoryIdExist) {
@@ -51,7 +50,7 @@ export class ProductsComponent implements OnInit{
     this.productService.search(key, pageNo,this.pageSize).subscribe(
       response => {
         // @ts-ignore
-        if (response && 'status' in response && response.status === 'NO_CONTENT') {
+        if (response && 'status' in response && response.status === 'NOT_ACCEPTABLE') {
           this.products = [];
           // @ts-ignore
           this.messageAr = response.bundleMessage.message_ar;

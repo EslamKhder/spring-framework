@@ -13,5 +13,12 @@ spring:
   messages:
     basename: i18n/messages
     local-default: en
+  main:
+    allow-circular-references: true
 server:
   port: 8085
+
+token:
+  secret: kkkjgkhkd669$#65@#fghdfyhrtyerytryrtydfgjfg
+  time: 10h
+

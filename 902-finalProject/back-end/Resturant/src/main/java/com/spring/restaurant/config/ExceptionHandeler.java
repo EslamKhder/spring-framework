@@ -14,7 +14,7 @@ public class ExceptionHandeler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ExceptionResponseDto> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity.ok(new ExceptionResponseDto(HttpStatus.NO_CONTENT, BundleTranslatorService.getBundleMessageinEnglishAndArabic(ex.getMessage())));
-
+        return ResponseEntity.ok(new ExceptionResponseDto(HttpStatus.NOT_ACCEPTABLE, BundleTranslatorService.getBundleMessageinEnglishAndArabic(ex.getMessage())));
     }
+
 }

@@ -49,4 +49,31 @@ export class CartService {
     this.totalOrdersSize.next(totalNumber)
     this.totalOrdersPrice.next(totalPrice)
   }
+
+
+
+  //                            0   1  2   3
+  //order: CardOrder[] = []; // o1, o2 ,o3 o4
+  removeOrder(order: CardOrder) {
+    debugger
+    const index = this.order.findIndex(o => o.id === order.id); //1
+
+    if (index > -1){
+      this.order.splice(index, 1);
+    }
+
+    this.calculateTotals()
+  }
+
+  //  case   order    qu > 1
+  //  case   order    qu = 1
+  deCreaseOrder(order: CardOrder) {
+    order.quantity--;   // 5  4
+
+    if (order.quantity === 0){
+      this.removeOrder(order)
+    } else {
+      this.calculateTotals()
+    }
+  }
 }

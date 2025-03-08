@@ -9,9 +9,9 @@
       <span class="fa fa-bars"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <input class="form-control" type="search" placeholder="Search" aria-label="Search" #key (input)="search(key.value)">
-      <button class="btn btn-outline-success" type="submit" (click)="search(key.value)">Search</button>
-      <div class="navbar-nav ms-auto py-0 pe-4">
+      <input  *ngIf="isUserLogin()" class="form-control" type="search" placeholder="Search" aria-label="Search" #key (input)="search(key.value)">
+      <button  *ngIf="isUserLogin()" class="btn btn-outline-success" type="submit" (click)="search(key.value)">Search</button>
+      <div   *ngIf="isUserLogin()" class="navbar-nav ms-auto py-0 pe-4">
         <div class="nav-item nav-link active"><a routerLink="/contact-info">Contact</a></div>
         <div class="nav-item nav-link active"> </div>
         <div class="nav-item nav-link active"><a routerLink="/chefs">Team</a></div>
@@ -31,12 +31,17 @@
             <a href="testimonial.html" class="dropdown-item">Cake</a>-->
           </div>
         </div>
+
         <!--<a href="contact.html" class="nav-item nav-link">Contact</a>-->
       </div>
 
 
     </div>
-    <app-card></app-card>
+    <app-card *ngIf="isUserLogin()"></app-card>
+
+    <div *ngIf="isUserLogin()" class="nav-item nav-link active"><a (click)="logOut()">LogOut</a></div>
+    <div *ngIf="!isUserLogin()" class="nav-item nav-link active"><a (click)="login()">login</a></div>
+    <div *ngIf="!isUserLogin()" class="nav-item nav-link active"><a (click)="signup()">signup</a></div>
   </nav>
 
   <div class="container-xxl py-5 bg-dark hero-header mb-5">

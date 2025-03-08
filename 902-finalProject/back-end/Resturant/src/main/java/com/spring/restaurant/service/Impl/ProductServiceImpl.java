@@ -58,4 +58,10 @@ public class ProductServiceImpl implements ProductService {
                 productPage.getTotalElements()
         );
     }
+
+    @Override
+    public List<ProductDto> findProductsByIds(List<Long> porductIds) {
+        List <Product> products = productRepository.findAllById(porductIds);
+        return ProductMapper.PRODUCT_MAPPER.toDtoList(products);
+    }
 }

@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Login</h2>
+  <input type="email" placeholder="Email" required #email>
+  <input type="password" placeholder="Password" required #password>
+  <button (click)="login(email.value, password.value)">Login</button>
+</div>
+
+
+<p class="notification error notificationAr" *ngIf="messageAr != ''">{{messageAr}}</p>
+<p class="notification error notificationEn" *ngIf="messageEn != ''">{{messageEn}}</p>
