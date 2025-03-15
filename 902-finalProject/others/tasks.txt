@@ -17,15 +17,18 @@
 	- make action select display only for admin
 	- on login user return list of roles
 	- refactor list of roles on session storage
-7- add  on header new feature() to display all request orders related to login user (display for user only)
+7- add on header new feature(Request Orders) to display all request orders related to login user (display for user only)
 	- show all request orders on table (CODE, TOTAL_PRICE, TOTAL_QUANTITY, 	NAME_OF_PRODUCT, NAME_OF_Category)
-8- add  on header new feature to display all request orders for all users(display for user only)
-	- show all request orders on table (CODE, TOTAL_PRICE, TOTAL_QUANTITY, 	NAME_OF_PRODUCT, NAME_OF_Category
-	- add search feature on component by code or NAME_OF_PRODUCT     (like)
+	- new componant
+8-  add on header new feature (All Request Orders) to display all request orders for all clients(display for admin only)
+	- show all request orders on table (CODE, TOTAL_PRICE, TOTAL_QUANTITY, 	NAME_OF_PRODUCT, NAME_OF_Category)
+	- new component
+	- on new component add feature search to search by NAME_OF_PRODUCT Or CODE
+
+9- add on header new feature (All Contact info Message) with new component to display 
+	(NAME, phoneNumber of client and  and all column on Contact Info)  (display for admin only).
 
 
-9-  add  on header new feature to display all contact Info for all users(display for admin only)
-	- show all request orders on table (Name of client, all column on contact Info )
-	- add search feature on component by Name or emailT     (like)
 
- 
+
+
