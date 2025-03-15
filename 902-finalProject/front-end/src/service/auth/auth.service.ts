@@ -32,4 +32,5 @@ export class AuthService {
   isUserLogIn(){
     return sessionStorage.getItem('token') != null &&  sessionStorage.getItem('token') != undefined;
   }
+
 }

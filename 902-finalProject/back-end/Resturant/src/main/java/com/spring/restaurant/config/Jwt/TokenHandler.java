@@ -30,7 +30,7 @@ public class TokenHandler {
 
        secret = tokenConfig.getSecret();
        timeExpired = tokenConfig.getTime();
-   Key key =  Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+       Key key =  Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
       jwtBuilder = Jwts.builder().signWith(key);
       jwtParser = Jwts.parserBuilder().setSigningKey(key).build();
 
@@ -40,13 +40,9 @@ public class TokenHandler {
 
    public String createToken(Client client){
 
+       client.getRoles().stream().forEach(role -> role.setClient(null));
 
-       for(Role role : client.getRoles()){
-           role.setClient(null);
-
-       }
-
-      // build the claims
+       // build the claims
 
       Date issuesDate = new Date(); // current date
 

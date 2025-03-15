@@ -6,17 +6,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
 	public static void main(String[] args) {
-		/*AnnotationConfigApplicationContext annotationContext = 
-				new AnnotationConfigApplicationContext("applicationContext.xml");*/
+		AnnotationConfigApplicationContext annotationContext = 
+				new AnnotationConfigApplicationContext(SpringConfig.class);
 		
-		ClassPathXmlApplicationContext applicationContext = 
+		/*ClassPathXmlApplicationContext applicationContext = 
 				new ClassPathXmlApplicationContext("applicationContext.xml");
+		*/
+		AdminServiceImpl s1 = annotationContext.getBean("admin", AdminServiceImpl.class);
 		
-		AdminServiceImpl s1 = applicationContext.getBean("adminServiceImpl", AdminServiceImpl.class);
 		s1.save("ahmed");
 		
-		ClentServiceImpl2 s2 = applicationContext.getBean("clentServiceImpl2", ClentServiceImpl2.class);
-		s2.save("ahmed");
+		//System.out.println(s1.getUserName());
 	}
 
 }

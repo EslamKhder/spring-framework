@@ -20,7 +20,7 @@ import java.net.URI;
 public class ClientController {
 
     @Autowired
-   private AuthService authService;
+    private AuthService authService;
 
     @Autowired
     private ClientService clientService;

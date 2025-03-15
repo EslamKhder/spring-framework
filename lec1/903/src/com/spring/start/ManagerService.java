@@ -2,7 +2,7 @@ package com.spring.start;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class ManagerService implements UserService {
 
 	@Override

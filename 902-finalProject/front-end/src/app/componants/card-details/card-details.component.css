@@ -28,3 +28,9 @@
     transform: scale(1);
   }
 }
+
+
+img, svg {
+  vertical-align: middle;
+  width: 121% !important;
+}

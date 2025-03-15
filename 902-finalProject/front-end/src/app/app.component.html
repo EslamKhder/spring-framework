@@ -15,7 +15,7 @@
         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
       </div>
       <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
-        <app-category></app-category>
+        <app-category *ngIf="isUserLogin()"></app-category>
       </div>
     </div>
   </div>

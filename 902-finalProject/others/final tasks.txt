@@ -1,0 +1,30 @@
+1. pls finalize all project feature
+2. pls finalize contact-info 
+3. on saveOrder  pls apply 
+	- pls re calculate total price
+	- check on table orders if order has same code
+          re create code and check if recreate still create if code not exist save
+
+4. pls refactor final code to display on new component 
+	- create new  component  with your design to display code
+	- on app module pls add new path pls apply activator add code on path
+
+5. create user with roles user and admin manually on /DB
+6. add on header new feature to add new product
+	-  create new  component toad product
+	-  add constrain to category id not null
+	- finalize full case
+	- make action select display only for admin
+	- on login user return list of roles
+	- refactor list of roles on session storage
+7- add add on header new feature() to display all request orders related to login user (display for user only)
+	- show all request orders on table (CODE, TOTAL_PRICE, TOTAL_QUANTITY, 	NAME_OF_PRODUCT, NAME_OF_Category)
+8- add add on header new feature to display all request orders for all users(display for user only)
+	- show all request orders on table (CODE, TOTAL_PRICE, TOTAL_QUANTITY, 	NAME_OF_PRODUCT, NAME_OF_Category)
+
+
+
+
+
+
+

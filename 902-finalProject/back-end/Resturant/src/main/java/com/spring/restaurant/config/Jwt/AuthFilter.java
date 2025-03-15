@@ -19,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class AuthFilter extends OncePerRequestFilter {
@@ -65,9 +66,10 @@ public class AuthFilter extends OncePerRequestFilter {
 
             //  here  we need to tell the second filter which is spring  security filter that   the user signrd in
 
+            List<GrantedAuthority>  grantedAuthorities = client.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList());
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                    new UsernamePasswordAuthenticationToken(client, null, getAuthorities(client.getRoles()));
+                    new UsernamePasswordAuthenticationToken(client, null, grantedAuthorities);
 
 
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
@@ -76,21 +78,5 @@ public class AuthFilter extends OncePerRequestFilter {
         } catch (SystemException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    // this function just to convert the clientForSpringSecurity.getAuthortiesForClients() to GrantedAuthority
-
-
-    private List<GrantedAuthority> getAuthorities(List<Role> Auth) {
-
-        List<GrantedAuthority> roles = new ArrayList<>(); //client.getAuthortiesForClients();
-
-        for (Role role : Auth) {
-            SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getCode());
-            roles.add(grantedAuthority);
-        }
-
-        return roles;
     }
 }

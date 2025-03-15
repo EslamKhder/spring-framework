@@ -7,11 +7,12 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
     
-    
+    <!--
     <context:component-scan base-package="com.spring.start"></context:component-scan>
     
-    
-    <!--  <context:property-placeholder location="classpath:data.properties"/>
+    <context:property-placeholder location="classpath:data.properties"/>
+      
+      <context:property-placeholder location="classpath:data.properties"/>
     
     <bean id="client" class="spring.core.start.ClientService">
 

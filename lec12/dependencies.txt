@@ -14,3 +14,6 @@
             <version>1.5.2.Final</version>
             <scope>provided</scope>
         </dependency>
+
+
+$2a$12$hoZjiEr8M347ncYxTRV5gO1fJVnCfAWQS5TW9Zb2DczJ/irvg97Wy

@@ -26,6 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
 
+        http.csrf().disable();
         // Disable session creation
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
@@ -38,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/client/create-client").permitAll()
                         .requestMatchers(HttpMethod.GET, "/product/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/category/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/orders/**").hasAnyRole("USER", "ADMIN")
         );
 
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
