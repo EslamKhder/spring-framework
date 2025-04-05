@@ -1,5 +1,5 @@
 1. pls finalize all project feature
-2. pls finalize contact-info 
+2. pls finalize contact-info
 3. on saveOrder  pls apply 
 	- pls re calculate total price
 	- check on table orders if order has same code

@@ -14,4 +14,6 @@ public interface ProductService {
     ProductResponseVM getProducts(Integer pageNo, Integer pageSize);
 
     List<ProductDto> findProductsByIds(List<Long> porductIds);
+
+    ProductDto addProduct(ProductDto productDto);
 }

@@ -15,6 +15,7 @@ import java.time.Duration;
 @ConfigurationProperties(prefix = "token")
 public class TokenConfig {
 
+
     private String secret;
 
     private Duration time;

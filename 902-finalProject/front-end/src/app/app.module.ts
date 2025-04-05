@@ -18,12 +18,14 @@ import { SignUpComponent } from './componants/sign-up/sign-up.component';
 import {AuthInterceptor} from "../service/interceptor/auth.interceptor";
 import {LoginActivator} from "../service/activator/login-activator";
 import {ScreenActivator} from "../service/activator/screen-activator";
+import { OrderDetailsComponent } from './componants/order-details/order-details.component';
 
 // name : type
 // http://localhost:4200/
 export const routes: Routes = [
 
-  // http://localhost:4200/active
+  // http://localhost:4200/active4
+  {path: 'orderDetails/:code', component: OrderDetailsComponent, canActivate: [ScreenActivator]},
   {path: 'category/:id', component: ProductsComponent, canActivate: [ScreenActivator]},
   {path: 'search/:key', component: ProductsComponent, canActivate: [ScreenActivator]},
   {path: 'products', component: ProductsComponent, canActivate: [ScreenActivator]},
@@ -32,6 +34,7 @@ export const routes: Routes = [
   {path: 'chefs', component: ChefsComponent, canActivate: [ScreenActivator]},
   {path: 'login', component: LoginComponent, canActivate: [LoginActivator]},
   {path: 'signup', component: SignUpComponent, canActivate: [LoginActivator]},
+
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 
@@ -56,7 +59,8 @@ export const routes: Routes = [
     ChefsComponent,
     ContactInfoComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    OrderDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

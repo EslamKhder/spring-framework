@@ -13,7 +13,6 @@ export class ScreenActivator implements CanActivate {
 
   // if not login can go to login com and sigun com
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
     if (this.authService.isUserLogIn()) {
       return true;
     }

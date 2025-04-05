@@ -15,6 +15,10 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAllByCategoryId(Long id, Pageable pageable);
 
+
+
+
+
     @Query(value = "SELECT * FROM Product WHERE LOWER(name) LIKE '%' || LOWER(:val) || '%' OR LOWER(description) LIKE '%' || LOWER(:val) || '%'", nativeQuery = true)
     Page<Product> getProductByLetters(@Param("val") String letters, Pageable pageable);
 

@@ -1,5 +1,6 @@
 package com.spring.restaurant.service.Impl;
 
+import com.spring.restaurant.controller.vm.OrderDetailsVM;
 import com.spring.restaurant.mapper.OrderMapper;
 import com.spring.restaurant.mapper.ProductMapper;
 import com.spring.restaurant.model.Orders;
@@ -11,15 +12,15 @@ import com.spring.restaurant.service.OrderService;
 import com.spring.restaurant.service.ProductService;
 import com.spring.restaurant.service.dto.OrdersDto;
 import com.spring.restaurant.util.UserCode;
+import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -46,18 +47,19 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Map<String, String> saveOrder(OrdersDto ordersDto) {
 
-        // pls re calculate total price
         List<Product> products = ProductMapper.PRODUCT_MAPPER.toEntityList(productService.findProductsByIds(ordersDto.getProductsIds()));
+        double totalPrice = products.stream().map(product -> product.getPrice()).reduce((price1, price2) -> price1 + price2).get();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Client client = (Client) authentication.getPrincipal();
 
+        String code = UserCode.generateCode(ordersRepository.findAll().size(), client.getName());
+
         Orders orders = OrderMapper.ORDER_MAPPER.toEntity(ordersDto);
         orders.setClient(client);
         orders.setProducts(products);
-        String code = UserCode.extractCode();
-        // check on table orders if order has same code
-        // re create code and check if recreate still create if code not exist save
+        orders.setTotalPrice(String.valueOf(totalPrice));
+        orders.setTotalQuantity(String.valueOf(products.size()));
         orders.setCode(code);
 
         ordersRepository.save(orders);
@@ -65,6 +67,44 @@ public class OrderServiceImpl implements OrderService {
         Map<String, String> response = new LinkedHashMap<>();
         response.put("code", orders.getCode());
         return response;
+    }
+
+    @Override
+    public OrderDetailsVM getOrderDetails(String code) throws RuntimeException {
+        Optional<Orders> orders = ordersRepository.findByCode(code);
+
+        if (orders.isEmpty()) {
+            throw new RuntimeException("error.invalid.orderDetails");
+        }
+        Orders order = orders.get();
+
+        return extractOrderDetailsVM(order);
+    }
+
+    @Override
+    public List<OrderDetailsVM> getAllOrderDetails() {
+        List<Orders> orders = ordersRepository.findAll();
+
+        return orders.stream().map(order -> extractOrderDetailsVM(order)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDetailsVM> getUserOrderDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Client client = (Client) authentication.getPrincipal();
+
+        List<Orders> orders = ordersRepository.findByClientId(client.getId());
+
+        return orders.stream().map(order -> extractOrderDetailsVM(order)).collect(Collectors.toList());
+    }
+
+    private OrderDetailsVM extractOrderDetailsVM(Orders order) {
+        OrderDetailsVM orderDetailsVM = new OrderDetailsVM();
+        orderDetailsVM.setCode(order.getCode());
+        orderDetailsVM.setTotalPrice(order.getTotalPrice());
+        orderDetailsVM.setTotalQuantity(order.getTotalQuantity());
+        orderDetailsVM.setProductDtos(ProductMapper.PRODUCT_MAPPER.toDtoList(order.getProducts()));
+        return orderDetailsVM;
     }
 
 

@@ -7,4 +7,6 @@ import java.util.List;
 public interface CategoryService {
     List<CategoryDto> getAllCategory();
 
+    CategoryDto findById(Long id);
+
 }

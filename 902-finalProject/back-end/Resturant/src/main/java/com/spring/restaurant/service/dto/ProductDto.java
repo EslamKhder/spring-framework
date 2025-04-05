@@ -9,4 +9,5 @@ import lombok.Setter;
 public class ProductDto extends BaseDto {
     private String description;
     private double price;
+    private Long categoryId;
 }

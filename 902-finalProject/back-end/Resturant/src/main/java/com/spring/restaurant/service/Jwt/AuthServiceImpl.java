@@ -1,6 +1,7 @@
 package com.spring.restaurant.service.Jwt;
 
 import com.spring.restaurant.config.Jwt.TokenHandler;
+import com.spring.restaurant.mapper.RoleMapper;
 import com.spring.restaurant.model.clientmodels.Client;
 import com.spring.restaurant.service.dto.Jwt.ClientLoginDto;
 import com.spring.restaurant.service.dto.Jwt.TokenDto;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -28,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
         if (!passwordEncoder.matches(clientLoginDto.getPassword(),client.getPassword())) {
             throw new BadCredentialsException("error.clientNotExist");
         }
-
-        return new TokenDto(tokenHandler.createToken(client));
+        List<String> rolse = client.getRoles().stream().map(role -> role.getCode().substring(5)).collect(Collectors.toList());
+        return new TokenDto(tokenHandler.createToken(client), rolse);
     }
 }
