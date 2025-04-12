@@ -84,8 +84,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDetailsVM> getAllOrderDetails() {
         List<Orders> orders = ordersRepository.findAll();
-
-        return orders.stream().map(order -> extractOrderDetailsVM(order)).collect(Collectors.toList());
+        return orders.stream().map(order -> {
+            OrderDetailsVM orderDetailsVM = extractOrderDetailsVM(order);
+            orderDetailsVM.setUserName(order.getClient().getName());
+            orderDetailsVM.setEmail(order.getClient().getEmail());
+            return orderDetailsVM;
+        }).collect(Collectors.toList());
     }
 
     @Override

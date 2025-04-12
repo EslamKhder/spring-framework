@@ -47,4 +47,6 @@ export class HeaderComponent implements OnInit {
   signup() {
     this.router.navigateByUrl("/signup")
   }
+
+
 }

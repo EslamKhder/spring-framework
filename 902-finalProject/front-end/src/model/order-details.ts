@@ -1,8 +1,10 @@
 import {Product} from "./product";
 
 export class OrderDetails {
+  userName: string;
+  email: string;
   code: string;
-  price: string;
-  quantity: string;
+  totalPrice: string;
+  totalQuantity: string;
   products: Product[];
 }

@@ -23,7 +23,22 @@ export class OrderService {
   }
 
   getOrderDetails(code): Observable<OrderDetails> {
-    return this.http.get<OrderDetails>(this.baseUrl + "/orderDetails/code/" + code).pipe(
+    return this.http.get<OrderDetails>(this.baseUrl + "orderDetails/code/" + code).pipe(
+      map(
+        response => response
+      )
+    )
+  }
+
+  getRequestOrdersRelatedToUser(): Observable<OrderDetails[]> {
+    return this.http.get<OrderDetails[]>(this.baseUrl + "userOrderDetails").pipe(
+      map(
+        response => response
+      )
+    )
+  }
+  getAllRequestOrders(): Observable<OrderDetails[]> {
+    return this.http.get<OrderDetails[]>(this.baseUrl + "allOrderDetails").pipe(
       map(
         response => response
       )

@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           this.extracted();
         } else {
           sessionStorage.setItem('token', 'Bearer ' + response.token)
+          sessionStorage.setItem('roles', 'Bearer ' + response.roles)
           this.router.navigateByUrl("/products");
         }
       }

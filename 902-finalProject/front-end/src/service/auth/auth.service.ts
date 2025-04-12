@@ -33,4 +33,14 @@ export class AuthService {
     return sessionStorage.getItem('token') != null &&  sessionStorage.getItem('token') != undefined;
   }
 
+  isUserAdmin(){
+    const roles = sessionStorage.getItem('roles');
+
+    if (roles && roles.includes('ADMIN')) {
+      return true
+    } else {
+     return false;
+    }
+  }
+
 }

@@ -22,9 +22,9 @@
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Actions</a>
           <div class="dropdown-menu m-0">
 
-            <a href="team.html" class="dropdown-item">Add Products</a>
-            <a href="team.html" class="dropdown-item">Request Orders</a>
-            <a href="team.html" class="dropdown-item">All Request Orders</a>
+            <a *ngIf="authService.isUserAdmin()" href="team.html" class="dropdown-item">Add Products</a>
+            <a routerLink="/orderDetails/user" class="dropdown-item">Request Orders</a>
+            <a *ngIf="authService.isUserAdmin()" routerLink="/orderDetails/allUser" class="dropdown-item">All Request Orders</a>
 <!--            <a [routerLink]="cat.name === 'ALL'? '/products' : 'category/' + cat.id" *ngFor="let cat of category" href="booking.html" class="dropdown-item">{{cat.name}}</a>-->
 <!--            &lt;!&ndash;<a href="team.html" class="dropdown-item">Breakfast</a>-->
 <!--            <a href="testimonial.html" class="dropdown-item">Launch</a>-->

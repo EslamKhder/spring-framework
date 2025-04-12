@@ -54,11 +54,11 @@ export class CardDetailsComponent implements OnInit {
 
     this.orderService.createOrder(this.totalPrice, this.totalQuantity, productsIds).subscribe(
       value => {
-        alert("your code is " + value.code);
+        //alert("your code is " + value.code);
         this.cartService.order = [];
         this.cartService.totalOrdersSize.next(0);
         this.cartService.totalOrdersPrice.next(0);
-        this.router.navigateByUrl("/products");
+        this.router.navigateByUrl("/orderDetails/" + value.code);
       },
       error => {
         // Error handling

@@ -1,27 +1,45 @@
 
-<div class="container">
+<div class="container" *ngIf="details !== null">
   <div class="code-details">
     <h2>Code Details</h2>
-    <p><strong>Code:</strong> ABC123</p>
-    <p><strong>Price:</strong> $49.99</p>
-    <p><strong>Quantity:</strong> 10</p>
+    <p><strong>Code:</strong> {{details.code}}</p>
+    <p><strong>Price:</strong> ${{details.totalPrice}}</p>
+    <p><strong>Quantity:</strong> {{details.totalQuantity}}</p>
   </div>
 
   <div class="products">
-    <div class="product-card">
-      <img src="https://via.placeholder.com/150" alt="Product Logo">
-      <h3>Product 1</h3>
-      <p><strong>ID:</strong> 1</p>
-      <p><strong>Description:</strong> This is a sample product.</p>
-      <p><strong>Price:</strong> $10</p>
-    </div>
-    <div class="product-card">
-      <img src="https://via.placeholder.com/150" alt="Product Logo">
-      <h3>Product 2</h3>
-      <p><strong>ID:</strong> 2</p>
-      <p><strong>Description:</strong> Another example product.</p>
-      <p><strong>Price:</strong> $15</p>
+    <div class="product-card" *ngFor="let pro of details.products">
+      <img src="../../../assets/img/{{pro.logoPath}}.jpg" alt="Product Logo">
+      <h3>{{pro.name}}</h3>
+      <p><strong>ID:</strong> {{pro.id}}</p>
+      <p><strong>Description:</strong>{{pro.description}}</p>
+      <p><strong>Price:</strong> {{pro.price}}</p>
     </div>
     <!-- Add more product-card divs as needed -->
   </div>
 </div>
+
+<div *ngIf="allOrderDetails.length !== 0">
+    <div class="container"  *ngFor="let allOrders of allOrderDetails">
+    <div class="code-details">
+      <h2>Code Details</h2>
+      <p *ngIf="allOrders.userName"><strong>user name:</strong> {{allOrders.userName}}</p>
+      <p *ngIf="allOrders.email"><strong>email:</strong> {{allOrders.email}}</p>
+      <p><strong>Code:</strong> {{allOrders.code}}</p>
+      <p><strong>Price:</strong> ${{allOrders.totalPrice}}</p>
+      <p><strong>Quantity:</strong> {{allOrders.totalQuantity}}</p>
+    </div>
+
+    <div class="products">
+      <div class="product-card" *ngFor="let pro of allOrders.products">
+        <img src="../../../assets/img/{{pro.logoPath}}.jpg" alt="Product Logo">
+        <h3>{{pro.name}}</h3>
+        <p><strong>ID:</strong> {{pro.id}}</p>
+        <p><strong>Description:</strong>{{pro.description}}</p>
+        <p><strong>Price:</strong> {{pro.price}}</p>
+      </div>
+      <!-- Add more product-card divs as needed -->
+    </div>
+  </div>
+</div>
+
