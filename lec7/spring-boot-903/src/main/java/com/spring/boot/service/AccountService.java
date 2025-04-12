@@ -1,16 +1,16 @@
 package com.spring.boot.service;
 
-import com.spring.boot.model.Account;
+import com.spring.boot.dto.AccountDto;
 import jakarta.transaction.SystemException;
 
 import java.util.List;
 
 public interface AccountService {
 
-    List<Account> getApplications();
-    Account createAccount(Account account) throws SystemException;
-    Account updateAccount(Account account) throws SystemException;
+    List<AccountDto> getApplications();
+    AccountDto createAccount(AccountDto account) throws SystemException;
+    AccountDto updateAccount(AccountDto account) throws SystemException;
     boolean deleteAccount(Long id) throws SystemException;
-    List<Account> search(String searchValue) throws SystemException;
-    List<Account> getByPhone(String phone) throws SystemException;
+    List<AccountDto> search(String searchValue) throws SystemException;
+    List<AccountDto> getByPhone(String phone) throws SystemException;
 }
