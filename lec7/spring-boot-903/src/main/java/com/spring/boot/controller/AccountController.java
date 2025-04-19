@@ -1,6 +1,7 @@
 package com.spring.boot.controller;
 
 import com.spring.boot.dto.AccountDto;
+import com.spring.boot.exceptions.IdMisMatchException;
 import com.spring.boot.service.AccountService;
 import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
@@ -24,7 +25,7 @@ public class AccountController {
     }
 
     @PostMapping("/addAccount")
-    public ResponseEntity<AccountDto> addAccount(@RequestBody @Valid AccountDto account) throws SystemException {
+    public ResponseEntity<AccountDto> addAccount(@RequestBody @Valid AccountDto account) throws SystemException, IdMisMatchException {
         return ResponseEntity.created(URI.create("/addAccount")).body(accountService.createAccount(account));
     }
 

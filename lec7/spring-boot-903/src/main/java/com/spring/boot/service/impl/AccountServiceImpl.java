@@ -1,6 +1,7 @@
 package com.spring.boot.service.impl;
 
 import com.spring.boot.dto.AccountDto;
+import com.spring.boot.exceptions.IdMisMatchException;
 import com.spring.boot.mapper.AccountMapper;
 import com.spring.boot.model.Account;
 import com.spring.boot.repo.AccountRepo;
@@ -10,10 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -32,9 +30,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto createAccount(AccountDto accountDto) throws SystemException {
+    public AccountDto createAccount(AccountDto accountDto) throws IdMisMatchException, SystemException {
         if (Objects.nonNull(accountDto.getId())) {
-            throw new SystemException("id must be null");
+            throw new IdMisMatchException("error.id.invalid");
         }
 
         Optional<Account> accountExist = accountRepo.findByUserName(accountDto.getUserName());

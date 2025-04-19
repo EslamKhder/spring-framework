@@ -7,23 +7,25 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountDto extends BaseEntityDto{
+public class AccountDto extends BaseEntityDto implements Serializable {
 
     private Long id;
 
-    @NotEmpty(message = "invalid user name")
+    @NotEmpty(message = "invalid.user.name")
     private String userName;
 
-    @NotEmpty(message = "invalid phone Number")
-    @Size(min = 11, max = 11, message = "invalid phone Number")
+    @NotEmpty(message = "phone Number must be not null")
+    @Size(min = 11, max = 11, message = "phone Number size must 12 digit")
     private String phoneNumber;
 
     private String length;
     //    @JsonIgnore
-    @NotEmpty(message = "password")
+    @NotEmpty(message = "invalid password")
     private String password;
 
 
