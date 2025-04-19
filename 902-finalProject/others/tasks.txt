@@ -22,9 +22,8 @@
 8- add add on header new feature to display all request orders for all users(display for user only)
 	- show all request orders on table (CODE, TOTAL_PRICE, TOTAL_QUANTITY, 	NAME_OF_PRODUCT, NAME_OF_Category)
 
-
-
-
-
+9 -  product (add , remove, update) for admin
+10 - category (add , remove, update) for admin
+11 - new page for admin to show all users and can change status
 
 
