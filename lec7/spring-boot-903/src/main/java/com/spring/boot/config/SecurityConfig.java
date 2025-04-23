@@ -26,9 +26,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN");
-                //.requestMatchers(HttpMethod.GET, "/account/search/phone").hasAnyRole("ADMIN", "USER");
+//        http.authorizeHttpRequests()
+//                .requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN");
+
+        http.authorizeHttpRequests(api ->
+                api.requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN")
+        );
+
+
+        //.requestMatchers(HttpMethod.GET, "/account/search/phone").hasAnyRole("ADMIN", "USER");
 
 
         http.httpBasic(Customizer.withDefaults());

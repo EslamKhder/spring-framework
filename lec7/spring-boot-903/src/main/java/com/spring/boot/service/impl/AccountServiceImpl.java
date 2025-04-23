@@ -23,7 +23,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDto> getApplications() {
-
         List<Account> accounts = accountRepo.findAll();
 
         return extractAccounts(accounts);
