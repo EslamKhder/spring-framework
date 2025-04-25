@@ -15,6 +15,7 @@ public interface AccountRepo extends JpaRepository<Account, Long> {
 
     // native query
     // none native query
-    @Query(value = "SELECT * from Account where name like %:name%", nativeQuery = true)
+//    @Query(value = "SELECT * from Account where name like %:name%", nativeQuery = true)
+    @Query(value = "SELECT acc from Account acc where acc.name like %:name%")
     List<Account> search(@Param("name") String name);
 }
