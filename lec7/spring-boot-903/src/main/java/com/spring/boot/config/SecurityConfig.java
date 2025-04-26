@@ -18,11 +18,11 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource){
-        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-        return userDetailsManager;
-    }
+//    @Bean
+//    public UserDetailsManager userDetailsManager(DataSource dataSource){
+//        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        return userDetailsManager;
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -30,7 +30,7 @@ public class SecurityConfig {
 //                .requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN");
 
         http.authorizeHttpRequests(api ->
-                api.requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN")
+                api.requestMatchers(HttpMethod.GET, "/account/**").hasAnyRole("ADMIN")
         );
 
 

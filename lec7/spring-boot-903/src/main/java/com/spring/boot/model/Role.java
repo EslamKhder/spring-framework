@@ -9,22 +9,16 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Account {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
-    private String userName;
+    private String role;
 
-    @Column(nullable = false)
-    private String password;
-
-    @Column(name = "phone")
-    private String phoneNumber;
-
-    @ManyToMany(mappedBy = "accounts", fetch = FetchType.EAGER)
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Account> accounts;
 
 }

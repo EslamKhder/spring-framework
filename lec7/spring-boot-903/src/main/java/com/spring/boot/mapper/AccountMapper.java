@@ -16,7 +16,8 @@ public interface AccountMapper {
 
     Account toAccount(AccountDto accountDto);
 
-    @Mapping(target = "password", ignore = true)
+//    @Mapping(target = "password", ignore = true)
+    @Mapping(source = "roles", target = "roles")
     AccountDto toAccountDto(Account account);
 
     List<Account> toAccountList(List<AccountDto> accountDto);

@@ -14,4 +14,6 @@ public interface AccountService {
     boolean deleteAccount(Long id) throws SystemException;
     List<AccountDto> search(String searchValue) throws SystemException;
     List<AccountDto> getByPhone(String phone) throws SystemException;
+
+    AccountDto getAccountByName(String name) throws SystemException;
 }

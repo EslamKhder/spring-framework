@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,10 +24,10 @@ public class AccountDto extends BaseEntityDto implements Serializable {
     @Size(min = 11, max = 11, message = "phone Number size must 12 digit")
     private String phoneNumber;
 
-    private String length;
     //    @JsonIgnore
     @NotEmpty(message = "invalid password")
     private String password;
 
 
+    private List<RoleDto> roles;
 }

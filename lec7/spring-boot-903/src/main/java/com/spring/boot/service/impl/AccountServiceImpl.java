@@ -4,6 +4,7 @@ import com.spring.boot.dto.AccountDto;
 import com.spring.boot.exceptions.IdMisMatchException;
 import com.spring.boot.mapper.AccountMapper;
 import com.spring.boot.model.Account;
+import com.spring.boot.model.Role;
 import com.spring.boot.repo.AccountRepo;
 import com.spring.boot.service.AccountService;
 import jakarta.transaction.SystemException;
@@ -24,7 +25,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountDto> getApplications() {
         List<Account> accounts = accountRepo.findAll();
-
+        accounts.stream().forEach(account -> account.setRoles(null));
         return extractAccounts(accounts);
     }
 
@@ -100,6 +101,19 @@ public class AccountServiceImpl implements AccountService {
         List<Account> accounts = accountRepo.findByAccountPhoneV2(phone);
 
         return extractAccounts(accounts);
+    }
+
+    @Override
+    public AccountDto getAccountByName(String name) throws SystemException {
+        Optional<Account> accountExist = accountRepo.findByUserName(name);
+
+//        accountExist.get().getRoles().stream().forEach(role -> role.setAccounts(null));
+
+        if (!accountExist.isPresent()) {
+            throw new SystemException("there exist account with same username: " + name);
+        }
+
+        return AccountMapper.ACCOUNT_MAPPER.toAccountDto(accountExist.get());
     }
 
     private void checkAccountExist(Long id) throws SystemException {

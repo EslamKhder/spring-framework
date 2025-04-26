@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AccountRepo extends JpaRepository<Account, Long> ,
-        QuerydslPredicateExecutor<Account> {
+public interface AccountRepo extends JpaRepository<Account, Long> {
 
     Optional<Account> findByUserName(String userName);
 
