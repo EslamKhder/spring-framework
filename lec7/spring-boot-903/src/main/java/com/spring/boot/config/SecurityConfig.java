@@ -29,8 +29,10 @@ public class SecurityConfig {
 //        http.authorizeHttpRequests()
 //                .requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN");
 
+        http.csrf(httpCsrf -> httpCsrf.disable());
         http.authorizeHttpRequests(api ->
-                api.requestMatchers(HttpMethod.GET, "/account/**").hasAnyRole("ADMIN")
+                api.requestMatchers(HttpMethod.GET, "/account/allAccount").hasAnyRole("ADMIN", "USER")
+                   .requestMatchers(HttpMethod.POST, "/account/addAccount").hasAnyRole("ADMIN")
         );
 
 
