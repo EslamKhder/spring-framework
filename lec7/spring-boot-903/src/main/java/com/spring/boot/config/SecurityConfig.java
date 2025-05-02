@@ -28,6 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests()
 //                .requestMatchers(HttpMethod.POST, "/account/**").hasAnyRole("ADMIN");
+//        http.csrf().disable();
 
         http.csrf(httpCsrf -> httpCsrf.disable());
         http.authorizeHttpRequests(api ->
