@@ -1,5 +1,8 @@
 package com.spring.boot.service.impl;
 
+import com.spring.boot.dto.exception.IdNotNullException;
+import com.spring.boot.mapper.AccountMapper;
+import org.modelmapper.ModelMapper;
 import com.spring.boot.dto.AccountDto;
 import com.spring.boot.model.Account;
 import com.spring.boot.repo.AccountRepo;
@@ -19,6 +22,8 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepo accountRepo;
 
+//    @Autowired
+//    private ModelMapper modelMapper;
 
     @Override
     public List<AccountDto> getAllAccount() {
@@ -38,30 +43,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void createAccount(AccountDto account) throws SystemException {
-        if (Objects.nonNull(account.getId())) {
-            throw new SystemException("id must be null");
+    public void createAccount(AccountDto accountDto) throws SystemException, IdNotNullException {
+        if (Objects.nonNull(accountDto.getSpecId())) {
+            throw new IdNotNullException("error.id.null");
         }
-        accountRepo.save(new Account(
-                account.getName(),
-                account.getPhone(),
-                account.getAddress()
-        ));
+        accountRepo.save(AccountMapper.ACCOUNT_MAPPER.toAccount(accountDto));
     }
 
     @Override
-    public AccountDto updateAccount(AccountDto account) throws SystemException {
-        if (Objects.isNull(account.getId())) {
+    public AccountDto updateAccount(AccountDto accountDto) throws SystemException {
+        if (Objects.isNull(accountDto.getSpecId())) {
             throw new SystemException("id must be not null");
         }
-        Account accountSaved =  accountRepo.save(new Account(
-                account.getId(),
-                account.getName(),
-                account.getPhone(),
-                account.getAddress()
-        ));
-
-        return AccountDto.getAccountDto(accountSaved);
+        Account accountSaved =  accountRepo.save(AccountMapper.ACCOUNT_MAPPER.toAccount(accountDto));
+        return  AccountMapper.ACCOUNT_MAPPER.toAccountDto(accountSaved);
     }
 
     @Override
@@ -85,6 +80,6 @@ public class AccountServiceImpl implements AccountService {
 
 
     private List<AccountDto> extractAccountDtos(List<Account> accounts) {
-        return accounts.stream().map(account -> AccountDto.getAccountDto(account)).collect(Collectors.toList());
+        return AccountMapper.ACCOUNT_MAPPER.toAccountDtoList(accounts);
     }
 }

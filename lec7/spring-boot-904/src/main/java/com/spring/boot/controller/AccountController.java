@@ -2,6 +2,7 @@ package com.spring.boot.controller;
 
 import com.spring.boot.controller.vm.AccountResponseVm;
 import com.spring.boot.dto.AccountDto;
+import com.spring.boot.dto.exception.IdNotNullException;
 import com.spring.boot.model.Account;
 import com.spring.boot.service.AccountService;
 import jakarta.transaction.SystemException;
@@ -31,7 +32,7 @@ public class AccountController {
 
 
     @PostMapping("/account/create-account")
-    public ResponseEntity<Void> createAccount(@RequestBody @Valid AccountDto account) throws SystemException {
+    public ResponseEntity<Void> createAccount(@RequestBody @Valid AccountDto account) throws SystemException, IdNotNullException {
         accountService.createAccount(account);
         return ResponseEntity.created(URI.create("/account/create-account")).build();
     }

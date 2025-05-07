@@ -18,16 +18,16 @@ import java.util.Objects;
 @NoArgsConstructor
 public class AccountDto {
 
-    private Long id;
+    private Long specId;
 
-    @NotBlank(message = "invalid name")
+    @NotBlank(message = "invalid.name")
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Size(min = 11, max = 11, message = "invalid phone")
+    @Size(min = 11, max = 11, message = "invalid.phone")
     private String phone;
 
-    @NotEmpty(message = "invalid address")
+    @NotEmpty(message = "invalid.address")
     private String address;
 
     private int nameSize;
@@ -35,14 +35,4 @@ public class AccountDto {
 //    @Email
 //    @NotNull
 //    private String email;
-
-    public static AccountDto getAccountDto(Account account) {
-        return new AccountDto(
-                account.getId(),
-                account.getName(),
-                account.getPhone(),
-                account.getAddress(),
-                Objects.nonNull(account.getName()) ? account.getName().length() : 0
-        );
-    }
 }
