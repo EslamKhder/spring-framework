@@ -1,0 +1,78 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center mb-4">
+        <h1 class="heading-section">Orders</h1>
+      </div>
+    </div>
+    <div class="row" *ngIf="orders.length > 0">
+      <div class="col-md-12">
+        <!--					<h3 class="h5 mb-4 text-center">Table Accordion</h3>-->
+        <div class="table-wrap">
+          <table class="table">
+            <thead class="thead-primary">
+            <tr>
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>ADD</th>
+              <th>Quantity</th>
+              <th>REMOVE</th>
+              <th>total</th>
+              <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of orders" class="alert" role="alert">
+              <td>
+                <label class="checkbox-wrap checkbox-primary">
+                </label>
+              </td>
+              <td class="widthHeight">
+                <img class="img widthHeight" src="../../../assets/img/{{order.logoPath}}.jpg" />
+              </td>
+              <td>
+                <div class="email">
+                  <span>{{order.name}} </span><br>
+                  <span>{{order.description}} </span>
+                </div>
+              </td>
+              <td>${{order.price}}</td>
+              <td class="quantity">
+                <div class="input-group">
+                  <a (click)="addOrder(order)">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+              </td>
+              <td class="quantity">
+                <div class="input-group">
+                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="{{order.quantity}}" min="1" max="100">
+                </div>
+              </td>
+              <td class="quantity">
+                <div class="input-group">
+                  <a (click)="removeOrder(order)">
+                    <i class="fa fa-minus"></i>
+                  </a>
+                </div>
+              </td>
+              <td>${{order.price * order.quantity}}</td>
+              <td>
+                <button (click)="removeFullOrder(order)" type="button" class="close"  aria-label="Close">
+                  X
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-success col-12" (click)="saveOrder()">Take Order</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="orders.length === 0">
+      no product selected
+    </div>
+  </div>
+</section>
