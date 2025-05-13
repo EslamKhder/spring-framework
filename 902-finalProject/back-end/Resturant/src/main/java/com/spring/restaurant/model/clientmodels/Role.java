@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "C_ROLE")
 @Getter
 @Setter
 public class Role extends ClientBaseEntity {

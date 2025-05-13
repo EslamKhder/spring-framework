@@ -1,19 +1,29 @@
-spring.application.name=spring-boot-903
+spring:
+  application:
+    name: spring-boot-903
 
-spring.security.user.name=eslam
-spring.security.user.password=eslam123
+  security:
+    user:
+      name: eslam
+      password: eslam123
 
-spring.messages.basename=i18n/messages
+  messages:
+    basename: i18n/messages
 
-spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
-spring.datasource.url=jdbc:oracle:thin:@//localhost:1521/orclpdb
-spring.datasource.username=hr
-spring.datasource.password=hr
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/orclpdb
+    username: hr
+    password: hr
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
-server.port=7070
+server:
+  port: 7070
 
-token.secret=dgdhgfdafgdgafdhg3423@#sj
-token.time=24h
+token:
+  secret: dgdhgfdafgdgafdhg3423@#sj#@adsad232321322DWdassad
+  time: 24h

@@ -1,0 +1,19 @@
+i need to create employee table 
+id  name age phone number
+
+// api to get all employee
+// api to get all employee by List of ids
+
+// api to save employee
+// api to save List of employee
+
+// api to update employee
+// api to update List of employee
+
+// api to delete all employee
+
+// api to delete employee By ID
+
+// api to delete employee By List of ID
+
+// api to search about employee by name like 'ahmed%'

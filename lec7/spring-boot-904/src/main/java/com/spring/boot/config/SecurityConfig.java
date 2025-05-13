@@ -9,11 +9,20 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
 
+//    @Bean
+//    public UserDetailsManager userDetailsManager(DataSource dataSource){
+//        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        return userDetailsManager;
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -25,19 +34,20 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails user1 = User.withUsername("ahmed")
-                .password("{bcrypt}$2a$12$ClGL4/kKKMuJCW0ocRJkuOuqcGHgHn03aUPASgISpd6NtK7W3.gtq")
-                .roles("USER","ADMIN").build();
-        UserDetails user2 = User.withUsername("eslam")
-                .password("{bcrypt}$2a$12$j3Hl8CFhjYwcSxqTcGdN.O.bwxdeNNBp0jNTA1R1ZKT3GKWYy4yXa")
-                .roles("USER").build();
-        UserDetails user3 = User.withUsername("mona")
-                .password("{bcrypt}$2a$12$/TsaMRUtqFQ7lg7vMSwoZOcpcLvW/ZaxKr89O7NeCQSGgWG0cd2eC")
-                .roles("USER", "MANAGER")
-                .build();
-
-        return new InMemoryUserDetailsManager(user1, user2, user3);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails user1 = User.withUsername("ahmed")
+//                .disabled(true)
+//                .password("{bcrypt}$2a$12$ClGL4/kKKMuJCW0ocRJkuOuqcGHgHn03aUPASgISpd6NtK7W3.gtq")
+//                .roles("USER","ADMIN").build();
+//        UserDetails user2 = User.withUsername("eslam")
+//                .password("{bcrypt}$2a$12$j3Hl8CFhjYwcSxqTcGdN.O.bwxdeNNBp0jNTA1R1ZKT3GKWYy4yXa")
+//                .roles("USER").build();
+//        UserDetails user3 = User.withUsername("mona")
+//                .password("{bcrypt}$2a$12$/TsaMRUtqFQ7lg7vMSwoZOcpcLvW/ZaxKr89O7NeCQSGgWG0cd2eC")
+//                .roles("USER", "MANAGER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user1, user2, user3);
+//    }
 }

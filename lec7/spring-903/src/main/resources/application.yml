@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: spring-boot-903
+
+  security:
+    user:
+      name: eslam
+      password: eslam123
+
+  messages:
+    basename: i18n/messages
+  main:
+    allow-circular-references: true
+
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/orclpdb
+    username: hr
+    password: hr
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 7070
+
+token:
+  secret: dgdhgfdafgdgafdhg3423@#sj#@adsad232321322DWdassad
+  time: 24h

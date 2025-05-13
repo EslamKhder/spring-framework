@@ -69,7 +69,7 @@ public class AuthFilter extends OncePerRequestFilter {
             List<GrantedAuthority>  grantedAuthorities = client.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList());
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                    new UsernamePasswordAuthenticationToken(client, null, grantedAuthorities);
+                    new UsernamePasswordAuthenticationToken("eslam", null, grantedAuthorities);
 
 
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

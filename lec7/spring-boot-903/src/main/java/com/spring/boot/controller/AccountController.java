@@ -1,12 +1,14 @@
 package com.spring.boot.controller;
 
 import com.spring.boot.dto.AccountDto;
+import com.spring.boot.enms.Role;
 import com.spring.boot.exceptions.IdMisMatchException;
 import com.spring.boot.service.AccountService;
 import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -19,7 +21,9 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+
     @GetMapping("/allAccount")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<AccountDto>> getApplications(){
         return ResponseEntity.ok(accountService.getApplications());
     }

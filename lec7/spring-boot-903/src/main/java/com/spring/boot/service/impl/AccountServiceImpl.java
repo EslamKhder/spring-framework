@@ -1,15 +1,18 @@
 package com.spring.boot.service.impl;
 
 import com.spring.boot.dto.AccountDto;
+import com.spring.boot.dto.RoleDto;
 import com.spring.boot.exceptions.IdMisMatchException;
 import com.spring.boot.mapper.AccountMapper;
 import com.spring.boot.model.Account;
 import com.spring.boot.model.Role;
 import com.spring.boot.repo.AccountRepo;
 import com.spring.boot.service.AccountService;
+import com.spring.boot.service.RoleService;
 import jakarta.transaction.SystemException;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,6 +24,11 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepo accountRepo;
 
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private @Lazy PasswordEncoder passwordEncoder;
 
     @Override
     public List<AccountDto> getApplications() {
@@ -48,7 +56,16 @@ public class AccountServiceImpl implements AccountService {
         account.setPassword(accountDto.getPassword());
         account.setPhoneNumber(accountDto.getPhoneNumber());*/
 
-        accountRepo.save(account);
+        // account *
+        // role already created and add to account
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account = accountRepo.save(account); // account save     role save
+
+        List<Role> roles = account.getRoles();
+        final Account finalAccount = account;
+        roles.stream().forEach(role -> role.setAccounts(List.of(finalAccount)));
+
+        roleService.update(roles);
         return accountDto;
     }
 
