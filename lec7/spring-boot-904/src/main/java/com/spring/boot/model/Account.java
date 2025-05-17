@@ -27,7 +27,7 @@ public class Account {
 
     private String address;
 
-
+    private String password;
     public Account(String name, String phone, String address) {
         this.name = name;
         this.phone = phone;

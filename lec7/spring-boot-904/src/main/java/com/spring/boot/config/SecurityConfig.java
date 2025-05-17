@@ -4,18 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 
 //    @Bean
@@ -26,8 +23,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/account/allAccounts").hasRole("ADMIN");
+
+        httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        httpSecurity.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+//        httpSecurity.authorizeHttpRequests(api -> api.anyRequest().authenticated());
+
+        httpSecurity.authorizeHttpRequests(
+                api -> api.requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                        .anyRequest().authenticated()
+        );
+//        httpSecurity.authorizeHttpRequests()
+//                .requestMatchers(HttpMethod.GET, "/account/allAccounts").hasRole("ADMIN");
+
 
         httpSecurity.httpBasic(Customizer.withDefaults());
 

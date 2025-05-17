@@ -32,6 +32,7 @@ public class AccountDto {
 
     private int nameSize;
 
+    private String password;
 //    @Email
 //    @NotNull
 //    private String email;

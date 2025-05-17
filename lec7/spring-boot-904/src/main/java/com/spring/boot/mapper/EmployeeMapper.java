@@ -13,6 +13,7 @@ public interface EmployeeMapper {
 
     EmployeeMapper EMPLOYEE_MAPPER = Mappers.getMapper(EmployeeMapper.class);
 
+    @Mapping(source = "roleDtos" , target = "roles")
     Employee toEmployee(EmployeeDto employeeDto);
 
     @Mapping(source = "roles" , target = "roleDtos")

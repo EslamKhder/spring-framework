@@ -21,3 +21,7 @@ spring:
 
 server:
   port: 9090
+
+token:
+  secret: dskfsdjkfkjhsfdkjfjh3432432@#$#@23
+  time: 24h

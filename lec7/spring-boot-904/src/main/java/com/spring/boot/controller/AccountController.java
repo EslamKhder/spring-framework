@@ -1,14 +1,13 @@
 package com.spring.boot.controller;
 
-import com.spring.boot.controller.vm.AccountResponseVm;
 import com.spring.boot.dto.AccountDto;
 import com.spring.boot.dto.exception.IdNotNullException;
-import com.spring.boot.model.Account;
 import com.spring.boot.service.AccountService;
 import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -21,6 +20,8 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/account/allAccounts")
+//    @PreAuthorize("hasAnyRole('" + Role.ADMIN. + "', '" + Role.USER + "')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<AccountDto>> getAllAccount(){
         return ResponseEntity.ok(accountService.getAllAccount());
     }
@@ -32,6 +33,7 @@ public class AccountController {
 
 
     @PostMapping("/account/create-account")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Void> createAccount(@RequestBody @Valid AccountDto account) throws SystemException, IdNotNullException {
         accountService.createAccount(account);
         return ResponseEntity.created(URI.create("/account/create-account")).build();
@@ -39,6 +41,7 @@ public class AccountController {
 
 
     @PutMapping("/account/edit-account")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<AccountDto> editAccount(@RequestBody AccountDto account) throws SystemException {
         return ResponseEntity.ok(accountService.updateAccount(account));
     }

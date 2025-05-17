@@ -19,6 +19,6 @@ public class Employee {
     private String userName;
     private String password;
 
-    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Role> roles;
 }

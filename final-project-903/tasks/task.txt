@@ -1,0 +1,71 @@
+Category Entity
+(id, name, logo, flag)
+
+Product Entity
+(id, name, imagePath, desc, price)
+
+one to many from Category to Product
+many to one from Product to Category
+--------------------------------------------
+
+api to get all Category  
+api to get all Product by CategoryID
+
+note:
+pls apply controller , service , and repo
+pls apply mapper and dto 
+-----------------------------------
+api to get all Product based on key for 
+(name or desc)
+
+note: 
+if not found Products pls return Bundel message
+with English and Arabic text
+
+Exceptions
+Bundel message
+-------------------------------------------------------------------------------------------------
+create new Entity Chef 
+(id, name , spec, logoPath, faceLink, tweLink, instaLink)
+--------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+api to get All Chefs
+note:
+pls apply controller , service , and repo
+pls apply mapper and dto 
+--------------------------------------------
+create new Entity ContactInfo 
+(id, name , email, subject, message)
+--------------------------------------------
+api to save Entity ContactInfo 
+
+note:
+pls apply controller , service , and repo
+pls apply mapper and dto 
+pls apply validation on request of Controller
+note: 
+if any validation fire pls return Bundel message
+with English and Arabic text
+--------------------------------------------
+create User Entity (id, username, password)
+create UserDetails Entity (id, age, phoneNumber, address, ...ect)
+create role Entity (id, code)
+
+one to one from User to UserDetails
+one to one from UserDetails to User
+many to many from User to role
+many to many from role to User
+
+
+code is Enum with  ADMIN, USER
+--------------------------------------------------------
+refactor:
+
+one to many from User to ContactInfo
+many to one from ContactInfo to User
+
+note:
+refactor on dto.
+
+-------------------------------------------------------
+

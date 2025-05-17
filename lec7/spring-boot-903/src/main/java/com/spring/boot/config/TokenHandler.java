@@ -1,7 +1,6 @@
 package com.spring.boot.config;
 
 import com.spring.boot.dto.AccountDto;
-import com.spring.boot.model.Account;
 import com.spring.boot.service.AccountService;
 import com.spring.boot.sitting.JwtToken;
 import io.jsonwebtoken.Claims;

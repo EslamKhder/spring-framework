@@ -11,4 +11,5 @@ import java.util.List;
 public interface EmployeeService {
 
     EmployeeDto getEmployeeByUserName(String userName) throws SystemException;
+    EmployeeDto addEmployee(EmployeeDto employeeDto) throws SystemException;
 }
