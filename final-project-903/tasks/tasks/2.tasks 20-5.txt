@@ -1,32 +1,3 @@
-Category Entity
-(id, name, logo, flag)
-
-Product Entity
-(id, name, imagePath, desc, price)
-
-one to many from Category to Product
-many to one from Product to Category
---------------------------------------------
-
-api to get all Category  
-api to get all Product by CategoryID
-
-note:
-pls apply controller , service , and repo
-pls apply mapper and dto 
------------------------------------
-api to get all Product based on key for 
-(name or desc)
-
-note: 
-if not found Products pls return Bundel message
-with English and Arabic text
-
-Exceptions
-Bundel message
--------------------------------------------------------------------------------------------------
-create new Entity Chef 
-(id, name , spec, logoPath, faceLink, tweLink, instaLink)
 --------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------
 api to get All Chefs
@@ -68,4 +39,9 @@ note:
 refactor on dto.
 
 -------------------------------------------------------
+- for category order by name asc
+- pls any api return list order by id asc
+
+
+
 
