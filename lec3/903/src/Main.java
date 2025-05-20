@@ -26,26 +26,19 @@ public class Main {
 		Session session = factory.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		
-		Person person = session.get(Person.class, 14);
-		
-		System.out.println("person PassportNumber is : " + person.getPassport().getPassportNumber());
-
-		/*System.out.println("person name is : " + person.getName());
-		
-		System.out.println("person PassportNumber is : " + person.getPassport().getPassportNumber());
-		*/
-		/*System.out.println("person name is : " + person.getName());
-		
-		System.out.println("person PassportNumber is : " + person.getPassport().getPassportNumber());
-		
-		//System.out.println(session.contains(person)); // true 
+		// add delete    save delete commit
+		// select
+		// edit           update      commit
+		// edit                       commit
+		Person person = session.get(Person.class, 14); // 14
 		session.detach(person);
-		person.setName("name_test");
+		person.setAge(20);
 		
-		//System.out.println(session.contains(person)); //false
-		person.getPassport().setPassportNumber(187L);
+		person.getPassport().setPassportNumber(789);
+		/*Person person = new Person();
+		person.setName("ahmed");*/
 		//session.update(person);
-		transaction.commit();*/
+		transaction.commit();
 	}
 
 }

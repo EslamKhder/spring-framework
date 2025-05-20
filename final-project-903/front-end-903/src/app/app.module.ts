@@ -11,6 +11,7 @@ import {FooterComponent} from './componants/footer/footer.component';
 import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
+import {HttpClientModule} from "@angular/common/http";
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -45,7 +46,8 @@ export const routes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [
