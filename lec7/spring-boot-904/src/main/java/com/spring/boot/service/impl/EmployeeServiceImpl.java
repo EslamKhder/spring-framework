@@ -10,6 +10,8 @@ import com.spring.boot.repo.EmployeeRepo;
 import com.spring.boot.service.EmployeeService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepo employeeRepo;
 
+    @Autowired
+    private @Lazy PasswordEncoder passwordEncoder;
 
     @Override
     public EmployeeDto getEmployeeByUserName(String userName) throws SystemException {
@@ -52,6 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         role.setEmployee(employee);
         employee.setRoles(List.of(role));
 
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         Employee savedEmployee = employeeRepo.save(employee);
         return EmployeeMapper.EMPLOYEE_MAPPER.toEmployeeDto(savedEmployee);
     }

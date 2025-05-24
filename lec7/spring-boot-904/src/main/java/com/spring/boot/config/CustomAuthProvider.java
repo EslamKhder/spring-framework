@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class CustomAuthProvider implements AuthenticationProvider {
 
     @Autowired

@@ -21,7 +21,7 @@ public class AccountController {
 
     @GetMapping("/account/allAccounts")
 //    @PreAuthorize("hasAnyRole('" + Role.ADMIN. + "', '" + Role.USER + "')")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<List<AccountDto>> getAllAccount(){
         return ResponseEntity.ok(accountService.getAllAccount());
     }

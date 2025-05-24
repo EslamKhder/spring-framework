@@ -9,6 +9,7 @@ import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.transaction.SystemException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,7 @@ public class TokenHandler {
 
     private JwtParser jwtParser;
 
+    @Autowired
     private EmployeeService employeeService;
 
     public TokenHandler(JwtToken jwtToken) {
@@ -52,7 +54,7 @@ public class TokenHandler {
         return jwtBuilder.compact();
     }
 
-    public boolean validateToken(String token){
+    public EmployeeDto validateToken(String token){
         try {
             if (jwtParser.isSigned(token)) {
                 Claims claims = jwtParser.parseClaimsJws(token).getBody();
@@ -63,12 +65,16 @@ public class TokenHandler {
 
                 EmployeeDto employeeDto = employeeService.getEmployeeByUserName(userName);
 
-                return Objects.nonNull(employeeDto) && expirationDate.after(new Date()) &&
+                boolean isValidToken = Objects.nonNull(employeeDto) && expirationDate.after(new Date()) &&
                         issueDate.before(expirationDate);
+
+                if (isValidToken) {
+                    return employeeDto;
+                }
             }
         } catch (SystemException e) {
             throw new RuntimeException(e);
         }
-        return false;
+        return null;
     }
 }

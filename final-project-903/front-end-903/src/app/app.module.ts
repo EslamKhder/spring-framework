@@ -23,6 +23,8 @@ export const routes: Routes = [
   {path: 'contact-info', component: ContactInfoComponent},
   // http://localhost:4200/chefs
   {path: 'chefs', component: ChefsComponent},
+  {path: 'category/:id', component: ProductsComponent},
+  {path: 'search/:key', component: ProductsComponent},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   {path: '**', redirectTo: '/products', pathMatch: 'full'}
