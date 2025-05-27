@@ -11,12 +11,13 @@ export class HeaderComponent {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
   search(key) {
-    let idCategoryExist = this.activatedRoute.snapshot.paramMap.has("id");
+    const idCategoryExist = this.activatedRoute.firstChild.snapshot.paramMap.has("id");
+
     if (idCategoryExist) {
-      let idCategory = this.activatedRoute.snapshot.paramMap.get("id");
-      this.router.navigateByUrl("/category/" + idCategory + "/search/" + key);
-      return
+      const idCategory = this.activatedRoute.firstChild.snapshot.paramMap.get("id");
+      this.router.navigateByUrl(`/category/${idCategory}/search/${key}`);
+    } else {
+      this.router.navigateByUrl(`/search/${key}`);
     }
-    this.router.navigateByUrl("/search/" + key)
   }
 }
