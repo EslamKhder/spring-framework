@@ -1,5 +1,6 @@
 package com.spring.boot.restaurant.controller;
 
+import com.spring.boot.restaurant.controller.vm.ProductResponseVM;
 import com.spring.boot.restaurant.dto.ProductDto;
 import com.spring.boot.restaurant.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,10 @@ public class ProductController {
 
     private final ProductService productService;
 
+
     @GetMapping("/getAll")
-    public ResponseEntity<List<ProductDto>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProducts());
+    public ResponseEntity<ProductResponseVM> getAllProducts(@RequestParam("pageNumber")int pageNumber, @RequestParam("pageSize") int pageSize) {
+        return ResponseEntity.ok(productService.getAllProducts(pageNumber, pageSize));
     }
 
     @GetMapping("/getOne/{id}")
@@ -43,12 +45,15 @@ public class ProductController {
 
     @DeleteMapping("/deleteList")
     public ResponseEntity<Boolean> deleteProductsByIds(@RequestBody List<Long> ids) {
+
         return ResponseEntity.ok(productService.deleteProductsByIds(ids));
     }
 
+
     @GetMapping("/searchByCategoryId/{categoryId}")
-    public ResponseEntity<List<ProductDto>> getProductsByCategoryId(@PathVariable Long categoryId) {
-        return ResponseEntity.ok(productService.getProductsByCategoryId(categoryId));
+    public ResponseEntity<ProductResponseVM> getProductsByCategoryId(@PathVariable Long categoryId, @RequestParam("pageNumber")int pageNumber, @RequestParam("pageSize") int pageSize) {
+
+        return ResponseEntity.ok(productService.getProductsByCategoryId(categoryId, pageNumber, pageSize));
     }
 
     @GetMapping("/searchByCategoryName/{categoryName}")
@@ -56,9 +61,17 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductsByCategoryName(categoryName));
     }
 
+
     @GetMapping("/search")
-    public ResponseEntity<List<ProductDto>> searchProducts(@RequestParam String keyword) {
-        List<ProductDto> result = productService.searchProducts(keyword);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<ProductResponseVM> searchProducts(@RequestParam String keyword,@RequestParam("pageNumber")int pageNumber, @RequestParam("pageSize") int pageSize) {
+        return ResponseEntity.ok(productService.searchProducts(keyword, pageNumber, pageSize));
+    }
+
+    @GetMapping("/categorySearch")
+    public ResponseEntity<ProductResponseVM> searchProducts(@RequestParam Long categoryId,
+                                                            @RequestParam String keyword,
+                                                            @RequestParam("pageNumber")int pageNumber,
+                                                            @RequestParam("pageSize") int pageSize) {
+        return ResponseEntity.ok(productService.searchByCategoryIdAndKeyWord(categoryId, keyword, pageNumber, pageSize));
     }
 }

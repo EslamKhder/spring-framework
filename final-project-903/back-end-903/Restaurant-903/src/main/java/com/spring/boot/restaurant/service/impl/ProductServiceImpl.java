@@ -1,5 +1,6 @@
 package com.spring.boot.restaurant.service.impl;
 
+import com.spring.boot.restaurant.controller.vm.ProductResponseVM;
 import com.spring.boot.restaurant.dto.ProductDto;
 import com.spring.boot.restaurant.exception.BadRequestException;
 import com.spring.boot.restaurant.exception.NotFoundException;
@@ -9,6 +10,9 @@ import com.spring.boot.restaurant.repository.ProductRepo;
 import com.spring.boot.restaurant.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +27,11 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public List<ProductDto> getAllProducts() {
-        List<Product> products = productRepo.findAll();
-        return productMapper.toDtoList(products);
+    public ProductResponseVM getAllProducts(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);   //  for pagination
+        Page<Product> products = productRepo.findAll(pageable);
+//        return productMapper.toDtoList(products);
+        return new ProductResponseVM(productMapper.toDtoList(products.getContent()), products.getTotalElements());
     }
 
     @Override
@@ -65,9 +71,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProductsByCategoryId(Long categoryId) {
-        List<Product> products = productRepo.findByCategoryId(categoryId);
-        return productMapper.toDtoList(products);
+    public ProductResponseVM getProductsByCategoryId(Long categoryId, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);   //  for pagination
+        Page<Product> products = productRepo.findByCategoryId(categoryId, pageable);
+        return new ProductResponseVM(productMapper.toDtoList(products.getContent()), products.getTotalElements());
     }
 
     @Override
@@ -77,11 +84,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> searchProducts(String keyword) {
-        List<Product> products = productRepo
-                .findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword);
+    public ProductResponseVM searchProducts(String keyword, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);   //  for pagination
+        Page<Product> products = productRepo
+                .findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword, pageable);
+        return new ProductResponseVM(productMapper.toDtoList(products.getContent()), products.getTotalElements());
+    }
 
-        return productMapper.toDtoList(products);
+    @Override
+    public ProductResponseVM searchByCategoryIdAndKeyWord(Long categoryId, String keyword, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);   //  for pagination
+        Page<Product> products = productRepo
+                .findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryId(keyword, keyword, categoryId, pageable);
+        return new ProductResponseVM(productMapper.toDtoList(products.getContent()), products.getTotalElements());
     }
 
     @Override

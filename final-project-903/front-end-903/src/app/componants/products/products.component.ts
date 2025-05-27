@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import {Category} from "../../../model/category";
-import {CategoryService} from "../../../service/category.service";
+import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../model/product";
 import {ProductService} from "../../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
@@ -10,54 +8,93 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent  implements OnInit  {
   products: Product[] = [];
+  pageNumber: number = 1;
+  pageSize: number = 5;
+  collectionSize: number;
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(
-      () =>  this.handelAllAction()
+      () =>  this.handelAllAction(this.pageNumber)
     )
-
   }
 
   constructor(private productService :ProductService, private activatedRoute: ActivatedRoute) {
   }
 
-  handelAllAction(){
+  handelAllAction(pageNumber){
     let idCategoryExist = this.activatedRoute.snapshot.paramMap.has("id");
     let idKeyExist = this.activatedRoute.snapshot.paramMap.has("key");
+
+    debugger
+    if (idCategoryExist && idKeyExist) {
+      let idCategory = this.activatedRoute.snapshot.paramMap.get("id");
+      let key = this.activatedRoute.snapshot.paramMap.get("key");
+      this.searchByCategoryIdAndKey(idCategory, key, pageNumber);
+      return;
+    }
+
     if (idCategoryExist) {
       let idCategory = this.activatedRoute.snapshot.paramMap.get("id");
-      this.getProductByCategoryId(idCategory)
+      this.getProductByCategoryId(idCategory, pageNumber)
     } else if (idKeyExist) {
       let key = this.activatedRoute.snapshot.paramMap.get("key");
-      this.getProductByKey(key)
+      this.getProductByKey(key, pageNumber)
     } else {
-      this.getAllProducts()
+      this.getAllProducts(pageNumber)
     }
   }
 
-  getAllProducts(){
-    this.productService.getAllProducts().subscribe(
+  searchByCategoryIdAndKey(id, key, pageNumber){
+    this.productService.searchByCategoryIdAndKey(id, key, pageNumber, this.pageSize).subscribe(
       response => {
-        this.products = response
+        // @ts-ignore
+        this.products = response.products
+        // @ts-ignore
+        this.collectionSize = response.size
+      }
+    )
+  }
+  getAllProducts(pageNumber){
+    this.productService.getAllProducts(pageNumber, this.pageSize).subscribe(
+      response => {
+        // @ts-ignore
+        this.products = response.products
+        // @ts-ignore
+        this.collectionSize = response.size
       }
     )
   }
 
-  getProductByCategoryId(id){
-    this.productService.getProductsByCategoryId(id).subscribe(
+  getProductByCategoryId(id, pageNumber){
+    this.productService.getProductsByCategoryId(id, pageNumber, this.pageSize).subscribe(
       response => {
-        this.products = response
+        // @ts-ignore
+        this.products = response.products
+        // @ts-ignore
+        this.collectionSize = response.size
       }
     )
   }
 
-  getProductByKey(key){
-    this.productService.getProductsByKey(key).subscribe(
+  getProductByKey(key, pageNumber){
+    this.productService.getProductsByKey(key, pageNumber, this.pageSize).subscribe(
       response => {
-        this.products = response
+        // @ts-ignore
+        this.products = response.products
+        // @ts-ignore
+        this.collectionSize = response.size
       }
     )
+  }
+
+  doPagination() {
+    this.handelAllAction(this.pageNumber)
+  }
+
+  changePageSize(event: Event) {
+    this.pageSize = +(<HTMLInputElement>event.target).value;
+    this.handelAllAction(this.pageNumber)
   }
 }
