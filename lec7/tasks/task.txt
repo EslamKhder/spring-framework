@@ -1,0 +1,8 @@
+i need to create employee table 
+id  name age phone number
+
+// api to get all employee
+
+// api to get all employee by List of ids
+
+// api to save employee

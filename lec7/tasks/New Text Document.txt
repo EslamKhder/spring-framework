@@ -11,7 +11,6 @@ id  name age phone number
 // api to update List of employee
 
 // api to delete all employee
-// api to delete List of employee
 
 // api to delete employee By ID
 
