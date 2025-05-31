@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "114ceca3-a680-4d5c-a982-748e9ccfaaf7",
+		"name": "Restaurant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28860232"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/getAll",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/getOne/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"getOne",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Iced Lemon Tea\",\r\n    \"description\": \"Refreshing lemon-flavored iced tea.\",\r\n    \"price\": 5.99,\r\n    \"image\": \"lemon_tea.png\",\r\n    \"categoryId\": 8\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/products/create",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/createList",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"createList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"Chocolate Cake Updated\",\r\n    \"description\": \"Rich chocolate cake with creamy frosting.\",\r\n    \"price\": 5.99,\r\n    \"image\": \"chocolate_cake.png\",\r\n    \"categoryId\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/products/update",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/deleteOne/4",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"deleteOne",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete List",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[1,2]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/products/deleteList",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"deleteList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search By Category Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/searchByCategoryId/5",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"searchByCategoryId",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search By Category Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/searchByCategoryName/Desserts",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"searchByCategoryName",
+								"Desserts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search By Name Or Description",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/products/search?keyword=Rich",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "Rich"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/categories/getAll",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"categories",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/categories/getOne/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"categories",
+								"getOne",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Beverages\",\r\n  \"logo\": \"Beverages.png\",\r\n  \"flag\": \"active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/categories/createOne",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"categories",
+								"createOne"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/categories/createList",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"categories",
+								"createList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Desserts\",\r\n    \"logo\": \"desserts.png\",\r\n    \"flag\": \"active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/categories/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"categories",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/categories/deleteOne/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"categories",
+								"deleteOne",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete List",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[2,3]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/categories/deleteList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"categories",
+								"deleteList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/categories/getByName?name=Desserts",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"categories",
+								"getByName"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Desserts"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/categories/search?name=s",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"categories",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "s"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

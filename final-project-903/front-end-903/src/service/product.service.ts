@@ -9,20 +9,20 @@ import {Product} from "../model/product";
 })
 export class ProductService {
 
-  baseUrl = 'http://localhost:9090/api/products'
+  baseUrl = 'http://localhost:9090/products'
   constructor(private http: HttpClient) { }
 
-  getAllProducts(pageNumber, pageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/getAll?pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
-    // return this.http.get<Product[]>(this.baseUrl + '/getAll?pageNumber=' + pageNumber + '&pageSize=' + pageSize).pipe(
+  getAllProducts(pageNumber, pageSize): Observable<any> {
+    return this.http.get<Product[]>(`${this.baseUrl}/all-products?page=${pageNumber}&size=${pageSize}`).pipe(
+    // return this.http.get<Product[]>(this.baseUrl + '/getAll?page=' + pageNumber + '&size=' + pageSize).pipe(
       map(
         response => response
       )
     )
   }
 
-  getProductsByCategoryId(id,pageNumber, pageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/searchByCategoryId/${id}?pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
+  getProductsByCategoryId(id,pageNumber, pageSize): Observable<any> {
+    return this.http.get<Product[]>(`${this.baseUrl}/all-products/${id}?page=${pageNumber}&size=${pageSize}`).pipe(
     // return this.http.get<Product[]>(this.baseUrl + '/searchByCategoryId/' + id).pipe(
       map(
         response => response
@@ -30,8 +30,8 @@ export class ProductService {
     )
   }
 
-  getProductsByKey(key, pageNumber, pageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/search?keyword=${key}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
+  getProductsByKey(key, pageNumber, pageSize): Observable<any> {
+    return this.http.get<Product[]>(`${this.baseUrl}/all-products-by-key?key=${key}&page=${pageNumber}&size=${pageSize}`).pipe(
     // return this.http.get<Product[]>(this.baseUrl + '/search?keyword=' + key).pipe(
       map(
         response => response
@@ -39,8 +39,8 @@ export class ProductService {
     )
   }
 
-  searchByCategoryIdAndKey(id, key, pageNumber, pageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/categorySearch?categoryId=${id}&keyword=${key}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
+  searchByCategoryIdAndKey(id, key, pageNumber, pageSize): Observable<any> {
+    return this.http.get<Product[]>(`${this.baseUrl}/all-products-by-key-and-category-id?categoryId=${id}&key=${key}&page=${pageNumber}&size=${pageSize}`).pipe(
       // return this.http.get<Product[]>(this.baseUrl + '/search?keyword=' + key).pipe(
       map(
         response => response

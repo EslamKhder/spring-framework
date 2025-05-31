@@ -9,7 +9,7 @@ import {map} from "rxjs/operators";
 })
 export class CategoryService {
 
-  url = 'http://localhost:9090/api/categories/getAll';
+  url = 'http://localhost:9090/categories/all-categories';
   constructor(private http: HttpClient) { }
 
   getAllCategories(): Observable<Category[]> {

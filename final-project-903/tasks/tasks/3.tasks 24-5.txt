@@ -28,3 +28,5 @@ bundel message exception
 
 pls apply validation on pagination on service to prevent anyone send invalid page number
 --------------------------------------------------------------------------------------------------
+
+apply Bundel message on all cases if no data return

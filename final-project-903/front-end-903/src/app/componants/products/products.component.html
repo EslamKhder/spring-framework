@@ -4,22 +4,28 @@
           <div class="row g-4">
             <div class="col-lg-6" *ngFor="let pro of products">
               <div class="d-flex align-items-center">
-                <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.image}}" alt="" style="width: 80px;">
+                <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.imagePath}}" alt="" style="width: 80px;">
                 <div class="w-100 d-flex flex-column text-start ps-4">
                   <h5 class="d-flex justify-content-between border-bottom pb-2">
                     <span>{{pro.name}}</span>
                     <span class="text-primary">${{pro.price}}</span>
                   </h5>
                   <small class="fst-italic">{{pro.description}}</small>
-                  <button type="button" class="btn btn-danger col-lg-6">ADD to Card</button>
+                  <button type="button" class="btn btn-danger col-lg-6" (click)="addProductToCard(pro)">ADD to Card</button>
                 </div>
               </div>
             </div>
 
-            <div *ngIf="collectionSize === 0 || products.length === 0" class="coming-soon">
+            <div *ngIf="isCategoryProductExist" class="coming-soon">
               <div>🌟 ترقبوا! شيء مذهل قادم قريبًا. 🚀</div>
               <div>🌟 Stay tuned! Something amazing is coming soon. 🚀</div>
             </div>
+
+            <div *ngIf="isProductExist" class="coming-soon">
+              <div>{{messageAr}}</div>
+              <div>{{messageEn}}</div>
+            </div>
+
             <div class="col-md-9 pag" style="padding-left: 30%" *ngIf="collectionSize !== 0 && products.length !== 0">
                               <ngb-pagination
                                 [(page)]="pageNumber"

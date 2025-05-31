@@ -1,0 +1,10 @@
+.image-style {
+  width: 100px !important;
+}
+
+.no-orders-message {
+  color: gray;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+}
