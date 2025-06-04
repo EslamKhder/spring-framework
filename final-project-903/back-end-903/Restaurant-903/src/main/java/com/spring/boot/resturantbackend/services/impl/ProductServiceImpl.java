@@ -30,6 +30,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponseVm getAllProducts(int page, int size) throws SystemException {
         Pageable pageable = getPageable(page, size);
         Page<Product> result = productRepo.findAllByOrderByIdAsc(pageable);
+        if (result.getContent().isEmpty()) {
+            throw new SystemException("product.empty");
+        }
         return new ProductResponseVm(result.getContent().stream().map(ProductMapper.PRODUCT_MAPPER::toProductDto).toList(),
                 result.getTotalElements());
     }
