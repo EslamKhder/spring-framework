@@ -1,0 +1,121 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.signup-container {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ff7eb3;
+  box-shadow: 0 0 5px rgba(255, 126, 179, 0.5);
+}
+
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff7eb3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #e66aa0;
+}
+
+.signup-footer {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+.signup-footer a {
+  color: #6e8efb;
+  text-decoration: none;
+}
+
+.signup-footer a:hover {
+  text-decoration: underline;
+}
+
+
+.notification {
+  background-color: #fef3c7; /* soft yellow background */
+  color: #92400e; /* dark amber text */
+  border: 1px solid #fcd34d;
+  padding: 16px 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  font-family: Arial, sans-serif;
+}
+
+.notification p {
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: left; /* Adjust if needed for Arabic */
+  direction: ltr;    /* Default left-to-right for English */
+}
+
+/* Optional: RTL support for Arabic if needed */
+.notification p:last-child {
+  direction: rtl;
+  text-align: right;
+}
+
+.error-message {
+  color: #d32f2f; /* deep red */
+  background-color: #fdecea; /* soft red background */
+  border: 1px solid #f5c6cb;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 8px;
+  width: fit-content;
+  max-width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}

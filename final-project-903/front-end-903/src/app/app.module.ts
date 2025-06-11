@@ -13,6 +13,8 @@ import { ContactInfoComponent } from './componants/contact-info/contact-info.com
 import {APP_BASE_HREF} from '@angular/common';
 import {HttpClientModule} from "@angular/common/http";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { LoginComponent } from './componants/login/login.component';
+import {SignupComponent} from "./componants/signup/signup.component";
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -27,6 +29,8 @@ export const routes: Routes = [
   {path: 'category/:id', component: ProductsComponent},
   {path: 'search/:key', component: ProductsComponent},
   {path: 'category/:id/search/:key', component: ProductsComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'sign-up', component: SignupComponent},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   {path: '**', redirectTo: '/products', pathMatch: 'full'}
@@ -36,6 +40,8 @@ export const routes: Routes = [
 *   // http://localhost:4200/
   {path: '', component:OrderItemsComponent}
 * */
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +52,9 @@ export const routes: Routes = [
     CardComponent,
     FooterComponent,
     ChefsComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -59,4 +67,4 @@ export const routes: Routes = [
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}
