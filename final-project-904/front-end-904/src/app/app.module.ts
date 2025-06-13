@@ -13,6 +13,8 @@ import { ContactInfoComponent } from './componants/contact-info/contact-info.com
 import {APP_BASE_HREF} from '@angular/common';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { LoginComponent } from './componants/login/login.component';
+import { SignupComponent } from './componants/signup/signup.component';
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -26,6 +28,8 @@ export const routes: Routes = [
   {path: 'chefs', component: ChefsComponent},
   {path: 'category/:id', component: ProductsComponent},
   {path: 'search/:key', component: ProductsComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 
@@ -47,7 +51,9 @@ export const routes: Routes = [
     CardComponent,
     FooterComponent,
     ChefsComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

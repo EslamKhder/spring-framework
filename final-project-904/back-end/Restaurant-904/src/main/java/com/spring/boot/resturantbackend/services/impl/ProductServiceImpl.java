@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = getPageable(page, size);
         Page<Product> result = productRepo.findAllProductsByCategoryIdByOrderByIdAsc(id, pageable);
         if (result.isEmpty()) {
-            throw new SystemException("products.not.found");
+            throw new SystemException("products.category.not.found");
         }
         return new ProductResponseVm(result.getContent().stream().map(ProductMapper.PRODUCT_MAPPER::toProductDto).toList(),
                 result.getTotalElements());
@@ -177,6 +177,8 @@ public class ProductServiceImpl implements ProductService {
                 result.getTotalElements());
     }
 
+    // 1 2 3
+    // 0  1  2
     private static Pageable getPageable(int page, int size) throws SystemException {
         if (page < 1) {
             throw new SystemException("error.min.one.page");

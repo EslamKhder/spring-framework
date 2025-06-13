@@ -1,6 +1,5 @@
-package com.spring.boot.resturantbackend.models;
+package com.spring.boot.resturantbackend.models.security;
 
-import com.spring.boot.resturantbackend.models.security.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,18 +12,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ContactInfo {
+public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String name;
+    private String age;
     @Column(nullable = false)
-    private String email;
+    private String phoneNumber;
     @Column(nullable = false)
-    private String subject;
-    @Column(nullable = false)
-    private String message;
-    @ManyToOne
-    private UserEntity user;
+    private String address;
+    @OneToOne
+    private UserEntity userEntity;
 }

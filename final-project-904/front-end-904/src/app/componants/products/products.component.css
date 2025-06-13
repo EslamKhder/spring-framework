@@ -1,0 +1,38 @@
+.message-card {
+  background: linear-gradient(135deg, #ffffff, #f2f6fc);
+  border: 1px solid #dbe2ef;
+  border-radius: 16px;
+  padding: 20px 24px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.message-card:hover {
+  transform: translateY(-4px);
+}
+
+.message {
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+.message-ar {
+  background-color: #e6f7ff;
+  color: #003a63;
+  text-align: right;
+  direction: rtl;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.message-en {
+  background-color: #fff3e6;
+  color: #7a4f01;
+  text-align: left;
+  direction: ltr;
+  font-size: 16px;
+}

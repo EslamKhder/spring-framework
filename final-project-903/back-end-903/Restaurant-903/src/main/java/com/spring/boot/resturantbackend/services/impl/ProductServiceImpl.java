@@ -177,6 +177,8 @@ public class ProductServiceImpl implements ProductService {
                 result.getTotalElements());
     }
 
+    // 1 2 3
+    // 0  1  2
     private static Pageable getPageable(int page, int size) throws SystemException {
         if (page < 1) {
             throw new SystemException("error.min.one.page");

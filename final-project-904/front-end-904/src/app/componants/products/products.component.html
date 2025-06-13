@@ -4,7 +4,7 @@
     <div class="row g-4">
       <div class="col-lg-6" *ngFor="let pro of products">
         <div class="d-flex align-items-center">
-          <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.image}}" alt="" style="width: 80px;">
+          <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.imagePath}}" alt="" style="width: 80px;">
           <div class="w-100 d-flex flex-column text-start ps-4">
             <h5 class="d-flex justify-content-between border-bottom pb-2">
               <span>{{pro.name}}</span>
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9 pag" style="padding-left: 30%">
+      <div class="col-md-9 pag" style="padding-left: 30%" *ngIf="products.length !== 0">
                         <ngb-pagination
                           [(page)]="page"
                           [pageSize]="pageLength"
@@ -26,11 +26,13 @@
                         >
 
                         </ngb-pagination>
-
+<!--        [maxSize]="5"-->
+<!--        [boundaryLinks]="true"-->
+<!--        (pageChange)="doPagination()"-->
 <!--        (pageChange)="doing()"-->
         <div class="sel">
           <span class="mr-2">Page Size</span>
-          <select>
+          <select (change)="changePageSize($event)">
             <option>2</option>
             <option>5</option>
             <option selected="true">10</option>
@@ -38,6 +40,10 @@
             <option>50</option>
           </select>
         </div>
+      </div>
+      <div class="message-card" *ngIf="messageAr != '' || messageEn != ''">
+        <div class="message message-ar">{{messageAr}}</div>
+        <div class="message message-en">{{messageEn}}</div>
       </div>
     </div>
   </div>
