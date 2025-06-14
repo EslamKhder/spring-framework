@@ -5,16 +5,41 @@
             <div class="col-lg-6" *ngFor="let pro of products">
               <div class="d-flex align-items-center">
                 <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.imagePath}}" alt="" style="width: 80px;">
+
                 <div class="w-100 d-flex flex-column text-start ps-4">
                   <h5 class="d-flex justify-content-between border-bottom pb-2">
                     <span>{{pro.name}}</span>
                     <span class="text-primary">${{pro.price}}</span>
                   </h5>
+
                   <small class="fst-italic">{{pro.description}}</small>
-                  <button type="button" class="btn btn-danger col-lg-6" (click)="addProductToCard(pro)">ADD to Card</button>
+
+                  <div class="d-flex mt-2 gap-2">
+                    <button type="button" class="btn btn-danger" (click)="addProductToCard(pro)">
+                      Add to Cart
+                    </button>
+
+                    <div *ngIf="isUserAdmin()">
+                      <!-- Update Button -->
+                      <button type="button" class="btn btn-outline-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+
+                      <!-- Delete Button -->
+                      <button type="button" class="btn btn-outline-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+
+                      <!-- Delete Button -->
+                      <button type="button" class="btn btn-outline-danger">
+                        <i class="fas fa-plus me-1"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
 
             <div *ngIf="isCategoryProductExist" class="coming-soon">
               <div>🌟 ترقبوا! شيء مذهل قادم قريبًا. 🚀</div>

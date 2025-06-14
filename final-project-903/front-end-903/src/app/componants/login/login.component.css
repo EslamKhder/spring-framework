@@ -79,3 +79,43 @@ body {
 .login-footer a:hover {
   text-decoration: underline;
 }
+
+
+.notification {
+  background-color: #fef3c7; /* soft yellow background */
+  color: #92400e; /* dark amber text */
+  border: 1px solid #fcd34d;
+  padding: 16px 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  font-family: Arial, sans-serif;
+}
+
+.notification p {
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: left; /* Adjust if needed for Arabic */
+  direction: ltr;    /* Default left-to-right for English */
+}
+
+/* Optional: RTL support for Arabic if needed */
+.notification p:last-child {
+  direction: rtl;
+  text-align: right;
+}
+
+.error-message {
+  color: #d32f2f; /* deep red */
+  background-color: #fdecea; /* soft red background */
+  border: 1px solid #f5c6cb;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 8px;
+  width: fit-content;
+  max-width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}

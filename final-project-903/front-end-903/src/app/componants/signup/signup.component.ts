@@ -24,9 +24,9 @@ export class SignupComponent implements OnInit {
     if (!this.validation(userName, password, confirmPassword)) {
       return;
     }
-    debugger
     this.userService.createAccount(userName, password).subscribe(
       response => {
+        sessionStorage.setItem("roles", response.roles);
         sessionStorage.setItem("token", response.token);
         sessionStorage.setItem("userName", response.username);
         this.router.navigateByUrl("products");

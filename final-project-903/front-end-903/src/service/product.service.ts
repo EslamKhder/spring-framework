@@ -9,7 +9,7 @@ import {Product} from "../model/product";
 })
 export class ProductService {
 
-  baseUrl = 'http://localhost:9090/products'
+  baseUrl = 'http://localhost:6060/products'
   constructor(private http: HttpClient) { }
 
   getAllProducts(pageNumber, pageSize): Observable<any> {

@@ -1,16 +1,12 @@
 package com.spring.boot.resturantbackend.services.impl.security;
 
 import com.spring.boot.resturantbackend.config.security.TokenHandler;
-import com.spring.boot.resturantbackend.dto.security.RoleDto;
-import com.spring.boot.resturantbackend.dto.security.UserDto;
-import com.spring.boot.resturantbackend.mappers.security.RoleMapper;
-import com.spring.boot.resturantbackend.mappers.security.UserMapper;
+import com.spring.boot.resturantbackend.dto.security.AccountDto;
+import com.spring.boot.resturantbackend.mappers.security.AccountMapper;
 import com.spring.boot.resturantbackend.services.security.AccountService;
 import com.spring.boot.resturantbackend.services.security.AuthService;
-import com.spring.boot.resturantbackend.services.security.RoleService;
-import com.spring.boot.resturantbackend.utils.RoleEnum;
-import com.spring.boot.resturantbackend.vm.Security.UserAuthRequestVm;
-import com.spring.boot.resturantbackend.vm.Security.UserAuthResponseVm;
+import com.spring.boot.resturantbackend.vm.Security.AccountAuthRequestVm;
+import com.spring.boot.resturantbackend.vm.Security.AccountAuthResponseVm;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,38 +14,47 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthServiceImpl implements AuthService {
     @Autowired
     private AccountService accountService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private TokenHandler tokenHandler;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserAuthResponseVm signUp(UserAuthRequestVm userAuthRequestVm) throws SystemException {
-        UserDto userDto = UserMapper.USER_MAPPER.toUserDto(userAuthRequestVm);
-        userDto = accountService.createAccount(userDto);
-        UserAuthResponseVm userAuthResponseVm = UserMapper.USER_MAPPER.toUserResponseVm(userDto);
-        userAuthResponseVm.setToken(tokenHandler.generateToken(userDto));
-        return userAuthResponseVm;
+    public AccountAuthResponseVm signUp(AccountAuthRequestVm accountAuthRequestVm) {
+        AccountDto accountDto = AccountMapper.ACCOUNT_MAPPER.toAccountDto(accountAuthRequestVm);
+        accountDto = accountService.createAccount(accountDto);
+        AccountAuthResponseVm accountAuthResponseVm = AccountMapper.ACCOUNT_MAPPER.toAccountResponseVm(accountDto);
+        accountAuthResponseVm.setToken(tokenHandler.generateToken(accountDto));
+        accountAuthResponseVm.setRoles(getAccountRoles(accountDto));
+        return accountAuthResponseVm;
     }
 
     @Override
-    public UserAuthResponseVm login(UserAuthRequestVm userAuthRequestVm) throws SystemException {
-        UserDto userDto = accountService.getAccountByUsername(userAuthRequestVm.getUsername());
-        if (Objects.isNull(userDto)) {
-            throw new SystemException("not_found.account");
+    public AccountAuthResponseVm login(AccountAuthRequestVm accountAuthRequestVm) {
+        try {
+            AccountDto accountDto = accountService.getAccountByUsername(accountAuthRequestVm.getUsername());
+            if (Objects.isNull(accountDto)) {
+                throw new SystemException("not_found.account");
+            }
+            if (!passwordEncoder.matches(accountAuthRequestVm.getPassword(), accountDto.getPassword())) {
+                throw new SystemException("error.invalid.credentials");
+            }
+            AccountAuthResponseVm accountAuthResponseVm = AccountMapper.ACCOUNT_MAPPER.toAccountResponseVm(accountDto);
+            accountAuthResponseVm.setToken(tokenHandler.generateToken(accountDto));
+            accountAuthResponseVm.setRoles(getAccountRoles(accountDto));
+            return accountAuthResponseVm;
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        if (!passwordEncoder.matches(userAuthRequestVm.getPassword(), userDto.getPassword())) {
-            throw new SystemException("error.invalid.credentials");
-        }
-        UserAuthResponseVm userAuthResponseVm = UserMapper.USER_MAPPER.toUserResponseVm(userDto);
-        userAuthResponseVm.setToken(tokenHandler.generateToken(userDto));
-        return userAuthResponseVm;
+    }
+
+    private List<String> getAccountRoles(AccountDto accountDto) {
+        return accountDto.getRoles().stream().map(roleDto -> roleDto.getRole()).collect(Collectors.toList());
     }
 }

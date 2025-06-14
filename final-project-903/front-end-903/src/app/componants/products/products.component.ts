@@ -4,6 +4,7 @@ import {ProductService} from "../../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {CardService} from "../../../service/card.service";
 import {CardOrder} from "../../../model/card-order";
+import {UserService} from "../../../service/security/user.service";
 
 @Component({
   selector: 'app-products',
@@ -26,16 +27,16 @@ export class ProductsComponent  implements OnInit  {
     )
   }
 
-  constructor(private productService :ProductService, private activatedRoute: ActivatedRoute, private cardService: CardService) {
+  constructor(private productService :ProductService, private activatedRoute: ActivatedRoute,
+                  private cardService: CardService, private userService: UserService) {
   }
 
   handelAllAction(pageNumber){
     let idCategoryExist = this.activatedRoute.snapshot.paramMap.has("id");
     let idKeyExist = this.activatedRoute.snapshot.paramMap.has("key");
-
-    if (idCategoryExist && idKeyExist) {
+    let key = this.activatedRoute.snapshot.paramMap.get("key"); // true  false
+    if (idCategoryExist && idKeyExist && key && key !== '') {
       let idCategory = this.activatedRoute.snapshot.paramMap.get("id");
-      let key = this.activatedRoute.snapshot.paramMap.get("key");
       this.searchByCategoryIdAndKey(idCategory, key, pageNumber);
       return;
     }
@@ -90,6 +91,8 @@ export class ProductsComponent  implements OnInit  {
   // category id   not exist product  isCategoryProductExist = true
   // category id   exist product
 
+  // 2 --> 21 pr
+  // 3
   getProductByCategoryId(id, pageNumber){
     this.productService.getProductsByCategoryId(id, pageNumber, this.pageSize).subscribe(
       response => {
@@ -105,6 +108,15 @@ export class ProductsComponent  implements OnInit  {
         }
 
         this.isProductExist = false;
+      }, errors => {
+        this.products = []
+        this.collectionSize = 0
+        // @ts-ignore
+        this.messageAr = errors.error.bundleMessage.message_ar
+        // @ts-ignore
+        this.messageEn = errors.error.bundleMessage.message_en
+        this.isCategoryProductExist = false;
+        this.isProductExist = true;
       }
     )
   }
@@ -147,4 +159,9 @@ export class ProductsComponent  implements OnInit  {
     this.pageSize = +(<HTMLInputElement>event.target).value;
     this.handelAllAction(this.pageNumber)
   }
+
+  isUserAdmin(){
+    return this.userService.isUserAdmin();
+  }
+
 }
