@@ -15,11 +15,16 @@ public class BundleTranslationService {
     }
 
     public static BundleMessage getBundleMessageWithArAndEn(String key) {
-        return new BundleMessage(
-                messageSource.getMessage(key, null, new Locale("ar"))
-                ,
-                messageSource.getMessage(key, null, new Locale("en"))
-        );
+        try {
+            return new BundleMessage(
+                    messageSource.getMessage(key, null, new Locale("ar"))
+                    ,
+                    messageSource.getMessage(key, null, new Locale("en"))
+            );
+        } catch (Exception e){
+            return new BundleMessage(key);
+        }
+
 
     }
 }

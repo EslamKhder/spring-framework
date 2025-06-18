@@ -14,19 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class RoleEntity {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String code;
-    @ManyToMany
-    @JoinTable(
-            name = "USERS_ROLES",
-            schema = "hr",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role_id"})
-    )
-    private List<UserEntity> users;
+    private String role;
+    @ManyToMany(mappedBy = "roles")
+    private List<Account> accounts;
 }

@@ -16,11 +16,14 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepo orderRepo;
 
     @Override
-    public ResponseOrderVm requestOrder(RequestOrderVm requestOrderVm) throws SystemException {
-        if (Objects.nonNull(requestOrderVm.getId())) {
-            throw new SystemException("id.must_be.null");
+    public ResponseOrderVm requestOrder(RequestOrderVm requestOrderVm) {
+        try {
+            if (Objects.nonNull(requestOrderVm.getId())) {
+                throw new SystemException("id.must_be.null");
+            }
+            return new ResponseOrderVm();
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-
-        return new ResponseOrderVm();
     }
 }

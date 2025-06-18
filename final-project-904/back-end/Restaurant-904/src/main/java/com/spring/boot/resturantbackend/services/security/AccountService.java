@@ -1,21 +1,20 @@
 package com.spring.boot.resturantbackend.services.security;
 
-import com.spring.boot.resturantbackend.dto.security.UserDto;
-import jakarta.transaction.SystemException;
+import com.spring.boot.resturantbackend.dto.security.AccountDto;
 
 import java.util.List;
 
 public interface AccountService {
-    List<UserDto> getAccounts() throws SystemException;
+    List<AccountDto> getAccounts();
 
-    UserDto createAccount(UserDto userDto) throws SystemException;
+    AccountDto createAccount(AccountDto accountDto);
 
-    UserDto updateAccount(UserDto userDto) throws SystemException;
+    AccountDto updateAccount(AccountDto accountDto);
 
-    void deleteAccount(Long id) throws SystemException;
+    void deleteAccount(Long id);
 
-    UserDto getAccountById(Long id) throws SystemException;
+    AccountDto getAccountById(Long id);
 
-    UserDto getAccountByUsername(String username) throws SystemException;
+    AccountDto getAccountByUsername(String username);
 
 }

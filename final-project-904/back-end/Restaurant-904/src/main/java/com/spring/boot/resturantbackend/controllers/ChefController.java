@@ -24,7 +24,6 @@ import java.util.List;
 )
 @RestController
 @RequestMapping("/chefs")
-@CrossOrigin("http://localhost:4200")
 public class ChefController {
     @Autowired
     private ChefService chefService;

@@ -18,7 +18,7 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     private ContactInfoRepo contactInfoRepo;
 
     @Override
-    public ContactInfoDto createContactInfo(ContactInfoDto contactInfoDto) throws SystemException {
+    public ContactInfoDto createContactInfo(ContactInfoDto contactInfoDto) {
         try {
             if (Objects.nonNull(contactInfoDto.getId())) {
                 throw new SystemException("id.must_be.null");
@@ -27,7 +27,7 @@ public class ContactInfoServiceImpl implements ContactInfoService {
             contactInfo = contactInfoRepo.save(contactInfo);
             return ContactInfoMapper.CONTACT_INFO_MAPPER.toContactInfoDto(contactInfo);
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

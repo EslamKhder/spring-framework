@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../services/security/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import {AuthService} from "../../../services/security/auth.service";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private authService :AuthService) { }
+  constructor(private authService :AuthService, private router: Router) { }
 
   isUserNameValid: boolean = false;
   isPasswordValid: boolean = false;
@@ -26,7 +27,10 @@ export class SignupComponent implements OnInit {
 
     this.authService.createAccount(userName, password).subscribe(
       response => {
-        alert("created")
+        sessionStorage.setItem("token", response.token)
+        sessionStorage.setItem("userName", response.username)
+        sessionStorage.setItem("roles", response.roles)
+        this.router.navigateByUrl("/products")
       }, errorResponse => {
         this.messageEn = errorResponse.error.bundleMessage.message_en;
         this.messageAr = errorResponse.error.bundleMessage.message_ar;

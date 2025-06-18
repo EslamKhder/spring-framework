@@ -1,6 +1,6 @@
 package com.spring.boot.resturantbackend.config.security;
 
-import com.spring.boot.resturantbackend.dto.security.UserDto;
+import com.spring.boot.resturantbackend.dto.security.AccountDto;
 import com.spring.boot.resturantbackend.services.security.AccountService;
 import com.spring.boot.resturantbackend.setting.JWTToken;
 import io.jsonwebtoken.Claims;
@@ -36,26 +36,26 @@ public class TokenHandler {
     }
 
     //generate token method
-    public String generateToken(UserDto userDto) {
-        this.jwtBuilder.setSubject(userDto.getUsername());
+    public String generateToken(AccountDto accountDto) {
+        this.jwtBuilder.setSubject(accountDto.getUsername());
         Date now = new Date();
         this.jwtBuilder.setIssuedAt(now);
         this.jwtBuilder.setExpiration(createExpirationDate(now));
-        //this.jwtBuilder.claim("phoneNumber", userDto.getUserDetailsDto().getPhoneNumber());
+        //this.jwtBuilder.claim("phoneNumber", accountDto.getUserDetailsDto().getPhoneNumber());
         return this.jwtBuilder.compact();
     }
 
     //validate token
-    public UserDto validateToken(String token) throws SystemException {
+    public AccountDto validateToken(String token) throws SystemException {
         try {
             if (this.jwtParser.isSigned(token)) {
                 Claims claims = this.jwtParser.parseClaimsJws(token).getBody();
                 String username = claims.getSubject();
                 Date expirationDate = claims.getExpiration();
                 Date issuedDate = claims.getIssuedAt();
-                UserDto userDto = accountService.getAccountByUsername(username);
-                boolean valid = expirationDate.after(new Date()) && issuedDate.before(expirationDate) && Objects.nonNull(userDto);
-                return valid ? userDto : null;
+                AccountDto accountDto = accountService.getAccountByUsername(username);
+                boolean valid = expirationDate.after(new Date()) && issuedDate.before(expirationDate) && Objects.nonNull(accountDto);
+                return valid ? accountDto : null;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

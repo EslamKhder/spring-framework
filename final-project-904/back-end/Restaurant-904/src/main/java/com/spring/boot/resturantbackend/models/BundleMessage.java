@@ -17,4 +17,8 @@ public class BundleMessage {
     private String messageAr;
     @JsonProperty("message_en")
     private String messageEn;
+
+    public BundleMessage(String messageEn) {
+        this.messageEn = messageEn;
+    }
 }

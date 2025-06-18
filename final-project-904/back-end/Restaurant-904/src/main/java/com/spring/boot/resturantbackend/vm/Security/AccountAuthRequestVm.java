@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserAuthRequestVm {
+public class AccountAuthRequestVm {
     private Long id;
     @NotEmpty(message = "not_empty.username")
     @Size(min = 7, message = "size.username")

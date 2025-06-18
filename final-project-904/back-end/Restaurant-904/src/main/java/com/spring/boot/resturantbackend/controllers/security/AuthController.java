@@ -2,8 +2,8 @@ package com.spring.boot.resturantbackend.controllers.security;
 
 import com.spring.boot.resturantbackend.dto.ExceptionDto;
 import com.spring.boot.resturantbackend.services.security.AuthService;
-import com.spring.boot.resturantbackend.vm.Security.UserAuthRequestVm;
-import com.spring.boot.resturantbackend.vm.Security.UserAuthResponseVm;
+import com.spring.boot.resturantbackend.vm.Security.AccountAuthRequestVm;
+import com.spring.boot.resturantbackend.vm.Security.AccountAuthResponseVm;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,8 +33,8 @@ public class AuthController {
                     content = @Content(schema = @Schema(implementation = ExceptionDto.class))),
     })
     @PostMapping("/sign-up")
-    public ResponseEntity<UserAuthResponseVm> signUp(@RequestBody @Valid UserAuthRequestVm userAuthRequestVm) throws SystemException {
-        return ResponseEntity.created(URI.create("/sign-up")).body(authService.signUp(userAuthRequestVm));
+    public ResponseEntity<AccountAuthResponseVm> signUp(@RequestBody @Valid AccountAuthRequestVm accountAuthRequestVm) throws SystemException {
+        return ResponseEntity.created(URI.create("/sign-up")).body(authService.signUp(accountAuthRequestVm));
     }
     @Operation(summary = "login")
     @ApiResponses({
@@ -43,7 +43,7 @@ public class AuthController {
                     content = @Content(schema = @Schema(implementation = ExceptionDto.class))),
     })
     @PostMapping("/login")
-    public ResponseEntity<UserAuthResponseVm> login(@RequestBody @Valid UserAuthRequestVm userAuthRequestVm) throws SystemException {
-        return ResponseEntity.ok(authService.login(userAuthRequestVm));
+    public ResponseEntity<AccountAuthResponseVm> login(@RequestBody @Valid AccountAuthRequestVm accountAuthRequestVm) throws SystemException {
+        return ResponseEntity.ok(authService.login(accountAuthRequestVm));
     }
 }

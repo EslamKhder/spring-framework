@@ -11,10 +11,13 @@ import {FooterComponent} from './componants/footer/footer.component';
 import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 import { LoginComponent } from './componants/login/login.component';
 import { SignupComponent } from './componants/signup/signup.component';
+import {AuthInterceptor} from "../services/interceptor/auth.interceptor";
+import {AuthGuard} from "../services/guard/auth.guard";
+import {SignupLoginGuard} from "../services/guard/signup-login.guard";
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -22,15 +25,16 @@ export const routes: Routes = [
   // http://localhost:4200/products       ProductsComponent
   // http://localhost:4200/category/:id   ProductsComponent
   // http://localhost:4200/search/:key    ProductsComponent
-  {path: 'products', component: ProductsComponent},
-  {path: 'cardDetails', component: CardDetailsComponent},
-  {path: 'contact-info', component: ContactInfoComponent},
-  {path: 'chefs', component: ChefsComponent},
-  {path: 'category/:id', component: ProductsComponent},
-  {path: 'search/:key', component: ProductsComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  {path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'cardDetails', component: CardDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'contact-info', component: ContactInfoComponent, canActivate: [AuthGuard]},
+  {path: 'chefs', component: ChefsComponent, canActivate: [AuthGuard]},
+  {path: 'category/:id', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'search/:key', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [SignupLoginGuard]},
+  {path: 'signup', component: SignupComponent, canActivate: [SignupLoginGuard]},
   // http://localhost:4200/
+  {path: '**', redirectTo: '/products', pathMatch: 'full'},
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 
   //z '/products', pathMatch: 'full'}
@@ -61,7 +65,10 @@ export const routes: Routes = [
     HttpClientModule,
     NgbPaginationModule
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [
     AppComponent
   ]

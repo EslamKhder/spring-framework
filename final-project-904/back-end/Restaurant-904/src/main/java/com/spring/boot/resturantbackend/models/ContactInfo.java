@@ -1,6 +1,6 @@
 package com.spring.boot.resturantbackend.models;
 
-import com.spring.boot.resturantbackend.models.security.UserEntity;
+import com.spring.boot.resturantbackend.models.security.Account;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +26,5 @@ public class ContactInfo {
     @Column(nullable = false)
     private String message;
     @ManyToOne
-    private UserEntity user;
+    private Account account;
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../model/product";
 import {ProductService} from "../../../services/product.service";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../../../services/security/auth.service";
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,7 @@ export class ProductsComponent implements OnInit {
   collectionSize: number;
   messageAr: string = '';
   messageEn: string = '';
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) {
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -93,5 +94,9 @@ export class ProductsComponent implements OnInit {
     this.pageLength = +(<HTMLInputElement>event.target).value;
 
     this.getProducts(this.page)
+  }
+
+  idUserAdmin(){
+    return this.authService.isUserAdmin();
   }
 }

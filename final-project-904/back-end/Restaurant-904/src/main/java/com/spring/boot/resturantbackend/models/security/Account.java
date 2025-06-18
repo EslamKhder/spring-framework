@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserEntity {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,13 +25,21 @@ public class UserEntity {
     private String username;
     @Column(nullable = false)
     private String password;
-    @OneToOne(mappedBy = "userEntity")
-    private UserDetails userDetails;
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    private List<RoleEntity> roles;
-    @OneToMany(mappedBy = "user")
+    @OneToOne(mappedBy = "account")
+    private AccountDetails accountDetails;
+    @Getter
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            schema = "hr",
+            name = "Account_Role",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"account_id", "role_id"})
+    )
+    private List<Role> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "account")
     private List<ContactInfo> contacts;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "account")
     private List<Order> orders;
     private String enabled;
 }

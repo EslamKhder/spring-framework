@@ -1,4 +1,4 @@
-package com.spring.boot.resturantbackend.dto;
+package com.spring.boot.resturantbackend.dto.security;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserDetailsDto {
+public class AccountDetailsDto {
     private Long id;
     @NotEmpty(message = "not_empty.phone_number")
     private String phoneNumber;

@@ -1,6 +1,5 @@
 package com.spring.boot.resturantbackend.dto.security;
 
-import com.spring.boot.resturantbackend.dto.UserDetailsDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -15,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserDto {
+public class AccountDto {
     private Long id;
     @NotEmpty(message = "not_empty.username")
     @Size(min = 7, message = "size.username")
@@ -23,7 +22,7 @@ public class UserDto {
     @Size(min = 1, max = 1, message = "error.enabled")
     private String enabled;
     private List<RoleDto> roles;
-    private UserDetailsDto userDetailsDto;
+    private AccountDetailsDto accountDetails;
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{7,}$",
             message = "error.password"

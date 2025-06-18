@@ -101,15 +101,7 @@
             <version>0.11.2</version>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--            <version>10.20.1</version> &lt;!&ndash; Use the latest version &ndash;&gt;-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-database-oracle</artifactId>-->
-<!--        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -136,19 +128,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>10.17.0</version>
-                <configuration>
-                    <url>jdbc:oracle:thin:@//localhost:1521/orcl</url>
-                    <user>system</user>
-                    <password>hr</password>
-                    <schemas>
-                        <schema>hr</schema>
-                    </schemas>
-                </configuration>
-            </plugin>
+
             <!-- Spring Boot Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>

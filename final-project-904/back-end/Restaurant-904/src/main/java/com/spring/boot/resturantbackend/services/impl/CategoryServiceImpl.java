@@ -20,16 +20,20 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public List<CategoryDto> getAllCategories() throws SystemException {
-        List<Category> categories = categoryRepo.findAllByOrderByNameAsc();
-        if (categories.isEmpty()) {
-            throw new SystemException("error.empty.list.category");
+    public List<CategoryDto> getAllCategories() {
+        try {
+            List<Category> categories = categoryRepo.findAllByOrderByNameAsc();
+            if (categories.isEmpty()) {
+                throw new SystemException("error.empty.list.category");
+            }
+            return categories.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategoryDto).toList();
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        return categories.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategoryDto).toList();
     }
 
     @Override
-    public CategoryDto createCategory(CategoryDto categoryDto) throws SystemException {
+    public CategoryDto createCategory(CategoryDto categoryDto) {
         try {
             if (Objects.nonNull(categoryDto.getId())) {
                 throw new SystemException("id.must_be.null");
@@ -38,55 +42,49 @@ public class CategoryServiceImpl implements CategoryService {
             category = categoryRepo.save(category);
             return CategoryMapper.CATEGORY_MAPPER.toCategoryDto(category);
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public List<CategoryDto> createListOfCategory(List<CategoryDto> categoryDto) throws SystemException {
+    public List<CategoryDto> createListOfCategory(List<CategoryDto> categoriesDto) {
+        return saveCategoriesDto(categoriesDto);
+    }
+
+    private List<CategoryDto> saveCategoriesDto(List<CategoryDto> categoriesDto) {
         try {
-            if (categoryDto.isEmpty()) {
+            if (categoriesDto.isEmpty()) {
                 throw new SystemException("error.empty.list.category");
             }
-            List<Category> categories = categoryDto.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategory).toList();
+            List<Category> categories = categoriesDto.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategory).toList();
             categories = categoryRepo.saveAll(categories);
             return categories.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategoryDto).toList();
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public CategoryDto updateCategory(CategoryDto categoryDto) throws SystemException {
+    public CategoryDto updateCategory(CategoryDto categoryDto) {
         try {
             if (Objects.isNull(categoryDto.getId())) {
                 throw new SystemException("id.must_be.not_null");
             }
             Category category = CategoryMapper.CATEGORY_MAPPER.toCategory(categoryDto);
             category = categoryRepo.save(category);
-            categoryDto = CategoryMapper.CATEGORY_MAPPER.toCategoryDto(category);
-            return categoryDto;
+            return CategoryMapper.CATEGORY_MAPPER.toCategoryDto(category);
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public List<CategoryDto> updateListOfCategory(List<CategoryDto> categoryDto) throws SystemException {
-        try {
-            if (categoryDto.isEmpty()) {
-                throw new SystemException("error.empty.list.category");
-            }
-            List<Category> categories = categoryDto.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategory).toList();
-            categories = categoryRepo.saveAll(categories);
-            return categories.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategoryDto).toList();
-        } catch (Exception e) {
-            throw new SystemException(e.getMessage());
-        }
+    public List<CategoryDto> updateListOfCategory(List<CategoryDto> categoriesDto) {
+        return saveCategoriesDto(categoriesDto);
     }
 
     @Override
-    public void deleteCategoryById(Long id) throws SystemException {
+    public void deleteCategoryById(Long id) {
         try {
             if (Objects.isNull(id)) {
                 throw new SystemException("id.must_be.not_null");
@@ -94,24 +92,24 @@ public class CategoryServiceImpl implements CategoryService {
             getCategoryById(id);
             categoryRepo.deleteById(id);
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public void deleteListOfCategory(List<Long> categoryIds) throws SystemException {
+    public void deleteListOfCategory(List<Long> categoryIds) {
         try {
             if (categoryIds.isEmpty()) {
                 throw new SystemException("error.empty.list.category");
             }
             categoryRepo.deleteAllById(categoryIds);
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public CategoryDto getCategoryById(Long id) throws SystemException {
+    public CategoryDto getCategoryById(Long id) {
         try {
             if (Objects.isNull(id)) {
                 throw new SystemException("id.must_be.not_null");
@@ -122,7 +120,7 @@ public class CategoryServiceImpl implements CategoryService {
             }
             return CategoryMapper.CATEGORY_MAPPER.toCategoryDto(result.get());
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

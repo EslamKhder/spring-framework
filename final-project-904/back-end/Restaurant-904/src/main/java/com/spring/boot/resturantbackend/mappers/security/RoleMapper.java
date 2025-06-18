@@ -1,8 +1,7 @@
 package com.spring.boot.resturantbackend.mappers.security;
 
 import com.spring.boot.resturantbackend.dto.security.RoleDto;
-import com.spring.boot.resturantbackend.models.security.RoleEntity;
-import com.spring.boot.resturantbackend.vm.Security.RoleDtoVm;
+import com.spring.boot.resturantbackend.models.security.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -10,13 +9,7 @@ import org.mapstruct.factory.Mappers;
 public interface RoleMapper {
     RoleMapper ROLE_MAPPER = Mappers.getMapper(RoleMapper.class);
 
-    RoleDtoVm toRoleDtoVm(RoleEntity role);
+    Role toRole(RoleDto roleDto);
 
-    RoleEntity toRole(RoleDto roleDto);
-
-    RoleDto toRoleDto(RoleEntity role);
-
-    RoleDto toRoleDto(RoleDtoVm roleDtoVm);
-    RoleEntity toRoleEntity(RoleDtoVm roleDtoVm);
-
+    RoleDto toRoleDto(Role role);
 }

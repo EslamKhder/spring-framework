@@ -28,12 +28,6 @@ public class Product {
     private Double price;
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
-    @ManyToMany
-    @JoinTable(
-            schema = "hr",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"order_id", "product_id"})
-    )
+    @ManyToMany(mappedBy = "products")
     private List<Order> orders;
 }

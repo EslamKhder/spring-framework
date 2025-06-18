@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserDetails {
+public class AccountDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,5 +23,5 @@ public class UserDetails {
     @Column(nullable = false)
     private String address;
     @OneToOne
-    private UserEntity userEntity;
+    private Account account;
 }

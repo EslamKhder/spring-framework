@@ -1,24 +1,23 @@
 package com.spring.boot.resturantbackend.services;
 
 import com.spring.boot.resturantbackend.dto.CategoryDto;
-import jakarta.transaction.SystemException;
 
 import java.util.List;
 
 public interface CategoryService {
-    List<CategoryDto> getAllCategories() throws SystemException;
+    List<CategoryDto> getAllCategories();
 
-    CategoryDto createCategory(CategoryDto categoryDto) throws SystemException;
+    CategoryDto createCategory(CategoryDto categoryDto);
 
-    List<CategoryDto> createListOfCategory(List<CategoryDto> categoryDto) throws SystemException;
+    List<CategoryDto> createListOfCategory(List<CategoryDto> categoryDto);
 
-    CategoryDto updateCategory(CategoryDto categoryDto) throws SystemException;
+    CategoryDto updateCategory(CategoryDto categoryDto);
 
-    List<CategoryDto> updateListOfCategory(List<CategoryDto> categoryDto) throws SystemException;
+    List<CategoryDto> updateListOfCategory(List<CategoryDto> categoryDto);
 
-    void deleteCategoryById(Long id) throws SystemException;
+    void deleteCategoryById(Long id);
 
-    void deleteListOfCategory(List<Long> categoryIds) throws SystemException;
+    void deleteListOfCategory(List<Long> categoryIds);
 
-    CategoryDto getCategoryById(Long id) throws SystemException;
+    CategoryDto getCategoryById(Long id);
 }

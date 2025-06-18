@@ -1,11 +1,10 @@
 package com.spring.boot.resturantbackend.services.impl.security;
 
-import com.spring.boot.resturantbackend.dto.security.RoleDto;
-import com.spring.boot.resturantbackend.dto.security.UserDto;
+import com.spring.boot.resturantbackend.dto.security.AccountDto;
 import com.spring.boot.resturantbackend.mappers.security.RoleMapper;
-import com.spring.boot.resturantbackend.mappers.security.UserMapper;
-import com.spring.boot.resturantbackend.models.security.RoleEntity;
-import com.spring.boot.resturantbackend.models.security.UserEntity;
+import com.spring.boot.resturantbackend.mappers.security.AccountMapper;
+import com.spring.boot.resturantbackend.models.security.Account;
+import com.spring.boot.resturantbackend.models.security.Role;
 import com.spring.boot.resturantbackend.repositories.security.AccountRepo;
 import com.spring.boot.resturantbackend.services.security.AccountService;
 import com.spring.boot.resturantbackend.services.security.RoleService;
@@ -31,86 +30,115 @@ public class AccountServiceImpl implements AccountService {
     private RoleService roleService;
 
     @Override
-    public List<UserDto> getAccounts() throws SystemException {
-        List<UserEntity> users = accountRepo.findAll();
-        if (users.isEmpty()) {
-            throw new SystemException("empty.accounts");
+    public List<AccountDto> getAccounts() {
+        try {
+            List<Account> users = accountRepo.findAll();
+            if (users.isEmpty()) {
+                throw new SystemException("empty.accounts");
+            }
+            return users.stream().map(AccountMapper.ACCOUNT_MAPPER::toAccountDto).collect(Collectors.toList());
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        return users.stream().map(UserMapper.USER_MAPPER::toUserDto).collect(Collectors.toList());
     }
 
     @Override
-    public UserDto createAccount(UserDto userDto) throws SystemException {
-        if (Objects.nonNull(userDto.getId())) {
+    public AccountDto createAccount(AccountDto accountDto) {
+        try {
+            validateCreateAccount(accountDto);
+            //enable account
+            accountDto.setEnabled("1");
+            Account user = AccountMapper.ACCOUNT_MAPPER.toAccount(accountDto);
+            //encode password
+            user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+            //make relation between user and role
+            initRoleToUser(user);
+            user = accountRepo.save(user);
+            return AccountMapper.ACCOUNT_MAPPER.toAccountDto(user);
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    private void initRoleToUser(Account user) {
+        Role role = RoleMapper.ROLE_MAPPER.toRole(roleService.findByRole(RoleEnum.USER.toString()));
+        List<Role> roles = user.getRoles();
+        if (Objects.isNull(roles)) {
+            roles = new ArrayList<>();
+        }
+        roles.add(role);
+        user.setRoles(roles);
+    }
+
+    private void validateCreateAccount(AccountDto accountDto) throws SystemException {
+        if (Objects.nonNull(accountDto.getId())) {
             throw new SystemException("id.must_be.null");
         }
-        if (Objects.nonNull(getAccountByUsername(userDto.getUsername()))) {
-            throw new SystemException("user.exists");
+        if (Objects.nonNull(getAccountByUsername(accountDto.getUsername()))) {
+            throw new SystemException("account.exists");
         }
-
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        UserEntity userEntity = UserMapper.USER_MAPPER.toUserEntity(userDto);
-
-        userEntity = accountRepo.save(userEntity);
-
-        RoleDto roleDto = roleService.getRole(RoleEnum.USER.toString());
-        roleDto.getUsers().stream().forEach(userDto1 -> userDto1.setRoles(null));
-
-        RoleEntity roles = RoleMapper.ROLE_MAPPER.toRole(roleDto);
-
-        if (Objects.isNull(roles.getUsers())) {
-            roles.setUsers(new ArrayList<>());
-        }
-
-        roles.getUsers().add(userEntity);
-
-        roleService.update(List.of(roles));
-
-        return UserMapper.USER_MAPPER.toUserDto(userEntity);
     }
 
     @Override
-    public UserDto updateAccount(UserDto userDto) throws SystemException {
-        if (Objects.isNull(userDto.getId())) {
-            throw new SystemException("id.must_be.not_null");
+    public AccountDto updateAccount(AccountDto accountDto) {
+        try {
+            validateUpdateAccount(accountDto.getId());
+            Account account = AccountMapper.ACCOUNT_MAPPER.toAccount(accountDto);
+            account = accountRepo.save(account);
+            return AccountMapper.ACCOUNT_MAPPER.toAccountDto(account);
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        if (Objects.isNull(getAccountById(userDto.getId()))) {
-            throw new SystemException("not_found.account");
-        }
-        UserEntity user = UserMapper.USER_MAPPER.toUserEntity(userDto);
-        user = accountRepo.save(user);
-        return UserMapper.USER_MAPPER.toUserDto(user);
     }
 
-    @Override
-    public void deleteAccount(Long id) throws SystemException {
+    private void validateUpdateAccount(Long id) throws SystemException {
         if (Objects.isNull(id)) {
             throw new SystemException("id.must_be.not_null");
         }
         if (Objects.isNull(getAccountById(id))) {
             throw new SystemException("not_found.account");
         }
-        accountRepo.deleteById(id);
     }
 
     @Override
-    public UserDto getAccountById(Long id) throws SystemException {
-        if (Objects.isNull(id)) {
-            throw new SystemException("id.must_be.not_null");
+    public void deleteAccount(Long id) {
+        try {
+            validateUpdateAccount(id);
+            accountRepo.deleteById(id);
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        Optional<UserEntity> result = accountRepo.findById(id);
-        if (result.isEmpty()) {
-            throw new SystemException("not_found.account");
-        }
-        return UserMapper.USER_MAPPER.toUserDto(result.get());
     }
 
     @Override
-    public UserDto getAccountByUsername(String username) throws SystemException {
-        if (username.isEmpty()) {
-            throw new SystemException("not_empty.name");
+    public AccountDto getAccountById(Long id) {
+        try {
+            if (Objects.isNull(id)) {
+                throw new SystemException("id.must_be.not_null");
+            }
+            Optional<Account> result = accountRepo.findById(id);
+            if (result.isEmpty()) {
+                throw new SystemException("not_found.account");
+            }
+            return AccountMapper.ACCOUNT_MAPPER.toAccountDto(result.get());
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        Optional<UserEntity> result = accountRepo.findByUsername(username);
-        return result.map(UserMapper.USER_MAPPER::toUserDto).orElse(null);
+    }
+
+    @Override
+    public AccountDto getAccountByUsername(String username) {
+        try {
+            if (username.isEmpty()) {
+                throw new SystemException("not_empty.name");
+            }
+            Optional<Account> result = accountRepo.findByUsername(username);
+            if (result.isEmpty()) {
+                return null;
+            }
+            return AccountMapper.ACCOUNT_MAPPER.toAccountDto(result.get());
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

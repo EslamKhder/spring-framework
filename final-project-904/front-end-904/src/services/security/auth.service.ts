@@ -20,4 +20,26 @@ export class AuthService {
       )
     );
   }
+
+  login(username, password): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "login", {username, password}).pipe(
+      map(
+        response => response
+      )
+    );
+  }
+
+  isUserLogin(){
+    return sessionStorage.getItem("token");
+  }
+
+  isUserAdmin(){
+    return sessionStorage.getItem("roles") && sessionStorage.getItem("roles").includes("ADMIN");
+  }
+
+  logOut(){
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("roles");
+  }
 }

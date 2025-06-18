@@ -17,11 +17,15 @@ public class ChefServiceImpl implements ChefService {
     private ChefRepo chefRepo;
 
     @Override
-    public List<ChefDto> getAllChefs() throws SystemException {
-        List<Chef> chefsList = chefRepo.findAllByOrderByIdAsc();
-        if (chefsList.isEmpty()) {
-            throw new SystemException("chefs.not.found");
+    public List<ChefDto> getAllChefs() {
+        try {
+            List<Chef> chefsList = chefRepo.findAllByOrderByIdAsc();
+            if (chefsList.isEmpty()) {
+                throw new SystemException("chefs.not.found");
+            }
+            return chefsList.stream().map(ChefMapper.CHEF_MAPPER::toChefDto).toList();
+        } catch (SystemException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        return chefsList.stream().map(ChefMapper.CHEF_MAPPER::toChefDto).toList();
     }
 }

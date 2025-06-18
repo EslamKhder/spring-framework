@@ -1,7 +1,7 @@
 package com.spring.boot.resturantbackend.config.security.filters;
 
 import com.spring.boot.resturantbackend.config.security.TokenHandler;
-import com.spring.boot.resturantbackend.dto.security.UserDto;
+import com.spring.boot.resturantbackend.dto.security.AccountDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +38,7 @@ public class AuthFilter extends OncePerRequestFilter {
             }
             token = token.substring(7);
             //3- validate token
-            UserDto userValidated = null;
+            AccountDto userValidated = null;
             userValidated = tokenHandler.validateToken(token);
             if (Objects.isNull(userValidated)) {
                 response.reset();
@@ -47,7 +47,7 @@ public class AuthFilter extends OncePerRequestFilter {
             }
             //4- get roles
             List<SimpleGrantedAuthority> roles = userValidated.getRoles().stream().map(
-                    authority -> new SimpleGrantedAuthority("ROLE_" + authority.getCode())
+                    role -> new SimpleGrantedAuthority("ROLE_" + role.getRole())
             ).toList();
             //5- encapsulate user data , used to store details about an authenticated user after authentication is complete.
             //Stored in the SecurityContextHolder to represent the authenticated user for the duration of the request.
