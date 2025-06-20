@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
     // token  login
     // case 1: api to login /login
     // case 2 : api to get products   /product
-    debugger
     if (this.authService.isUserLogin()) {
       request = request.clone({
         setHeaders: {

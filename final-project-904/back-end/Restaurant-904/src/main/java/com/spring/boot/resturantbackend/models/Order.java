@@ -27,6 +27,7 @@ public class Order {
     private double totalNumber;
     @ManyToMany
     @JoinTable(
+            name = "order_product",
             schema = "hr",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"),
@@ -34,6 +35,6 @@ public class Order {
     )
     List<Product> products;
     @ManyToOne
-    @JoinColumn(unique = true, nullable = false)
+    @JoinColumn(nullable = false)
     private Account account;
 }

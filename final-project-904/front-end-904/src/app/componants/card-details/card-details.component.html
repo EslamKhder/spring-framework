@@ -1,11 +1,11 @@
-<section class="ftco-section">
+<section class="ftco-section" >
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center mb-4">
         <h1 class="heading-section">Orders</h1>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="orders.length !== 0">
       <div class="col-md-12">
         <!--					<h3 class="h5 mb-4 text-center">Table Accordion</h3>-->
         <div class="table-wrap">
@@ -24,216 +24,59 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="alert" role="alert">
+            <tr *ngFor="let order of orders"  class="alert" role="alert">
               <td>
                 <label class="checkbox-wrap checkbox-primary">
                 </label>
               </td>
               <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
+                <img class="img" src="../../../assets/img/{{order.imagePath}}" />
               </td>
               <td>
                 <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
+                  <span class="product-name">{{order.name}}</span><br>
+                  <span>{{order.description}}</span>
                 </div>
               </td>
-              <td>$44.99</td>
+              <td>${{order.price}}</td>
               <td class="quantity">
                 <div class="input-group">
-                  <a href="#">
+                  <a (click)="addOrder(order)">
                     <i class="fa fa-plus"></i>
                   </a>
                 </div>
               </td>
               <td class="quantity">
                 <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
+                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="{{order.quantity}}" min="1" max="100">
                 </div>
               </td>
               <td class="quantity">
                 <div class="input-group">
-                  <a href="#">
+<!--                  <a *ngIf="order.quantity > 1" (click)="decrementOrder(order)">-->
+                  <a *ngIf="order.quantity > 1">
                     <i class="fa fa-minus"></i>
                   </a>
                 </div>
               </td>
-              <td>$89.98</td>
+              <td>${{order.price * order.quantity}}</td>
               <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
-                  X
-                </button>
-              </td>
-            </tr>
-            <tr class="alert" role="alert">
-              <td>
-                <label class="checkbox-wrap checkbox-primary">
-                </label>
-              </td>
-              <td>
-                <img class="img" src="assets/img/menu-5.jpg" />
-              </td>
-              <td>
-                <div class="email">
-                  <span>Sneakers Shoes 2020 For Men </span>
-                  <span>Fugiat voluptates quasi nemo, ipsa perferendis</span>
-                </div>
-              </td>
-              <td>$44.99</td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-plus"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <input disabled type="text" name="quantity" class="quantity form-control input-number" value="2" min="1" max="100">
-                </div>
-              </td>
-              <td class="quantity">
-                <div class="input-group">
-                  <a href="#">
-                    <i class="fa fa-minus"></i>
-                  </a>
-                </div>
-              </td>
-              <td>$89.98</td>
-              <td>
-                <button type="button" class="close"  aria-label="Close">
+                <button type="button" class="close"  aria-label="Close" (click)="removeFullOrder(order)">
                   X
                 </button>
               </td>
             </tr>
             </tbody>
           </table>
-          <button type="button" class="btn btn-success col-12">Take Order</button>
+          <button type="button" class="btn btn-success col-12" (click)="createOrder()">Take Order</button>
         </div>
       </div>
     </div>
+
+    <div class="row no-orders-message" *ngIf="orders.length === 0">
+      <i class="bi bi-cart-x" style="font-size: 24px; color: red;"></i>
+      <p>No order found now!</p>
+    </div>
   </div>
 </section>
+

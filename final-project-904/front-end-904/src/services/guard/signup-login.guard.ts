@@ -10,7 +10,6 @@ export class SignupLoginGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {
   }
   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    debugger
     if (this.authService.isUserLogin()) {
       this.router.navigateByUrl("/products");
       return false;

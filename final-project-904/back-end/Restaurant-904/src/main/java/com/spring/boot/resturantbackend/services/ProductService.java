@@ -23,6 +23,7 @@ public interface ProductService {
     void deleteListOfProduct(List<Long> productIds);
 
     ProductDto getProductById(Long id);
+    List<ProductDto> getProductByIds(List<Long> ids);
 
     ProductResponseVm getAllProductsByKey(String key, int page, int size);
 

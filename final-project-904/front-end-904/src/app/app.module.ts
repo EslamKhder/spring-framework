@@ -18,6 +18,7 @@ import { SignupComponent } from './componants/signup/signup.component';
 import {AuthInterceptor} from "../services/interceptor/auth.interceptor";
 import {AuthGuard} from "../services/guard/auth.guard";
 import {SignupLoginGuard} from "../services/guard/signup-login.guard";
+import { OrderCodeComponent } from './componants/order-code/order-code.component';
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -33,6 +34,7 @@ export const routes: Routes = [
   {path: 'search/:key', component: ProductsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate: [SignupLoginGuard]},
   {path: 'signup', component: SignupComponent, canActivate: [SignupLoginGuard]},
+  {path: 'order-code/:code', component: OrderCodeComponent, canActivate: [AuthGuard]},
   // http://localhost:4200/
   {path: '**', redirectTo: '/products', pathMatch: 'full'},
   {path: '', redirectTo: '/products', pathMatch: 'full'},
@@ -57,7 +59,8 @@ export const routes: Routes = [
     ChefsComponent,
     ContactInfoComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    OrderCodeComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

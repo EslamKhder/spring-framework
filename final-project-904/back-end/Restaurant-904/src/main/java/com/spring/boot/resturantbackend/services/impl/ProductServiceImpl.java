@@ -162,6 +162,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getProductByIds(List<Long> ids) {
+        return ProductMapper.PRODUCT_MAPPER.toProductDtoList(productRepo.findAllById(ids));
+    }
+
+    @Override
     public ProductResponseVm getAllProductsByKey(String key, int page, int size) {
         try {
             if (Objects.isNull(key)) {

@@ -3,6 +3,8 @@ import {Product} from "../../../model/product";
 import {ProductService} from "../../../services/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../../services/security/auth.service";
+import {CardService} from "../../../services/card.service";
+import {CardOrder} from "../../../model/card-order";
 
 @Component({
   selector: 'app-products',
@@ -17,7 +19,7 @@ export class ProductsComponent implements OnInit {
   collectionSize: number;
   messageAr: string = '';
   messageEn: string = '';
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+  constructor(private cardService: CardService, private productService: ProductService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -98,5 +100,10 @@ export class ProductsComponent implements OnInit {
 
   idUserAdmin(){
     return this.authService.isUserAdmin();
+  }
+
+  addProduct(product: Product){
+    let order = new CardOrder(product);
+    this.cardService.addProductToOrder(order)
   }
 }
