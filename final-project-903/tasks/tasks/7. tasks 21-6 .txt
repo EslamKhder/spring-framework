@@ -1,0 +1,18 @@
+why not apply @PreAuthorize ???????
+pls loop on all api and set right Authorize  to every api
+--------------------------------------------------------------------
+pls prevent user to take order if user info details empty pls apply
+-----------------------------------------------------------------------------
+pls create new entity Comment  (id , value , order)
+- one to many from contact Info to Comment
+----------------------------------------------------------------------------
+pls apply new component to show all message contact ingo for ONLY ADMINS  (Contact Info messages) 
+- pls apply filter Reply and Not Replied
+- when admin click on any message can reply and save it on DB 
+------------------------------------------------------------------------------
+add new button on Contact info component to show related message that user send
+pls apply new component to show all message contact ingo for USER and replied message for admin
+- make user to reply ag to admin
+------------------------------------------------------------------------------
+pls add to chefs component on every chef design 5 start 
+---------------------------------------------------------------------------------------------------

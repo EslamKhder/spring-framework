@@ -14,5 +14,5 @@ public class AccountAuthResponseVm {
     private Long id;
     private String username;
     private String token;
-    private List<String> roles;
+    private List<String> userRoles;
 }
