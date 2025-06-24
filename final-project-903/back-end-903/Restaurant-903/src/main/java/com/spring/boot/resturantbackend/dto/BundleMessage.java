@@ -1,4 +1,4 @@
-package com.spring.boot.resturantbackend.models;
+package com.spring.boot.resturantbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

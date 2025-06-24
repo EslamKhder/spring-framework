@@ -1,12 +1,16 @@
 package com.spring.boot.resturantbackend.services.impl;
 
 import com.spring.boot.resturantbackend.dto.CategoryDto;
+import com.spring.boot.resturantbackend.dto.security.AccountDto;
 import com.spring.boot.resturantbackend.mappers.CategoryMapper;
 import com.spring.boot.resturantbackend.models.Category;
+import com.spring.boot.resturantbackend.models.security.Account;
 import com.spring.boot.resturantbackend.repositories.CategoryRepo;
 import com.spring.boot.resturantbackend.services.CategoryService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +26,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDto> getAllCategories() {
         try {
+            Category category = new Category();
             List<Category> categories = categoryRepo.findAllByOrderByNameAsc();
             if (categories.isEmpty()) {
                 throw new SystemException("error.empty.list.category");
             }
+            // TODO get all ORDER Related to user
+            // order include products  group by category id count     1  50     2  30      3  70
+//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//            AccountDto accountDto = (AccountDto) authentication.getPrincipal();
+
             return categories.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategoryDto).toList();
         } catch (SystemException e) {
             throw new RuntimeException(e.getMessage());

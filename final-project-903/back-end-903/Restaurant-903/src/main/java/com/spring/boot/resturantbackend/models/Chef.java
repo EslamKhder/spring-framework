@@ -12,10 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Chef {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Chef extends BaseEntity {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

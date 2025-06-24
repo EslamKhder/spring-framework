@@ -1,6 +1,5 @@
 package com.spring.boot.resturantbackend.dto;
 
-import com.spring.boot.resturantbackend.models.BundleMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

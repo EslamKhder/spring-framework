@@ -13,10 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ContactInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ContactInfo extends BaseEntity{
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

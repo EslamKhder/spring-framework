@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       response => {
         sessionStorage.setItem("token", response.token)
         sessionStorage.setItem("userName", response.username)
-        sessionStorage.setItem("roles", response.roles)
+        sessionStorage.setItem("roles", response.userRoles)
         this.router.navigateByUrl("/products")
       }, errorResponse => {
         this.messageEn = errorResponse.error.bundleMessage.message_en;

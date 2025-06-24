@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Product {
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

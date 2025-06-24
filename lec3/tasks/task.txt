@@ -1,0 +1,8 @@
+pls create project hibernate 
+1. create hibernate cfg xml 
+2. put configuration on xml as you know
+3. create model teacher with id, name , age and address
+4. make id primary key
+5. make name size 50
+6. make age between 15 and 20
+7. make address unique

@@ -1,7 +1,7 @@
 package com.spring.boot.resturantbackend.config;
 
 import com.spring.boot.resturantbackend.dto.ExceptionDto;
-import com.spring.boot.resturantbackend.models.BundleMessage;
+import com.spring.boot.resturantbackend.dto.BundleMessage;
 import com.spring.boot.resturantbackend.services.BundleTranslationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

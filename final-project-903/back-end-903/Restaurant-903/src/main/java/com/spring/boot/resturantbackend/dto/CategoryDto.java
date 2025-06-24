@@ -1,7 +1,7 @@
 package com.spring.boot.resturantbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.spring.boot.resturantbackend.vm.ProductVm;
+import com.spring.boot.resturantbackend.controllers.vm.ProductVm;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -40,4 +40,6 @@ public class CategoryDto {
             description = "list of products (List<ProductVm>)"
     )
     private List<ProductVm> products;
+
+    private boolean rec;
 }

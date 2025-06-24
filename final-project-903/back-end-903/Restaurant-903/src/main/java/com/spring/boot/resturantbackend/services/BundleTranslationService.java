@@ -1,6 +1,6 @@
 package com.spring.boot.resturantbackend.services;
 
-import com.spring.boot.resturantbackend.models.BundleMessage;
+import com.spring.boot.resturantbackend.dto.BundleMessage;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
