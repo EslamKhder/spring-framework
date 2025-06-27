@@ -9,6 +9,7 @@ import com.spring.boot.resturantbackend.services.CategoryService;
 import com.spring.boot.resturantbackend.services.ProductService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,8 +27,11 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryService categoryService;
 
+    //0  10   allProducts010  10 pro
+    // 0 20   allProducts020  20 pro
     @Override
-    public ProductResponseVm getAllProducts(int page, int size) {
+    @Cacheable(value = "products", key = "'allProducts' + page + size")
+    public ProductResponseVm getAllProducts(int page, int size) {//
         try {
             Pageable pageable = getPageable(page, size);
             Page<Product> result = productRepo.findAllByOrderByIdAsc(pageable);

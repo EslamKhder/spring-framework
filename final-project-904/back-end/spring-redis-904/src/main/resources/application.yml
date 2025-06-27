@@ -13,7 +13,7 @@ spring:
   data:
     redis:
       host: localhost
-      port: 49160
+      port: 49154
       username: default
       password: redispw
 

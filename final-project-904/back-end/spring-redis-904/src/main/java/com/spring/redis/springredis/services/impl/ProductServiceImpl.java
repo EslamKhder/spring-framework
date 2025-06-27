@@ -17,40 +17,44 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepo productRepo;
 
+    @Cacheable(value = "products", key = "'allProducts'")
     @Override
-    @Cacheable(value = "products", key = "'all'")
     public List<Product> getAllProducts() {
         return productRepo.findAll();
     }
 
+    // 150
     @Override
-    @CacheEvict(value = "products", key = "'all'")
-//    @CachePut(value = "products", key = "#product.id")
+    @CacheEvict(value = "products", key = "'allProducts'")
+    @CachePut(value = "products", key = "#product.id")
     public Product saveProduct(Product product) {
         return productRepo.save(product);
     }
 
     @Override
-//    @CacheEvict(value = "products", key = "'all'")
-//    @CacheEvict(value = "products", key = "#product.id")
-//    @Caching(evict = {
-//            @CacheEvict(value = "products", key = "'all'"),
-//            @CacheEvict(value = "products", key = "#product.id")
-//    })
+    @CacheEvict(value = "products", key = "'allProducts'")
+    @CachePut(value = "products", key = "#product.id")
     public Product updateProduct(Product product) {
         return productRepo.save(product);
     }
 
     @Override
-    @CacheEvict(value = "products", key = "'all'")
-    public void deleteProduct(Long id) {
+    @Caching(evict = {
+            @CacheEvict(value = "products", key = "'allProducts'"),
+            @CacheEvict(value = "products", key = "#id")
+    })
+    public void deleteProduct(Long id) { // 10
         productRepo.deleteById(id);
     }
 
-    // TODO TASK create function to get product by id apply Cache
-//    @Cacheable(value = "products", key = "#id")
     @Override
+    @Cacheable(value = "products", key = "#id")
     public Product getProductBy(Long id) {
         return productRepo.findById(id).get();
     }
+
+    // 1005
+    // category        1005
+    // update 1005
+
 }
