@@ -31,8 +31,13 @@ public class CategoryServiceImpl implements CategoryService {
             if (categories.isEmpty()) {
                 throw new SystemException("error.empty.list.category");
             }
+
+            // List<Category>
+
             // TODO get all ORDER Related to user
             // order include products  group by category id count     1  50     2  30      3  70
+            // 50 order every order has 10 product ----> 500 product    ---> category id
+            // table -----< products  ----> category
 //            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //            AccountDto accountDto = (AccountDto) authentication.getPrincipal();
 

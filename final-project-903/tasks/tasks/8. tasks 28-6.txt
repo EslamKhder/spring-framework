@@ -1,0 +1,10 @@
+apply redis on all services
+--------------------------------------------------------
+
+enhance api get categories to get most Category with orders
+
+get order for user   ---> 10 order
+get products from 10 order  --> 60 product   20->1   5 -> 2   30->3   5->4
+group by categoryId based size product
+
+---------------------------------------------------------------

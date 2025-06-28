@@ -8,14 +8,7 @@ spring:
     password: hr
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
-  data:
-    redis:
-      host: localhost
-      port: 49153
-      username: default
-      password: redispw
-
 server:
   port: 9090

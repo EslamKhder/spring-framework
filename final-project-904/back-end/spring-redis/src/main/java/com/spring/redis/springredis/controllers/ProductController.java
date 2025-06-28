@@ -35,7 +35,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.updateProduct(product));
     }
 
-    @DeleteMapping("/delete-product")
+    @DeleteMapping("/delete-product/{id}")
     public ResponseEntity<Void> saveProduct(@PathVariable Long id)
             throws SystemException {
         productService.deleteProduct(id);
