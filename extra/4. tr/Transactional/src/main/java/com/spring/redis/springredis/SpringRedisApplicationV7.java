@@ -2,27 +2,26 @@ package com.spring.redis.springredis;
 
 import com.spring.redis.springredis.models.BankAccount;
 import com.spring.redis.springredis.repositories.BankAccountRepository;
-import com.spring.redis.springredis.services.impl.BankServiceImplV2;
-import com.spring.redis.springredis.services.impl.BankServiceImplV3;
+import com.spring.redis.springredis.services.impl.BankServiceImplV6;
+import com.spring.redis.springredis.services.impl.BankServiceImplV7;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 
 import java.util.List;
 
-@SpringBootApplication
-public class SpringRedisApplicationV3 implements CommandLineRunner {
+//@SpringBootApplication
+public class SpringRedisApplicationV7 implements CommandLineRunner {
 
     @Autowired
     private BankAccountRepository repo;
 
     @Autowired
-    private BankServiceImplV3 bankService;
+    private BankServiceImplV7 bankService;
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringRedisApplicationV3.class, args);
+        SpringApplication.run(SpringRedisApplicationV7.class, args);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class SpringRedisApplicationV3 implements CommandLineRunner {
         repo.saveAll(List.of(a, b));
 
         try {
-            bankService.transfer(a.getId(), b.getId(), 300);
+            bankService.transferWithTx(a.getId(), b.getId(), 300);
             System.out.println("Transfer succeeded");
         } catch (Exception e) {
             System.out.println("Transfer failed: " + e.getMessage());

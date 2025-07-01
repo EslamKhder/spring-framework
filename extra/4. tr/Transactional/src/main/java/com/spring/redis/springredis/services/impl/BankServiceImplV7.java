@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class BankServiceImplV3 {
+public class BankServiceImplV7 {
 
     @Autowired
     private BankAccountRepository repo;
 
     @Autowired
-    private AuditServiceImplV3 audit;
+    private AuditServiceImplV7 audit;
 
-    @Transactional
-    public void transfer(Long fromId, Long toId, double amount) {
+    public void transferWithoutTx(Long fromId, Long toId, double amount) {
+        // no @Transactional
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();
 
@@ -25,8 +25,20 @@ public class BankServiceImplV3 {
 
         repo.save(from);
         repo.save(to);
+        audit.logTransfer("No transaction context");
+    }
 
-        audit.logTransfer("Transfer completed"); // throw new RE
+    @Transactional
+    public void transferWithTx(Long fromId, Long toId, double amount) {
+        BankAccount from = repo.findById(fromId).orElseThrow();
+        BankAccount to = repo.findById(toId).orElseThrow();
+
+        from.setBalance(from.getBalance() - amount);
+        to.setBalance(to.getBalance() + amount);
+
+        repo.save(from);
+        repo.save(to);
+        audit.logTransfer("Runs inside existing transaction");
     }
 
 }

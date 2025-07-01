@@ -36,6 +36,7 @@ public class SpringRedisApplicationV1 implements CommandLineRunner {
 
         repo.saveAll(List.of(a, b));
 
+        /********************/
         try {
             bankService.transferWithCheckedException(a.getId(), b.getId(), 300);
             System.out.println("Transfer succeeded");
@@ -43,8 +44,8 @@ public class SpringRedisApplicationV1 implements CommandLineRunner {
             System.out.println("Transfer failed: " + e.getMessage());
         }
 
-        repo.findAll().forEach(acc -> {
-            System.out.println(acc.getOwner() + ": " + acc.getBalance());
-        });
+//        repo.findAll().forEach(acc -> {
+//            System.out.println(acc.getOwner() + ": " + acc.getBalance());
+//        });
     }
 }

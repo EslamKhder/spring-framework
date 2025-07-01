@@ -16,8 +16,7 @@ public class AuditServiceImplV3 {
 
     @Transactional(propagation = Propagation.NESTED)
     public void logTransfer(String message) {
+        System.out.println("save log");
         loggerRepository.save(new Logger(message));
-
-        throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 }
