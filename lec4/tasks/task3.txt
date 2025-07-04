@@ -1,5 +1,5 @@
 Identifyand apply code  relationship type (OneToOne, OneToMany, etc.) 
-every line contain 2 table pls apply relationship
+every line contain 2 table pls apply relationship with hibernate 
 
 Student - Passport
 
