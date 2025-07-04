@@ -2,6 +2,7 @@ package com.spring.redis.springredis.services.impl;
 
 import com.spring.redis.springredis.models.BankAccount;
 import com.spring.redis.springredis.repositories.BankAccountRepository;
+import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,8 @@ public class BankServiceImplV1 {
 
 
     @Transactional(
-            rollbackFor = Exception.class
+            rollbackFor = Exception.class,
+            noRollbackFor = SystemException.class
     )
     public void transferWithCheckedException(Long fromId, Long toId, double amount) throws Exception {
         BankAccount from = repo.findById(fromId).orElseThrow();

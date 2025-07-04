@@ -3,7 +3,6 @@ package com.spring.redis.springredis;
 import com.spring.redis.springredis.models.BankAccount;
 import com.spring.redis.springredis.repositories.BankAccountRepository;
 import com.spring.redis.springredis.services.impl.BankServiceImplV5;
-import com.spring.redis.springredis.services.impl.BankServiceImplV6;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,16 +11,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
 
 //@SpringBootApplication
-public class SpringRedisApplicationV6 implements CommandLineRunner {
+public class SpringRedisApplicationV5 implements CommandLineRunner {
 
     @Autowired
     private BankAccountRepository repo;
 
     @Autowired
-    private BankServiceImplV6 bankService;
+    private BankServiceImplV5 bankService;
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringRedisApplicationV6.class, args);
+        SpringApplication.run(SpringRedisApplicationV5.class, args);
     }
 
     @Override

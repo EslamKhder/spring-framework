@@ -2,11 +2,12 @@ package com.spring.boot.resturantbackend.services;
 
 import com.spring.boot.resturantbackend.controllers.vm.ProductResponseVm;
 import com.spring.boot.resturantbackend.dto.ProductDto;
+import jakarta.transaction.SystemException;
 
 import java.util.List;
 
 public interface ProductService {
-    ProductResponseVm getAllProducts(int page, int size);
+    ProductResponseVm getAllProducts(int page, int size) throws SystemException;
 
     ProductResponseVm getAllProductsByCategoryId(Long id, int page, int size);
 

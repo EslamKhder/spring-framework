@@ -8,15 +8,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AuditServiceImplV7 {
+public class AuditServiceImplV6 {
 
     @Autowired
     private LoggerRepository loggerRepository;
 
 
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional(propagation = Propagation.NEVER)
     public void logTransfer(String message) {
         loggerRepository.save(new Logger(message));
-//        throw new RuntimeException("Oops!"); // rollback both transfer and log
+        throw new RuntimeException("Oops!");
     }
 }

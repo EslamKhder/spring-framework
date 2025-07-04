@@ -71,6 +71,11 @@ public class CategoryController {
         return ResponseEntity.created(URI.create("create-category")).body(categoryService.createCategory(categoryDto));
     }
 
+    @PutMapping("/update-category")
+    public ResponseEntity<CategoryDto> updateCategory(@RequestBody @Valid CategoryDto categoryDto) throws SystemException {
+        return ResponseEntity.created(URI.create("create-category")).body(categoryService.updateCategory(categoryDto));
+    }
+
     @Operation(
             summary = "get category by id"
     )

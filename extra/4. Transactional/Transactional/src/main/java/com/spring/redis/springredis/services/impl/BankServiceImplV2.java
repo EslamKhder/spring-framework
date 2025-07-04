@@ -23,12 +23,9 @@ public class BankServiceImplV2 {
         to.setBalance(to.getBalance() + amount);
         repo.save(from);
         repo.save(to);
-        try {
-            audit.logTransfer("Transfer completed");
-        } catch (Exception e) {
-            System.out.println("-----");
-        }
-//        throw new RuntimeException("Oops!"); // rollback both transfer and log
+
+        audit.logTransfer("Transfer completed");
+        throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 
 }
