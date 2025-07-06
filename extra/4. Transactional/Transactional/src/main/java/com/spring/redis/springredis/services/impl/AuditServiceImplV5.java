@@ -20,3 +20,7 @@ public class AuditServiceImplV5 {
         throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 }
+
+// EXCEPTION   TRY CATCH
+
+// RuntimeException    --->  EXCEPTION   IGNORE EX

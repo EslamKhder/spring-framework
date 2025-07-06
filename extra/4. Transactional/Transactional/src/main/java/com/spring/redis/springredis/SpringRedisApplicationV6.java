@@ -37,7 +37,7 @@ public class SpringRedisApplicationV6 implements CommandLineRunner {
         repo.saveAll(List.of(a, b));
 
         try {
-            bankService.transferWithTx(a.getId(), b.getId(), 300);
+            bankService.transferWithoutTx(a.getId(), b.getId(), 300);
             System.out.println("Transfer succeeded");
         } catch (Exception e) {
             System.out.println("Transfer failed: " + e.getMessage());

@@ -39,6 +39,8 @@ public class BankServiceImplV7 {
         repo.save(from);
         repo.save(to);
         audit.logTransfer("Runs inside existing transaction");
+        throw new RuntimeException("Oops!"); // rollback both transfer and log
+
     }
 
 }

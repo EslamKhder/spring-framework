@@ -26,6 +26,7 @@ public class BankServiceImplV6 {
         repo.save(from);
         repo.save(to);
         audit.logTransfer("No transaction context");
+        throw new RuntimeException("Oops!");
     }
 
     @Transactional

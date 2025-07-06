@@ -26,6 +26,7 @@ public class BankServiceImplV4 {
         repo.save(from);
         repo.save(to);
         audit.logTransfer("No transaction context");
+        throw new RuntimeException("Oops!");
     }
 
     @Transactional
@@ -39,6 +40,7 @@ public class BankServiceImplV4 {
         repo.save(from);
         repo.save(to);
         audit.logTransfer("Runs inside existing transaction");
+        throw new RuntimeException("Oops!");
     }
 
 }

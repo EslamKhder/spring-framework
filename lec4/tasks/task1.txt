@@ -11,9 +11,4 @@ save object with any data
 update object
 delete object 
 get object with id
------------------------------------------------
-get all student that name start with char a
-get all student that age >= 20
-get all student that status = true
-get all student that id is even
------------------------------------------------
+--------------------------------------------

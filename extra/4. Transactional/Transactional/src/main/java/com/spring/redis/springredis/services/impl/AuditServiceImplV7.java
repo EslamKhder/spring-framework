@@ -18,6 +18,5 @@ public class AuditServiceImplV7 {
     public void logTransfer(String message) {
         System.out.println("-------");
         loggerRepository.save(new Logger(message));
-        throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 }
