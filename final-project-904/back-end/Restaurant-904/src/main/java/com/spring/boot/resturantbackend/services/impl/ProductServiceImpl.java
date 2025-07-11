@@ -211,7 +211,6 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e.getMessage());
         }
     }
-
     private static Pageable getPageable(int page, int size) {
         try {
             if (page < 1) {
