@@ -17,7 +17,7 @@ userName
 salary
 
 -------------------------
-create DoctorData Table with 
+create DoctorDetails Table with 
 
 id
 fukkAddress
