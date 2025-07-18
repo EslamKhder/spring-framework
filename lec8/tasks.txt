@@ -1,0 +1,105 @@
+✅ Project Theme: "University Course Management System"
+The system should manage students, courses, and instructors with appropriate relationships.
+
+🔧 Task Set
+1. Set Up the Spring Boot Project
+Create a new Spring Boot project with dependencies:
+
+Spring Web
+
+Spring Data JPA
+
+ORACL
+
+Lombok (optional)
+
+2. Define the Models & Relationships
+Ask them to create the following entities:
+
+🧑‍🎓 Student Entity
+id, name, email
+
+A student can register in many courses (Many-to-Many)
+
+📚 Course Entity
+id, title, description
+
+A course can have many students (Many-to-Many with Student)
+
+A course is taught by one instructor (Many-to-One)
+
+👨‍🏫 Instructor Entity
+id, name, email
+
+An instructor can teach many courses (One-to-Many)
+
+Instructions:
+
+Use proper JPA annotations for all relationships.
+
+Create @Entity, @Id, and @GeneratedValue.
+
+Use bidirectional or unidirectional relations where appropriate.
+
+Create the join table for the many-to-many relation manually using @JoinTable.
+
+3. Create Repositories
+Create Spring Data JPA interfaces for each model:
+
+StudentRepository
+
+CourseRepository
+
+InstructorRepository
+----------------------------
+Student APIs:
+Create a student
+
+Get all students
+
+Get student by ID
+
+Register a student to a course
+
+Course APIs:
+Create a course
+
+Get all courses
+
+Assign an instructor to a course
+
+Instructor APIs:
+Create an instructor
+
+Get all instructors
+
+Get courses taught by an instructor
+------------------------------------------
+
+🔧 API Specification
+HTTP Method: GET
+
+Endpoint: /api/students/{id}
+
+Path Variable: id = student ID
+
+Description: Returns the student’s basic info and a list of enrolled courses, each with course info and instructor info.
+----------------------------------------------
+🔧 API Specification
+HTTP Method: GET
+
+Endpoint: /api/courses/{id}
+
+Path Variable: id = course ID
+
+Description: Returns course info, instructor info, and all enrolled students.
+------------------------------------------
+🔧 API Specification
+HTTP Method: GET
+
+Endpoint: /api/instructors/{id}
+
+Path Variable: id = instructor ID
+
+Description: Returns instructor info, each course they teach, and enrolled students in each course.
+
