@@ -2,7 +2,7 @@ package com.eraasoft.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+//Accept-Language
 @SpringBootApplication
 public class SpringBoot905Application {
 

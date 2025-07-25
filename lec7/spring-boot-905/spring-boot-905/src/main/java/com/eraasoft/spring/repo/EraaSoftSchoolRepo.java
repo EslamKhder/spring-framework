@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.chrono.Era;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EraaSoftSchoolRepo extends JpaRepository<EraaSoftSchool, Long> {
@@ -18,7 +19,7 @@ public interface EraaSoftSchoolRepo extends JpaRepository<EraaSoftSchool, Long> 
     //nativeQuery = false  default Based on Model
     @Query(value = "select * from Eraa_Soft_School where USER_NAME=:userName", nativeQuery = true)
 //    @Query(value = "select ess from EraaSoftSchool ess where ess.userName = :userName")
-    EraaSoftSchool extractByUserName(@Param("userName") String userName);
+    Optional<EraaSoftSchool> extractByUserName(@Param("userName") String userName);
     // DB ORACLE
     // MODEL
 }

@@ -1,6 +1,6 @@
 package com.eraasoft.spring.controller;
 
-import com.eraasoft.spring.model.EraaSoftSchool;
+import com.eraasoft.spring.dto.EraaSoftSchoolDto;
 import com.eraasoft.spring.service.EraaSoftSchoolService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ public class EraaSoftSchoolController {
     }
 
     @PostMapping("/save-student")
-    ResponseEntity<EraaSoftSchool> addStudent(@RequestBody EraaSoftSchool eraaSoftSchool) throws SystemException {
+    ResponseEntity<EraaSoftSchoolDto> addStudent(@RequestBody EraaSoftSchoolDto eraaSoftSchool) throws SystemException {
         return ResponseEntity.ok(eraaSoftSchoolService.save(eraaSoftSchool));
     }
 
     @PutMapping("/update-student")
-    ResponseEntity<EraaSoftSchool> updateStudent(@RequestBody EraaSoftSchool eraaSoftSchool) {
+    ResponseEntity<EraaSoftSchoolDto> updateStudent(@RequestBody EraaSoftSchoolDto eraaSoftSchool) {
         return ResponseEntity.ok(eraaSoftSchoolService.update(eraaSoftSchool));
     }
 
@@ -37,17 +37,17 @@ public class EraaSoftSchoolController {
     }
 
     @GetMapping("/students")
-    ResponseEntity<List<EraaSoftSchool>> getAllStudent() {
+    ResponseEntity<List<EraaSoftSchoolDto>> getAllStudent() {
         return ResponseEntity.ok(eraaSoftSchoolService.getAll());
     }
 
     @GetMapping("/student")
-    ResponseEntity<EraaSoftSchool> getStudentById(@RequestParam Long id) {
+    ResponseEntity<EraaSoftSchoolDto> getStudentById(@RequestParam Long id) {
         return ResponseEntity.ok(eraaSoftSchoolService.getById(id));
     }
 
     @GetMapping("/student/user-name/{userName}")
-    ResponseEntity<EraaSoftSchool> getStudentById(@PathVariable String userName) {
+    ResponseEntity<EraaSoftSchoolDto> getStudentById(@PathVariable String userName) {
         return ResponseEntity.ok(eraaSoftSchoolService.getByUserName(userName));
     }
 }

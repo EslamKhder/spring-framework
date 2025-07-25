@@ -1,70 +1,112 @@
 package com.eraasoft.spring.service.impl;
 
+import com.eraasoft.spring.mapper.EraaSoftMapper;
 import com.eraasoft.spring.model.EraaSoftSchool;
+import com.eraasoft.spring.dto.EraaSoftSchoolDto;
 import com.eraasoft.spring.repo.EraaSoftSchoolRepo;
 import com.eraasoft.spring.service.EraaSoftSchoolService;
+
 import jakarta.transaction.SystemException;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
     private EraaSoftSchoolRepo eraaSoftSchoolRepo;
 
+//    private EraaSoftMapper eraaSoftMapper;
+
+//    private ModelMapper modelMapper;
+
     @Autowired
-    public EraaSoftSchoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo) {
+    public EraaSoftSchoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo/*, ModelMapper modelMapper*/) {
         this.eraaSoftSchoolRepo = eraaSoftSchoolRepo;
+//        this.eraaSoftMapper = eraaSoftMapper;
+//        this.modelMapper = modelMapper;
     }
 
     @Override
-    public EraaSoftSchool save(EraaSoftSchool eraaSoftSchool) throws SystemException {
-        if (Objects.nonNull(eraaSoftSchool.getId())) {
+    public EraaSoftSchoolDto save(EraaSoftSchoolDto eraaSoftSchoolDto) throws SystemException {
+        if (Objects.nonNull(eraaSoftSchoolDto.getId())) {
             throw new IndexOutOfBoundsException("id must be null");
         }
-        return eraaSoftSchoolRepo.save(eraaSoftSchool); // save not send id on EraaSoftSchool
+
+//        EraaSoftSchool eraaSoftSchool = modelMapper.map(eraaSoftSchoolDto, EraaSoftSchool.class);
+        EraaSoftSchool eraaSoftSchool = EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchool(eraaSoftSchoolDto);
+
+        eraaSoftSchool =  eraaSoftSchoolRepo.save(eraaSoftSchool);
+
+        eraaSoftSchoolDto.setId(eraaSoftSchool.getId());
+
+        return eraaSoftSchoolDto; // save not send id on EraaSoftSchoolDto
     }
 
     @Override
-    public EraaSoftSchool update(EraaSoftSchool eraaSoftSchool) {
-        if (Objects.isNull(eraaSoftSchool.getId())) {
+    public EraaSoftSchoolDto update(EraaSoftSchoolDto eraaSoftSchoolDto) {
+        if (Objects.isNull(eraaSoftSchoolDto.getId())) {
             throw new RuntimeException("id must be not null");
         }
-        return eraaSoftSchoolRepo.save(eraaSoftSchool);// update when send id on EraaSoftSchool
+
+//        EraaSoftSchool eraaSoftSchool = modelMapper.map(eraaSoftSchoolDto, EraaSoftSchool.class);
+        EraaSoftSchool eraaSoftSchool = EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchool(eraaSoftSchoolDto);
+
+        eraaSoftSchoolRepo.save(eraaSoftSchool);
+
+        return eraaSoftSchoolDto;
     }
 
     @Override
     public boolean delete(Long id) {
-        Optional<EraaSoftSchool> eraaSoftSchoolOptional = eraaSoftSchoolRepo.findById(id);
+        Optional<EraaSoftSchool> eraaSoftSchool = eraaSoftSchoolRepo.findById(id);
 
-        if (!eraaSoftSchoolOptional.isPresent()) {
+        if (!eraaSoftSchool.isPresent()) {
             return false;
         }
 
         eraaSoftSchoolRepo.deleteById(id); // true
-            return true;
+        return true;
     }
 
     @Override
-    public List<EraaSoftSchool> getAll() {
-        return eraaSoftSchoolRepo.findAll();
+    public List<EraaSoftSchoolDto> getAll() {
+        List<EraaSoftSchool>  eraaSoftSchools = eraaSoftSchoolRepo.findAll();
+        if(CollectionUtils.isEmpty(eraaSoftSchools)){
+            return new ArrayList<>();
+        }
+//
+//        return eraaSoftSchools.stream().map(eraaSoftSchool ->
+//                modelMapper.map(eraaSoftSchool, EraaSoftSchoolDto.class)).collect(Collectors.toList());
+
+        return eraaSoftSchools.stream().map(eraaSoftSchool -> EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchoolDto(eraaSoftSchool)).collect(Collectors.toList());
     }
 
     @Override
-    public EraaSoftSchool getById(Long id) {
+    public EraaSoftSchoolDto getById(Long id) {
         Optional<EraaSoftSchool> eraaSoftSchoolOptional = eraaSoftSchoolRepo.findById(id);
 
         if (!eraaSoftSchoolOptional.isPresent()) {
             return null;
         }
-        return eraaSoftSchoolRepo.getById(id);
+
+//        return modelMapper.map(eraaSoftSchoolOptional.get(), EraaSoftSchoolDto.class);
+        return  EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchoolDto(eraaSoftSchoolOptional.get());
     }
 
     @Override
-    public EraaSoftSchool getByUserName(String userName) {
-        return eraaSoftSchoolRepo.extractByUserName(userName);
+    public EraaSoftSchoolDto getByUserName(String userName) {
+        Optional<EraaSoftSchool> eraaSoftSchoolOptional = eraaSoftSchoolRepo.extractByUserName(userName);
+        if (!eraaSoftSchoolOptional.isPresent()) {
+            return null;
+        }
+//        return modelMapper.map(eraaSoftSchoolOptional.get(), EraaSoftSchoolDto.class);
+        return EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchoolDto(eraaSoftSchoolOptional.get());
     }
 }

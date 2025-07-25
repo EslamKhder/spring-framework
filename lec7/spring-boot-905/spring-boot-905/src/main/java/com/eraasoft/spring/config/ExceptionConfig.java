@@ -12,5 +12,4 @@ public class ExceptionConfig {
     public ResponseEntity<ExceptionResponse> handleRuntimeException1(Exception exception){
         return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage()));
     }
-
 }
