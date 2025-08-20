@@ -3,6 +3,10 @@ server:
 
 # Oracle Database Configuration
 spring:
+  security:
+    user:
+      name: eslamYml
+      password: eslamYml123
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@//localhost:1521/orclpdb
@@ -12,3 +16,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  messages:
+    basename: i18n/messages
+
+token:
+  secret: dafkhkjsdLHKDJSH2332DSFAMN@#@#$!
+  time: 24h

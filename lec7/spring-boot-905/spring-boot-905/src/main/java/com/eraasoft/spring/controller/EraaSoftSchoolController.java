@@ -3,16 +3,19 @@ package com.eraasoft.spring.controller;
 import com.eraasoft.spring.dto.EraaSoftSchoolDto;
 import com.eraasoft.spring.service.EraaSoftSchoolService;
 import jakarta.transaction.SystemException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
+@RequestMapping("/eraa-soft")
 public class EraaSoftSchoolController {
 
     private EraaSoftSchoolService eraaSoftSchoolService;
+
 
     @Autowired
     public EraaSoftSchoolController(EraaSoftSchoolService eraaSoftSchoolService) {
@@ -20,7 +23,7 @@ public class EraaSoftSchoolController {
     }
 
     @PostMapping("/save-student")
-    ResponseEntity<EraaSoftSchoolDto> addStudent(@RequestBody EraaSoftSchoolDto eraaSoftSchool) throws SystemException {
+    ResponseEntity<EraaSoftSchoolDto> addStudent(@RequestBody @Valid EraaSoftSchoolDto eraaSoftSchool) throws SystemException {
         return ResponseEntity.ok(eraaSoftSchoolService.save(eraaSoftSchool));
     }
 
@@ -29,6 +32,7 @@ public class EraaSoftSchoolController {
         return ResponseEntity.ok(eraaSoftSchoolService.update(eraaSoftSchool));
     }
 
+    // api ==> all data of student count student
     @DeleteMapping("/delete/student")
     ResponseEntity<Void> deleteStudent(@RequestParam("studentId") Long id) {
         return eraaSoftSchoolService.delete(id) ?
@@ -37,6 +41,7 @@ public class EraaSoftSchoolController {
     }
 
     @GetMapping("/students")
+    @PreAuthorize("hasRole('ADMIN')")
     ResponseEntity<List<EraaSoftSchoolDto>> getAllStudent() {
         return ResponseEntity.ok(eraaSoftSchoolService.getAll());
     }

@@ -17,11 +17,13 @@ public class EraaSoftSchool {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String userName;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private Integer age;
 
 }

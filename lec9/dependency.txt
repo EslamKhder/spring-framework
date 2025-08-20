@@ -25,4 +25,3 @@
     <scope>provided</scope>
 </dependency>
 ------------------------------------------------------
-Could not autowire. No beans of 'ModelMapper' type found. 

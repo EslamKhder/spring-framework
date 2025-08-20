@@ -6,8 +6,8 @@ spring:
     url: jdbc:oracle:thin:@//localhost:1521/orclpdb
     username: hr
     password: hr
-
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     show-sql: true

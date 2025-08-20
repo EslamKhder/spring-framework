@@ -22,12 +22,13 @@ import java.util.stream.Collectors;
 public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
     private EraaSoftSchoolRepo eraaSoftSchoolRepo;
 
-//    private EraaSoftMapper eraaSoftMapper;
+    private EraaSoftMapper eraaSoftMapper;
 
 //    private ModelMapper modelMapper;
 
     @Autowired
-    public EraaSoftSchoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo/*, ModelMapper modelMapper*/) {
+    public EraaSoftSchoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo, EraaSoftMapper eraaSoftMapper/*, ModelMapper modelMapper*/) {
+        this.eraaSoftMapper = eraaSoftMapper;
         this.eraaSoftSchoolRepo = eraaSoftSchoolRepo;
 //        this.eraaSoftMapper = eraaSoftMapper;
 //        this.modelMapper = modelMapper;
@@ -36,11 +37,17 @@ public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
     @Override
     public EraaSoftSchoolDto save(EraaSoftSchoolDto eraaSoftSchoolDto) throws SystemException {
         if (Objects.nonNull(eraaSoftSchoolDto.getId())) {
-            throw new IndexOutOfBoundsException("id must be null");
+            throw new RuntimeException("id must be null");
+        }
+
+        Optional<EraaSoftSchool> eraaSoftSchoolOp = eraaSoftSchoolRepo.findByUserName(eraaSoftSchoolDto.getFullUserName());
+
+        if (eraaSoftSchoolOp.isPresent()) {
+            throw new RuntimeException("user name is exist");
         }
 
 //        EraaSoftSchool eraaSoftSchool = modelMapper.map(eraaSoftSchoolDto, EraaSoftSchool.class);
-        EraaSoftSchool eraaSoftSchool = EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchool(eraaSoftSchoolDto);
+        EraaSoftSchool eraaSoftSchool = eraaSoftMapper.toEraaSoftSchool(eraaSoftSchoolDto);
 
         eraaSoftSchool =  eraaSoftSchoolRepo.save(eraaSoftSchool);
 
@@ -56,7 +63,7 @@ public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
         }
 
 //        EraaSoftSchool eraaSoftSchool = modelMapper.map(eraaSoftSchoolDto, EraaSoftSchool.class);
-        EraaSoftSchool eraaSoftSchool = EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchool(eraaSoftSchoolDto);
+        EraaSoftSchool eraaSoftSchool = eraaSoftMapper.toEraaSoftSchool(eraaSoftSchoolDto);
 
         eraaSoftSchoolRepo.save(eraaSoftSchool);
 
@@ -85,7 +92,7 @@ public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
 //        return eraaSoftSchools.stream().map(eraaSoftSchool ->
 //                modelMapper.map(eraaSoftSchool, EraaSoftSchoolDto.class)).collect(Collectors.toList());
 
-        return eraaSoftSchools.stream().map(eraaSoftSchool -> EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchoolDto(eraaSoftSchool)).collect(Collectors.toList());
+        return eraaSoftSchools.stream().map(eraaSoftSchool -> eraaSoftMapper.toEraaSoftSchoolDto(eraaSoftSchool)).collect(Collectors.toList());
     }
 
     @Override
@@ -97,7 +104,7 @@ public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
         }
 
 //        return modelMapper.map(eraaSoftSchoolOptional.get(), EraaSoftSchoolDto.class);
-        return  EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchoolDto(eraaSoftSchoolOptional.get());
+        return  eraaSoftMapper.toEraaSoftSchoolDto(eraaSoftSchoolOptional.get());
     }
 
     @Override
@@ -107,6 +114,6 @@ public class EraaSoftSchoolServiceImpl implements EraaSoftSchoolService {
             return null;
         }
 //        return modelMapper.map(eraaSoftSchoolOptional.get(), EraaSoftSchoolDto.class);
-        return EraaSoftMapper.ERAA_SOFT_MAPPER.toEraaSoftSchoolDto(eraaSoftSchoolOptional.get());
+        return eraaSoftMapper.toEraaSoftSchoolDto(eraaSoftSchoolOptional.get());
     }
 }

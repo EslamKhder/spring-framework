@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface EraaSoftSchoolRepo extends JpaRepository<EraaSoftSchool, Long> {
 
-    EraaSoftSchool findByUserName(String userName);
+    Optional<EraaSoftSchool> findByUserName(String userName);
 
     //nativeQuery = true   DB ORACLE
     //nativeQuery = false  default Based on Model

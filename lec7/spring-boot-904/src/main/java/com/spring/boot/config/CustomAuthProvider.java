@@ -47,8 +47,6 @@ public class CustomAuthProvider implements AuthenticationProvider {
         } catch (SystemException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     @Override

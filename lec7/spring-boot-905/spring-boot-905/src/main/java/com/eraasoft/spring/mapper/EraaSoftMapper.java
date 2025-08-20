@@ -9,10 +9,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 // EraaSoftSchool   EraaSoftSchoolDto
-@Mapper
+@Mapper(componentModel = "spring")
 public interface EraaSoftMapper {
-
-    EraaSoftMapper ERAA_SOFT_MAPPER = Mappers.getMapper(EraaSoftMapper.class);
 
     @Mapping(source = "fullUserName", target = "userName")
     EraaSoftSchool toEraaSoftSchool(EraaSoftSchoolDto eraaSoftSchoolDto);
