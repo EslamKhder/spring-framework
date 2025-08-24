@@ -18,6 +18,8 @@ export const routes: Routes = [
 
   // http://localhost:4200/products
   {path: 'products', component: ProductsComponent},
+  {path: 'category/:id', component: ProductsComponent},
+  {path: 'products/:key', component: ProductsComponent},
   // http://localhost:4200/cardDetails
   {path: 'cardDetails', component: CardDetailsComponent},
   {path: 'contact-info', component: ContactInfoComponent},

@@ -9,8 +9,8 @@
       <span class="fa fa-bars"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <input #key class="form-control" type="search" placeholder="Search" aria-label="Search" (input)="search(key.value)" >
+<!--      <button class="btn btn-outline-success" type="submit" (click)="search(key.value)">Search</button>-->
       <div class="navbar-nav ms-auto py-0 pe-4">
         <div class="nav-item nav-link active"><a routerLink="/contact-info">Contact</a></div>
         <div class="nav-item nav-link active"> </div>
