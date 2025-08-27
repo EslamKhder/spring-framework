@@ -1,0 +1,42 @@
+body {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signup-card {
+  max-width: 450px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+  background: #fff;
+  margin: auto;
+}
+.signup-card h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.btn-success {
+  width: 100%;
+  border-radius: 30px;
+  padding: 0.6rem;
+  font-size: 1rem;
+}
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: fadeIn 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

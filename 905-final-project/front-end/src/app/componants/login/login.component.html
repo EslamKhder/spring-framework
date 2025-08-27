@@ -1,0 +1,33 @@
+<div class="login-card center">
+  <h3>Login</h3>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Enter your username"
+        #username
+      >
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter your password"
+        #password
+      >
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="login(username.value, password.value)">Login</button>
+    <div class="text-center mt-3">
+      <a href="#">Forgot Password?</a> | <a  routerLink="/signup">Register</a>
+    </div>
+    <!-- Example Notification (Error) -->
+    <div *ngIf="messageAr || messageEn" class="alert alert-danger notification">
+      <strong>{{messageEn}}</strong><br>
+      <small class="text-muted">{{messageAr}}</small>
+    </div>
+
+</div>

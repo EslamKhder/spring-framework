@@ -11,7 +11,10 @@ import {FooterComponent} from './componants/footer/footer.component';
 import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './componants/login/login.component';
+import { SignupComponent } from './componants/signup/signup.component';
+import {AuthInterceptor} from "../interceptors/auth.interceptor";
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -23,6 +26,8 @@ export const routes: Routes = [
   // http://localhost:4200/cardDetails
   {path: 'cardDetails', component: CardDetailsComponent},
   {path: 'contact-info', component: ContactInfoComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   {path: 'chefs', component: ChefsComponent},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
@@ -49,14 +54,17 @@ export const routes: Routes = [
     CardComponent,
     FooterComponent,
     ChefsComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [
     AppComponent
   ]
