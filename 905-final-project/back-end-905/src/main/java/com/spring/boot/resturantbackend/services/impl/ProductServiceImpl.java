@@ -202,7 +202,7 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    private static Pageable getPageable(int page, int size) {
+    private static Pageable getPageable(int page, int size) {//2
         try {
             if (page < 1) {
                 throw new SystemException("error.min.one.page");
