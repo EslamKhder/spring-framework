@@ -212,4 +212,9 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    @Override
+    public List<ProductDto> getProductByIds(List<Long> ids) {
+        return ProductMapper.PRODUCT_MAPPER.toProductDtoList(productRepo.findAllById(ids));
+    }
 }

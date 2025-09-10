@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ExceptionHandling {
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDto> handleException(Exception exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(

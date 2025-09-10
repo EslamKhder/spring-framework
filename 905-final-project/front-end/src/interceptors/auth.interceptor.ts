@@ -15,7 +15,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // api  login  signup
-    debugger
     if (this.authService.isUserLogin()){
       request = request.clone({
         setHeaders: {

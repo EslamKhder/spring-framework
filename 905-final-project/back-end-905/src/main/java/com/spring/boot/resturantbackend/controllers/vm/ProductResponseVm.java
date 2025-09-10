@@ -16,3 +16,6 @@ public class ProductResponseVm {
     private List<ProductDto> products;
     private Long totalProducts;
 }
+// category
+// list of products
+// totalProducts

@@ -1,0 +1,15 @@
+.message-box {
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 12px;
+  padding: 15px 20px;
+}
+.message-ar {
+  direction: rtl;
+  font-weight: bold;
+  color: #d63384; /* pinkish for Arabic */
+}
+.message-en {
+  direction: ltr;
+  color: #0d6efd; /* bootstrap blue for English */
+}

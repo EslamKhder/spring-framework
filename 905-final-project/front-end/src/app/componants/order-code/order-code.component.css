@@ -1,0 +1,34 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+.order-box {
+  padding: 20px 30px;
+  background: #fff;
+  border: 2px solid #2563eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.order-box h2 {
+  margin: 0 0 10px;
+  color: #374151;
+}
+
+.order-code {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2563eb;
+  letter-spacing: 1px;
+  padding: 10px 15px;
+  background: #f0f6ff;
+  border-radius: 8px;
+  display: inline-block;
+}

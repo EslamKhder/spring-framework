@@ -4,6 +4,7 @@ import com.spring.boot.resturantbackend.controllers.vm.ProductResponseVm;
 import com.spring.boot.resturantbackend.dto.ExceptionDto;
 import com.spring.boot.resturantbackend.services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(
         name = "Product Controller",
-        description = "get all products"
+        description = "apis manage Products"
 )
 @RestController
 @RequestMapping("/products")
@@ -27,12 +28,15 @@ public class ProductController {
 
     @Operation(
             summary = "get all products",
-            description = "all products in resturant"
+            description = "this api get all products"
     )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Http Status get all products"
+                    description = "Http Status get all products",
+                    content = @Content(
+                            schema = @Schema(implementation = ProductResponseVm.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
@@ -41,9 +45,18 @@ public class ProductController {
                             schema = @Schema(implementation = ExceptionDto.class)
                     )
             ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Http Status Not Found",
+                    content = @Content(
+                            schema = @Schema(implementation = ExceptionDto.class)
+                    )
+            )
     })
     @GetMapping("/all-products")
-    public ResponseEntity<ProductResponseVm> getAllProducts(@RequestParam int page, @RequestParam int size)
+    public ResponseEntity<ProductResponseVm> getAllProducts(
+            @Parameter(description = "this page contain products and must start with 1") @RequestParam int page,
+            @Parameter(description = "this size of products") @RequestParam int size)
             throws SystemException {
         return ResponseEntity.ok(productService.getAllProducts(page, size));
     }

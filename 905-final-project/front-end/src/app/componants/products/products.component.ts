@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../model/product";
 import {ProductService} from "../../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
+import {CartService} from "../../../service/cart.service";
+import {ProductOrder} from "../../../model/product-order";
 
 @Component({
   selector: 'app-products',
@@ -11,54 +13,95 @@ import {ActivatedRoute} from "@angular/router";
 
 export class ProductsComponent  implements OnInit{
 
+  messageAr: string = '';
+  messageEn: string = '';
   products: Product[] = [];
-
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) {
+  pageNumber: number = 1;
+  pageSize: number = 20;
+  totalProductSize: number;
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
+              private cartService: CartService) {
 
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(
-      () => this.loadProducts()
+      () => this.loadProducts(this.pageNumber)
     )
   }
 
   // http://localhost:4200/products
   // http://localhost:4200/category/1
   // http://localhost:4200/search/rice
-  loadProducts(){
+  loadProducts(pageNum){
       // check
       let hasCategoryId = this.activatedRoute.snapshot.paramMap.has("id");
       let hasKey = this.activatedRoute.snapshot.paramMap.has("key");
       if (hasCategoryId){
         let categoryId = this.activatedRoute.snapshot.paramMap.get("id");
-        this.getProductByCategoryId(categoryId);
+        this.getProductByCategoryId(categoryId, pageNum);
         return;
       } else if (hasKey) {
         let key = this.activatedRoute.snapshot.paramMap.get("key");
-        this.searchByKey(key);
+        this.searchByKey(key, pageNum);
         return;
       }
 
-      this.getProducts();
+      this.getProducts(pageNum);
   }
 
 
-  getProducts(){
-    this.productService.getProducts().subscribe(
-      value => this.products = value
+  getProducts(pageNum){
+    this.productService.getProducts(pageNum, this.pageSize).subscribe(
+      response => {
+        this.products = response.products;
+        this.totalProductSize = response.totalProducts
+      }, error => {
+        this.messageAr = error.error.bundleMessage.message_ar;
+        this.messageEn = error.error.bundleMessage.message_en;
+        this.products = [];
+      }
     )
   }
 
-  getProductByCategoryId(id){
-    this.productService.getProductsByCategoryId(id).subscribe(
-      value => this.products = value
+  getProductByCategoryId(id, pageNum){
+    this.productService.getProductsByCategoryId(id, pageNum, this.pageSize).subscribe(
+      response => {
+        this.products = response.products;
+        this.totalProductSize = response.totalProducts
+      }, error => {
+        this.messageAr = error.error.bundleMessage.message_ar;
+        this.messageEn = error.error.bundleMessage.message_en;
+        this.products = [];
+      }
     )
   }
 
-  searchByKey(key){
-    this.productService.search(key).subscribe(
-      value => this.products = value
+  searchByKey(key, pageNum){
+    this.productService.search(key, pageNum, this.pageSize).subscribe(
+      response => {
+        this.products = response.products;
+        this.totalProductSize = response.totalProducts
+      }, error => {
+        this.messageAr = error.error.bundleMessage.message_ar;
+        this.messageEn = error.error.bundleMessage.message_en;
+        this.products = [];
+      }
     )
+  }
+
+  pagination() {
+   this.loadProducts(this.pageNumber)
+  }
+
+  changePageSize(event: Event) {
+    this.pageSize = +(<HTMLInputElement>event.target).value
+    this.loadProducts(this.pageNumber)
+  }
+
+  addProduct(product: Product){
+    let productOrder = new ProductOrder(product);
+    this.cartService.addProductToOrder(productOrder);
+
   }
 }

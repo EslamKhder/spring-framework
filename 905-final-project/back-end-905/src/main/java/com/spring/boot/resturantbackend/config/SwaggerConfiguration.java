@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+
 @OpenAPIDefinition(
         info = @Info(
                 title = "Resturant Endpoints",
@@ -23,5 +23,6 @@ import org.springframework.context.annotation.Configuration;
                 version = "1"
         )
 )
+@Configuration
 public class SwaggerConfiguration {
 }
