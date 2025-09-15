@@ -21,19 +21,33 @@
         <div class="nav-item nav-link active"> </div>
 
 
-<!--        <div class="nav-item dropdown">-->
-<!--          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>-->
-<!--          <div class="dropdown-menu m-0">-->
-<!--            <a href="booking.html" class="dropdown-item">ALL</a>-->
-<!--            <a href="team.html" class="dropdown-item">Breakfast</a>-->
-<!--            <a href="testimonial.html" class="dropdown-item">Launch</a>-->
-<!--            <a href="testimonial.html" class="dropdown-item">Dinner</a>-->
-<!--            <a href="testimonial.html" class="dropdown-item">Ice Cream</a>-->
-<!--            <a href="testimonial.html" class="dropdown-item">Coffee</a>-->
-<!--            <a href="testimonial.html" class="dropdown-item">Cake</a>-->
-<!--          </div>-->
-<!--        </div>-->
-        <!--<a href="contact.html" class="nav-item nav-link">Contact</a>-->
+        <div class="nav-item dropdown">
+          <a href="#"
+             class="nav-link dropdown-toggle fw-bold text-uppercase"
+             data-bs-toggle="dropdown">
+            <i class="fa fa-list-alt me-2"></i> services
+          </a>
+
+          <div class="dropdown-menu shadow-lg rounded-3 border-0 p-2 animate__animated animate__fadeIn">
+            <a href="booking.html" class="dropdown-item d-flex align-items-center rounded mb-1">
+              <i class="fa fa-box-open text-primary me-2"></i> Show Orders H
+             </a>
+            <a *ngIf="isAdmin()" href="booking.html" class="dropdown-item d-flex align-items-center rounded mb-1">
+              <i class="fa fa-box-open text-primary me-2"></i> Show All Orders
+            </a>
+            <a *ngIf="isAdmin()" href="booking.html" class="dropdown-item d-flex align-items-center rounded mb-1">
+              <i class="fa fa-plus-circle text-success me-2"></i> Add New Product
+            </a>
+            <a href="booking.html" class="dropdown-item d-flex align-items-center rounded mb-1">
+              <i class="fa fa-key text-warning me-2"></i> Change Password
+            </a>
+            <a *ngIf="isAdmin()" href="booking.html" class="dropdown-item d-flex align-items-center rounded">
+              <i class="fa fa-user-times text-danger me-2"></i> Remove Account
+            </a>
+          </div>
+        </div>
+
+        <a href="contact.html" class="nav-item nav-link">Contact</a>
       </div>
 
 

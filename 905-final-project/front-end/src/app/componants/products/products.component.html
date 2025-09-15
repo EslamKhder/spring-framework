@@ -1,19 +1,53 @@
 <div class="tab-content">
   <div id="tab-1" class="tab-pane fade show p-0 active">
     <div class="row g-4" *ngIf="products.length !== 0">
-      <div *ngFor="let pro of products" class="col-lg-6">
-        <div class="d-flex align-items-center">
-          <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.imagePath}}" alt="" style="width: 80px;">
-          <div class="w-100 d-flex flex-column text-start ps-4">
-            <h5 class="d-flex justify-content-between border-bottom pb-2">
-              <span>{{pro.name}}</span>
-              <span class="text-primary">${{pro.price}}</span>
-            </h5>
-            <small class="fst-italic">{{pro.description}}</small>
-            <button type="button" class="btn btn-danger col-lg-6" (click)="addProduct(pro)">ADD to Card</button>
+      <div class="row">
+        <div *ngFor="let pro of products" class="col-lg-6 mb-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex">
+
+              <!-- Product Image -->
+              <img class="flex-shrink-0 img-fluid rounded"
+                   src="../../../assets/img/{{pro.imagePath}}"
+                   alt="{{pro.name}}"
+                   style="width: 80px; height: 80px; object-fit: cover;">
+
+              <!-- Product Info -->
+              <div class="w-100 d-flex flex-column text-start ps-4">
+                <h5 class="d-flex justify-content-between border-bottom pb-2">
+                  <span>{{pro.name}}</span>
+                  <span class="text-primary">${{pro.price}}</span>
+                </h5>
+                <small class="fst-italic mb-2">{{pro.description}}</small>
+
+                <!-- Action Buttons at bottom -->
+                <div class="mt-auto d-flex gap-2 flex-wrap">
+                  <!-- Add to Cart -->
+                  <button type="button" class="btn btn-success btn-sm" (click)="addProduct(pro)">
+                    <i class="fa fa-cart-plus"></i>
+                  </button>
+
+                  <!-- Update -->
+                  <button  *ngIf="isAdmin()" type="button" class="btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <!-- Delete -->
+                  <button  *ngIf="isAdmin()" type="button" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                  <!-- Details -->
+                  <button type="button" class="btn btn-info btn-sm">
+                    <i class="fa fa-info-circle"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="col-md-9 pag" style="padding-left: 30%">
             <ngb-pagination
               [(page)]="pageNumber"

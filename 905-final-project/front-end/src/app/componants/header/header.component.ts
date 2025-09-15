@@ -18,6 +18,9 @@ export class HeaderComponent {
   isUserLogin(): boolean {
     return this.authService.isUserLogin();
   }
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
 
   search(key){
     this.routes.navigateByUrl("/products/" + key);

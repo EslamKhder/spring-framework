@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
     this.authService.createAccount(username, password).subscribe(
       response => {
         sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("roles", response.userRoles);
         this.routes.navigateByUrl("/products");
       } , error => {
         this.messageAr = error.error.bundleMessage.message_ar;

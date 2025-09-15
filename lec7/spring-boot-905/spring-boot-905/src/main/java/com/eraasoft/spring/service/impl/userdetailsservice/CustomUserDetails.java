@@ -1,7 +1,6 @@
 package com.eraasoft.spring.service.impl.userdetailsservice;
 
 import com.eraasoft.spring.dto.AccountDto;
-import com.eraasoft.spring.dto.RoleDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

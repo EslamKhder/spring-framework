@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../model/product";
 import {ProductService} from "../../../service/product.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CartService} from "../../../service/cart.service";
 import {ProductOrder} from "../../../model/product-order";
+import {AuthService} from "../../../service/auth.service";
 
 @Component({
   selector: 'app-products',
@@ -20,8 +21,12 @@ export class ProductsComponent  implements OnInit{
   pageSize: number = 20;
   totalProductSize: number;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
-              private cartService: CartService) {
+              private cartService: CartService, private authService: AuthService) {
 
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   ngOnInit(): void {

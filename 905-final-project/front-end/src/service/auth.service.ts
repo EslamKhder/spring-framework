@@ -34,8 +34,19 @@ export class AuthService {
                      sessionStorage.getItem("token") != undefined;
   }
 
+  isAdmin(): boolean {
+    debugger
+    const roles = sessionStorage.getItem("roles");
+    if (!roles) {
+      return false;
+    }
+
+    return roles.includes("ADMIN");
+  }
+
   logOut() {
-    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("roles");
   }
 
 

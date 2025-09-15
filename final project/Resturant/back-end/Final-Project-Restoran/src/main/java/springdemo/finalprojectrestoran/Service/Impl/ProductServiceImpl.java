@@ -58,6 +58,9 @@ public class ProductServiceImpl implements ProductService {
         return ProductMapper.PRODUCT_MAPPER.toDtoList(products);
     }
 
+    // 1 5   List
+    // 1 10  List
+    // 2 6   List
     @Override
     public List<ProductDto> getProducts( int pageNumber, int pageSize) {
 
