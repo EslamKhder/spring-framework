@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BankServiceImplV1 {
 
+    //CH
+    //NON CH
     @Autowired
     private BankAccountRepository repo;
 
@@ -21,17 +23,20 @@ public class BankServiceImplV1 {
         from.setBalance(from.getBalance() - amount);
         to.setBalance(to.getBalance() + amount);
 
-        repo.save(from);//commit
-        repo.save(to);//commit
+        repo.save(from);//
+        repo.save(to);//
 
         // Unchecked exception => causes rollback
         throw new RuntimeException("Something went wrong after saving!");
     }
 
 
+//    @Transactional(
+//            rollbackFor = Exception.class,
+//            noRollbackFor = SystemException.class
+//    )
     @Transactional(
-            rollbackFor = Exception.class,
-            noRollbackFor = SystemException.class
+            rollbackFor = Exception.class
     )
     public void transferWithCheckedException(Long fromId, Long toId, double amount) throws Exception {
         BankAccount from = repo.findById(fromId).orElseThrow();

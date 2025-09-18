@@ -14,7 +14,10 @@ public class BankServiceImplV2 {
 
     @Autowired
     private AuditServiceImplV2 audit;
-    // one tr
+    //Alice  1000
+    //Bob    500
+    //
+
     @Transactional
     public void transfer(Long fromId, Long toId, double amount) {
         BankAccount from = repo.findById(fromId).orElseThrow();
@@ -25,7 +28,8 @@ public class BankServiceImplV2 {
         repo.save(to);
 
         audit.logTransfer("Transfer completed");
-        throw new RuntimeException("Oops!"); // rollback both transfer and log
+
+       throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 
 }

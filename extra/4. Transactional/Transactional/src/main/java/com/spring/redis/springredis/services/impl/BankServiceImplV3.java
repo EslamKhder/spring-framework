@@ -25,7 +25,15 @@ public class BankServiceImplV3 {
 
         repo.save(from);
         repo.save(to);
-        audit.logTransfer("Transfer completed"); // throw new RE
+
+        audit.logTransfer("Transfer completed");
+        audit.logTransfer("Transfer completed");
+        audit.logTransfer("Transfer completed");
+
+        throw new RuntimeException("invalid");
+
+
+
     }
 
 }

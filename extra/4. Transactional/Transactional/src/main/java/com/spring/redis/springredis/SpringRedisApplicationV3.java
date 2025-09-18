@@ -12,7 +12,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 import java.util.List;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class SpringRedisApplicationV3 implements CommandLineRunner {
 
     @Autowired

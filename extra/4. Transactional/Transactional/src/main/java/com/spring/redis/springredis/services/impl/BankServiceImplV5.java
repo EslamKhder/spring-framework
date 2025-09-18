@@ -38,11 +38,11 @@ public class BankServiceImplV5 {
 
         repo.save(from);
         repo.save(to);
-        try {
+//        try {
             audit.logTransfer("Runs inside existing transaction");
-        } catch (Exception exception) {
-            System.out.println("--------> NOT_SUPPORTED");
-        }
+//        } catch (Exception exception) {
+//            System.out.println("--------> NOT_SUPPORTED");
+//        }
     }
 
 }
