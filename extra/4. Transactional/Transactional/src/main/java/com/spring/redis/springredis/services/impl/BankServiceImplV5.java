@@ -28,6 +28,7 @@ public class BankServiceImplV5 {
         audit.logTransfer("No transaction context");
     }
 
+
     @Transactional
     public void transferWithTx(Long fromId, Long toId, double amount) {
         BankAccount from = repo.findById(fromId).orElseThrow();
@@ -36,13 +37,15 @@ public class BankServiceImplV5 {
         from.setBalance(from.getBalance() - amount);
         to.setBalance(to.getBalance() + amount);
 
-        repo.save(from);
-        repo.save(to);
-//        try {
+        repo.save(from);// tx with save
+        try {
             audit.logTransfer("Runs inside existing transaction");
-//        } catch (Exception exception) {
-//            System.out.println("--------> NOT_SUPPORTED");
-//        }
+        } catch (Exception exception) {
+            System.out.println("--------> NOT_SUPPORTED");
+        }
+        repo.save(to);
+        // catch tx
+        throw new RuntimeException("Oops 2!");
     }
 
 }

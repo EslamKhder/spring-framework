@@ -14,9 +14,11 @@ public class AuditServiceImplV7 {
     private LoggerRepository loggerRepository;
 
 
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void logTransfer(String message) {
         System.out.println("-------");
         loggerRepository.save(new Logger(message));
+
+        throw new RuntimeException("...1");
     }
 }

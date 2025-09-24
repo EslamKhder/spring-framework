@@ -21,7 +21,7 @@
         <div class="nav-item nav-link active"> </div>
 
 
-        <div class="nav-item dropdown">
+        <div class="nav-item dropdown" *ngIf="isUserLogin()">
           <a href="#"
              class="nav-link dropdown-toggle fw-bold text-uppercase"
              data-bs-toggle="dropdown">
@@ -29,7 +29,7 @@
           </a>
 
           <div class="dropdown-menu shadow-lg rounded-3 border-0 p-2 animate__animated animate__fadeIn">
-            <a href="booking.html" class="dropdown-item d-flex align-items-center rounded mb-1">
+            <a routerLink="/orders-user" class="dropdown-item d-flex align-items-center rounded mb-1">
               <i class="fa fa-box-open text-primary me-2"></i> Show Orders H
              </a>
             <a *ngIf="isAdmin()" href="booking.html" class="dropdown-item d-flex align-items-center rounded mb-1">
@@ -47,7 +47,6 @@
           </div>
         </div>
 
-        <a href="contact.html" class="nav-item nav-link">Contact</a>
       </div>
 
 

@@ -23,11 +23,14 @@ public class BankServiceImplV4 {
         from.setBalance(from.getBalance() - amount);
         to.setBalance(to.getBalance() + amount);
 
-        repo.save(from);
-        repo.save(to);
+        repo.save(from); // committed 700
+        repo.save(to);// committed
+
         audit.logTransfer("No transaction context");
-        throw new RuntimeException("Oops!");
     }
+
+
+
 
     @Transactional
     public void transferWithTx(Long fromId, Long toId, double amount) {

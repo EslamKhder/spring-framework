@@ -35,12 +35,10 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    debugger
     const roles = sessionStorage.getItem("roles");
     if (!roles) {
       return false;
     }
-
     return roles.includes("ADMIN");
   }
 

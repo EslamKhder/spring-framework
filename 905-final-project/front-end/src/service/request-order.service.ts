@@ -8,13 +8,20 @@ import {map} from "rxjs/operators";
 })
 export class RequestOrderService {
 
-  url = 'http://localhost:9090/orders/create-orders';
+  url = 'http://localhost:9090/orders/';
 
   constructor(private http: HttpClient) { }
 
   createOrder(productsIds, totalPrice, totalNumber): Observable<any> {
-    debugger
-    return this.http.post<any>(this.url , {productsIds, totalPrice, totalNumber}).pipe(
+    return this.http.post<any>(this.url + 'create-orders' , {productsIds, totalPrice, totalNumber}).pipe(
+      map(
+        response => response
+      )
+    );
+  }
+
+  getOrder(): Observable<any> {
+    return this.http.get<any>(this.url + 'all-orders').pipe(
       map(
         response => response
       )

@@ -19,6 +19,7 @@ import {AuthGuard} from "../guard/auth.guard";
 import {LoginSignUpGuard} from "../guard/login-sign-up.guard";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 import { OrderCodeComponent } from './componants/order-code/order-code.component';
+import { OrderUserComponent } from './componants/order-user/order-user.component';
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -34,6 +35,7 @@ export const routes: Routes = [
   {path: 'signup', component: SignupComponent, canActivate:[LoginSignUpGuard]},
   {path: 'chefs', component: ChefsComponent, canActivate:[AuthGuard]},
   {path: 'order-code/:code', component: OrderCodeComponent, canActivate:[AuthGuard]},
+  {path: 'orders-user', component: OrderUserComponent, canActivate:[AuthGuard]},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 
@@ -62,7 +64,8 @@ export const routes: Routes = [
     ContactInfoComponent,
     LoginComponent,
     SignupComponent,
-    OrderCodeComponent
+    OrderCodeComponent,
+    OrderUserComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

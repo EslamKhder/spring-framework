@@ -1,7 +1,10 @@
 package com.spring.boot.resturantbackend.services.impl;
 
+import com.spring.boot.resturantbackend.controllers.vm.UserOrdersResponse;
+import com.spring.boot.resturantbackend.dto.OrderDto;
 import com.spring.boot.resturantbackend.dto.ProductDto;
 import com.spring.boot.resturantbackend.dto.security.AccountDto;
+import com.spring.boot.resturantbackend.mappers.OrderMapper;
 import com.spring.boot.resturantbackend.mappers.ProductMapper;
 import com.spring.boot.resturantbackend.mappers.security.AccountMapper;
 import com.spring.boot.resturantbackend.models.Order;
@@ -48,5 +51,24 @@ public class OrderServiceImpl implements OrderService {
         orderSaved = orderRepo.save(order);
 
         return new ResponseOrderVm(orderSaved.getCode(), orderSaved.getTotalPrice(), orderSaved.getTotalNumber());
+    }
+
+    @Override
+    public UserOrdersResponse getOrders() {
+        AccountDto accountDto = (AccountDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Order> orders =  orderRepo.findByAccountId(accountDto.getId());
+
+        List<OrderDto> orderDtos =  OrderMapper.ORDER_MAPPER.toOrderDtoList(orders);
+
+        double totalPrice = orderDtos.stream()
+                .mapToDouble(OrderDto::getTotalPrice)
+                .sum();
+
+        return new UserOrdersResponse(
+                orderDtos,
+                orderDtos.size(),
+                totalPrice
+        );
     }
 }

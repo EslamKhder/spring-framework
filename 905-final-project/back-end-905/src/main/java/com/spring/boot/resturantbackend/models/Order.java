@@ -34,6 +34,6 @@ public class Order {
     )
     List<Product> products;
     @ManyToOne
-    @JoinColumn(unique = true, nullable = false)
+    @JoinColumn(nullable = false)
     private Account account;
 }

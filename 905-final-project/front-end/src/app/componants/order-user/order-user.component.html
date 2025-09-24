@@ -1,0 +1,33 @@
+<div class="summary">
+  <div>
+    <h1>User Orders</h1>
+    <p>Total Orders: {{orders.size}}</p>
+  </div>
+  <div>
+    <strong>Total Price:  {{orders.price}}</strong>
+  </div>
+</div>
+
+<div class="orders">
+
+
+  <div *ngFor="let order of orders.orderDtos" class="order-card">
+    <h2>{{order.code}}</h2>
+    <div class="order-meta">Items: {{order.totalNumber}} • Total: {{order.totalPrice}}</div>
+    <div class="products">
+      <div *ngFor="let product of order.products" class="product">
+        <img src="../../../assets/img/{{product.imagePath}}" alt="Mombar">
+        <div class="product-info">
+          <h4>{{product.name}}</h4>
+          <p>{{product.description}}</p>
+          <div class="product-footer">
+            <span class="badge">{{product.category.name}}</span>
+            <span>{{product.price}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- more products -->
+    </div>
+  </div>
+
+</div>

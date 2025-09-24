@@ -13,10 +13,11 @@ public class AuditServiceImplV4 {
     @Autowired
     private LoggerRepository loggerRepository;
 
-
+    // if Tx exist join
+    // if No Tx exist ex non tx
     @Transactional(propagation = Propagation.SUPPORTS)
     public void logTransfer(String message) {
-        loggerRepository.save(new Logger(message));
-        throw new RuntimeException("Oops!"); // rollback both transfer and log
+        loggerRepository.save(new Logger(message));// committed
+        //throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 }

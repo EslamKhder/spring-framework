@@ -29,6 +29,7 @@ public class BankServiceImplV6 {
         throw new RuntimeException("Oops!");
     }
 
+
     @Transactional
     public void transferWithTx(Long fromId, Long toId, double amount) {
         BankAccount from = repo.findById(fromId).orElseThrow();
@@ -40,6 +41,7 @@ public class BankServiceImplV6 {
         repo.save(from);
         repo.save(to);
         audit.logTransfer("Runs inside existing transaction");
+
     }
 
 }

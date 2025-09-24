@@ -1,14 +1,16 @@
 package com.spring.boot.service;
 
-import com.spring.boot.model.Student;
+import com.spring.boot.StudentDto.StudentDto;
+import jakarta.transaction.SystemException;
 
 import java.util.List;
 
 public interface StudentService {
 
-    Student saveStudent(Student student);
-    Student updateStudent(Student student);
-    void removeStudentById(Long id);
-    Student getStudentById(Long id);
-    List<Student> getStudents();
+    StudentDto saveStudent(StudentDto StudentDto) throws SystemException;
+    StudentDto updateStudent(StudentDto StudentDto) throws SystemException;
+    void removeStudentById(Long id) throws SystemException;
+    StudentDto getStudentById(Long id) throws SystemException;
+    List<StudentDto> getStudents();
+    List<StudentDto> getStudentsByName(String name) throws SystemException;
 }

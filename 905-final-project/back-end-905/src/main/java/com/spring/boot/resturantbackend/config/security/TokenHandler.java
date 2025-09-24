@@ -24,6 +24,7 @@ public class TokenHandler {
     private Duration time;
     private JwtBuilder jwtBuilder;
     private JwtParser jwtParser;
+
     @Autowired
     private AccountService accountService;
 

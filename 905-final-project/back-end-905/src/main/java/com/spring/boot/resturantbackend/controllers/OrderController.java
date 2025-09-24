@@ -1,7 +1,10 @@
 package com.spring.boot.resturantbackend.controllers;
 
+import com.spring.boot.resturantbackend.annotation.ValidPhone;
 import com.spring.boot.resturantbackend.controllers.vm.RequestOrderVm;
 import com.spring.boot.resturantbackend.controllers.vm.ResponseOrderVm;
+import com.spring.boot.resturantbackend.controllers.vm.UserOrdersResponse;
+import com.spring.boot.resturantbackend.dto.CategoryDto;
 import com.spring.boot.resturantbackend.dto.ExceptionDto;
 import com.spring.boot.resturantbackend.services.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,12 +17,10 @@ import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @Tag(
         name = "Order Controller",
@@ -52,4 +53,8 @@ public class OrderController {
         return ResponseEntity.created(URI.create("create-orders")).body(orderService.requestOrder(requestOrderVm));
     }
 
+    @GetMapping("/all-orders") // UserOrdersResponse
+    public ResponseEntity<UserOrdersResponse> getAllOrders()  {
+        return ResponseEntity.ok(orderService.getOrders());
+    }
 }
