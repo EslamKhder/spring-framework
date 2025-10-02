@@ -48,12 +48,13 @@ public class SecurityConfig {
 
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
 
-        http.authorizeHttpRequests(api -> api.requestMatchers("/auth/**").permitAll()
+        http.authorizeHttpRequests(api -> api.requestMatchers(HttpMethod.GET,"/auth/**").hasRole("")
                                              .anyRequest().authenticated());
 
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 //        http.httpBasic(Customizer.withDefaults());
         http.httpBasic(AbstractHttpConfigurer::disable);
+        http.formLogin(Customizer.withDefaults());
         return http.build();
     }
 

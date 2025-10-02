@@ -1,0 +1,19 @@
+spring:
+  security:
+    user:
+      name: eslam
+      password: 123
+  application:
+    name: com.spring.boot.906
+  messages:
+    basename: i18n/messages
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/orclpdb
+    username: hr
+    password: hr
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

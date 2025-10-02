@@ -1,6 +1,6 @@
 package com.spring.boot.service;
 
-import com.spring.boot.StudentDto.StudentDto;
+import com.spring.boot.dto.StudentDto;
 import jakarta.transaction.SystemException;
 
 import java.util.List;
@@ -13,4 +13,5 @@ public interface StudentService {
     StudentDto getStudentById(Long id) throws SystemException;
     List<StudentDto> getStudents();
     List<StudentDto> getStudentsByName(String name) throws SystemException;
+    StudentDto getStudentsByUserName(String useName);
 }

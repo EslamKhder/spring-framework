@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StudentRepo extends JpaRepository<Student, Long> {
@@ -16,4 +17,6 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
 //    @Query(value = "select * from Student WHERE name = :name", nativeQuery = true)
     @Query(value = "select stu from Student stu WHERE stu.name = :name")
     List<Student> extractByName(@Param("name") String name);
+
+    Optional<Student> findByUserName(String userName);
 }

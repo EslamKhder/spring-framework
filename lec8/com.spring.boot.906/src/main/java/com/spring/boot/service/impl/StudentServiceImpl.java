@@ -1,6 +1,7 @@
 package com.spring.boot.service.impl;
 
-import com.spring.boot.StudentDto.StudentDto;
+import com.spring.boot.dto.StudentDto;
+import com.spring.boot.mapper.StudentMapper;
 import com.spring.boot.model.Student;
 import com.spring.boot.repo.StudentRepo;
 import com.spring.boot.service.StudentService;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -19,21 +19,20 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepo studentRepo;
 
+//    @Autowired
+//    private ModelMapper modelMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
+
     @Override
     public StudentDto saveStudent(StudentDto studentDto)  throws SystemException {
         if (Objects.nonNull(studentDto.getId())) {
-            throw new SystemException("id must be null");
+            throw new SystemException("student.id.not.required");
         }
 
-        if (Objects.isNull(studentDto.getName())) {
-            throw new SystemException("name must be not null");
-        }
+        Student student = studentMapper.toEntity(studentDto);
 
-        if (Objects.isNull(studentDto.getPhoneNumber())) {
-            throw new SystemException("PhoneNumber must be no null");
-        }
-        Student student =
-                new Student(studentDto.getName(), "", "", studentDto.getPhoneNumber());
         student = studentRepo.save(student);
         studentDto.setId(student.getId());
         return studentDto;
@@ -45,11 +44,9 @@ public class StudentServiceImpl implements StudentService {
             throw new SystemException("id must be not null");
         }
 
-        Student student =
-                new Student(studentDto.getId(), studentDto.getName(), "", "", studentDto.getPhoneNumber());
+        Student student = studentMapper.toEntity(studentDto);
 
         student = studentRepo.save(student); // id= 5
-
         studentDto.setId(student.getId());
         return studentDto;
     }
@@ -75,18 +72,14 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = studentOptional.get();
 
-        return new StudentDto(student.getId(), student.getName(), student.getPhoneNumber());
-
+        return studentMapper.toDto(student);
     }
 
     @Override
     public List<StudentDto> getStudents() {
         List<Student> students = studentRepo.findAll();
 
-        return students.stream().map(student ->
-                new StudentDto(student.getId(), student.getName(), student.getPhoneNumber()
-        )).collect(Collectors.toList());
-
+        return studentMapper.toListDto(students);
     }
 
     @Override
@@ -97,8 +90,17 @@ public class StudentServiceImpl implements StudentService {
             throw new SystemException("no StudentDto found with name " + name);
         }
 
-        return students.stream().map(student ->
-                new StudentDto(student.getId(), student.getName(), student.getPhoneNumber()
-                )).collect(Collectors.toList());
+        return studentMapper.toListDto(students);
+    }
+
+    @Override
+    public StudentDto getStudentsByUserName(String useName) {
+        Optional<Student> student = studentRepo.findByUserName(useName);
+
+        if (student.isEmpty()) {
+            throw new RuntimeException("no StudentDto found with name " + useName);
+        }
+
+        return studentMapper.toDto(student.get());
     }
 }

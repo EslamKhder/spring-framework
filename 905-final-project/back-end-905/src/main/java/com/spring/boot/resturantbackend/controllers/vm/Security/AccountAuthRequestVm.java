@@ -24,6 +24,6 @@ public class AccountAuthRequestVm {
     private String password;
 
 
-    @ValidPhone
-    private String phone;
+//    @ValidPhone
+//    private String phone;
 }
