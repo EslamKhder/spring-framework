@@ -16,4 +16,4 @@ id  name age phone number
 
 // api to delete employee By List of ID
 
-// api to search about employee by name like 'ahmed%'
+// api to search about employee by name like 'ahmed%'  // function name  -  native query -  none native query
