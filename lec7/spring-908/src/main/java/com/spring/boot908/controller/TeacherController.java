@@ -2,9 +2,13 @@ package com.spring.boot908.controller;
 
 import com.spring.boot908.dto.TeacherDto;
 import com.spring.boot908.service.TeacherService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -18,18 +22,21 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    public List<TeacherDto> getTeacher(){
-        return teacherService.getAllTeachers();
+    public ResponseEntity<List<TeacherDto>> getTeacher(){
+        return ResponseEntity.ok(teacherService.getAllTeachers());
     }
 
+    // URI   URL
+    // URL http://localhost:9090/teacher/save
+    // /teacher/save
     @PostMapping("/teacher/save")
-    public TeacherDto saveTeacher(@RequestBody TeacherDto teacherDto){
-        return teacherService.saveTeacher(teacherDto);
+    public ResponseEntity<TeacherDto> saveTeacher(@RequestBody @Valid TeacherDto teacherDto) throws URISyntaxException {
+        return ResponseEntity.created(new URI("/teacher/save")).body(teacherService.saveTeacher(teacherDto));
     }
 
     @PutMapping("/teacher/update")
-    public TeacherDto updateTeacher(@RequestBody TeacherDto teacherDto){
-        return teacherService.updateTeacher(teacherDto);
+    public ResponseEntity<TeacherDto> updateTeacher(@RequestBody @Valid  TeacherDto teacherDto){
+        return ResponseEntity.ok(teacherService.updateTeacher(teacherDto));
     }
 
 
@@ -44,18 +51,18 @@ public class TeacherController {
 
     // http://localhost:9090/teacher/delete/5
     @DeleteMapping("/teacher/delete/{teacherId}")
-    public void deleteTeacher(@PathVariable("teacherId") Long id){
+    public ResponseEntity<Void> deleteTeacher(@PathVariable("teacherId") Long id){
         teacherService.deleteTeacher(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/teacher")
-    public TeacherDto getTeacher(@RequestParam("teacherId") Long id){
-        return teacherService.getTeacherById(id);
+    public ResponseEntity<TeacherDto> getTeacher(@RequestParam("teacherId") Long id){
+        return ResponseEntity.ok(teacherService.getTeacherById(id));
     }
 
-
     @GetMapping("/teacher/username")
-    public TeacherDto getTeacher(@RequestParam String userName){
-        return teacherService.getTeacherByUserName(userName);
+    public ResponseEntity<TeacherDto> getTeacher(@RequestParam String userName){
+        return ResponseEntity.ok(teacherService.getTeacherByUserName(userName));
     }
 }

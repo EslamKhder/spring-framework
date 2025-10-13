@@ -28,7 +28,7 @@ public class Student {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Role> roles;
 
     public Student(String name, String userName, String password, String phoneNumber) {

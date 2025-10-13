@@ -20,9 +20,4 @@ public class Teacher {
     @Column(nullable = false)
     private String password;
 
-    public Teacher(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
-
 }

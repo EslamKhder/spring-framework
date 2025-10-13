@@ -16,7 +16,7 @@ public class Role {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
 
 }

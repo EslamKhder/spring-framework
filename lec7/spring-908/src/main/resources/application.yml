@@ -1,23 +1,22 @@
+server:
+  port: 9090
+
 spring:
   security:
     user:
+      password: eslam123
       name: eslam
-      password: 123
-  application:
-    name: com.spring.boot.906
   messages:
     basename: i18n/messages
+  application:
+    name: spring-908
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@//localhost:1521/orclpdb
     username: hr
     password: hr
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 
-token:
-  secret: dsnfds,mnds3223@#$#asdSD21asdakshj@##DSA
-  time: 24h

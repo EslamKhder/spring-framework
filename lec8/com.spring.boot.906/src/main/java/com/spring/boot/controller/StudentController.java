@@ -6,6 +6,7 @@ import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -19,6 +20,7 @@ public class StudentController {
     private StudentService studentService;
 
     // http://localhost:8080/students
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/students")
     public ResponseEntity<List<StudentDto>> getAllStudent(){
         return ResponseEntity.ok().body(studentService.getStudents());
@@ -33,11 +35,13 @@ public class StudentController {
     }
 
     // http://localhost:8080/students
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/students/id/{id}")
     public ResponseEntity<StudentDto> getStudentById(@PathVariable Long id) throws SystemException {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/add")
     public ResponseEntity<StudentDto> addStudent(@RequestBody @Valid StudentDto studentDto) throws SystemException {
         return ResponseEntity.created(URI.create("/add")).body(studentService.saveStudent(studentDto));

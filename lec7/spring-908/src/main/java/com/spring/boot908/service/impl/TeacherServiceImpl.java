@@ -1,9 +1,11 @@
 package com.spring.boot908.service.impl;
 
 import com.spring.boot908.dto.TeacherDto;
+import com.spring.boot908.mapper.TeacherMapper;
 import com.spring.boot908.model.Teacher;
 import com.spring.boot908.repo.TeacherRepo;
 import com.spring.boot908.service.TeacherService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +19,22 @@ public class TeacherServiceImpl implements TeacherService {
 
     private TeacherRepo teacherRepo;
 
+    private TeacherMapper teacherMapper;
+
     @Autowired
-    public TeacherServiceImpl(TeacherRepo teacherRepo) {
+    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapper teacherMapper) {
         this.teacherRepo = teacherRepo;
+        this.teacherMapper = teacherMapper;
     }
 
     @Override
     public List<TeacherDto> getAllTeachers() {
         List<Teacher> teachers = teacherRepo.findAll();
 
-
-
         List<TeacherDto> teacherDtos = teachers.stream().map(teacher ->
-                new TeacherDto(teacher.getId(), teacher.getUserName(), teacher.getPassword()))
+//                new TeacherDto(teacher.getId(), teacher.getUserName(), teacher.getPassword())
+                                teacherMapper.toDto(teacher)
+                )
                 .collect(Collectors.toList());
 
         teacherDtos.stream().forEach(teacherDto -> {
@@ -43,16 +48,8 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherDto saveTeacher(TeacherDto teacherDto) {
 
-        if (Objects.nonNull(teacherDto.getId())) {
-            throw new RuntimeException("id must be null");
-        }
-
-        if (Objects.isNull(teacherDto.getUserName())){
-            throw new RuntimeException("user name must be not null");
-        }
-
-        if (Objects.isNull(teacherDto.getPassword())){
-            throw new RuntimeException("Password must be not null");
+        if (Objects.nonNull(teacherDto.getTeacherId())) {
+            throw new RuntimeException("id.teacher.not.required");
         }
 
         Optional<Teacher> teacherOptional = teacherRepo.extractByUserName(teacherDto.getUserName());
@@ -60,19 +57,21 @@ public class TeacherServiceImpl implements TeacherService {
             throw new RuntimeException("exist Teacher with same userName: " + teacherDto.getUserName());
         }
 
-        Teacher teacher = teacherRepo.save(new Teacher(teacherDto.getUserName(), teacherDto.getPassword()));
+        Teacher teacher = teacherRepo.save(teacherMapper.toEntity(teacherDto));
 
-        teacherDto.setId(teacher.getId());
+        teacherDto.setTeacherId(teacher.getId());
         return teacherDto;
     }
 
     @Override
     public TeacherDto updateTeacher(TeacherDto teacherDto) {
-        if (Objects.isNull(teacherDto.getId())) {
+        if (Objects.isNull(teacherDto.getTeacherId())) {
             throw new RuntimeException("id must be not null");
         }
 
-        teacherRepo.save(new Teacher(teacherDto.getId(), teacherDto.getUserName(), teacherDto.getPassword()));
+        teacherRepo.save(
+                teacherMapper.toEntity(teacherDto)
+        );
 
         return teacherDto;
     }
@@ -93,7 +92,9 @@ public class TeacherServiceImpl implements TeacherService {
             throw new RuntimeException("Teacher not exist with id: " + id);
         }
         Teacher teacher = teacherOptional.get();
-        return new TeacherDto(teacher.getId(), teacher.getUserName(), teacher.getPassword());
+
+//        return new TeacherDto(teacher.getId(), teacher.getUserName(), teacher.getPassword());
+        return teacherMapper.toDto(teacher);
     }
 
     @Override
@@ -103,6 +104,7 @@ public class TeacherServiceImpl implements TeacherService {
             throw new RuntimeException("Teacher not exist with userName: " + userName);
         }
         Teacher teacher = teacherOptional.get();
-        return new TeacherDto(teacher.getId(), teacher.getUserName(), teacher.getPassword());
+//        return new TeacherDto(teacher.getId(), teacher.getUserName(), teacher.getPassword());
+        return teacherMapper.toDto(teacher);
     }
 }
