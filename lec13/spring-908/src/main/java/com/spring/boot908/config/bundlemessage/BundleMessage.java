@@ -1,4 +1,4 @@
-package com.spring.boot908.config;
+package com.spring.boot908.config.bundlemessage;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

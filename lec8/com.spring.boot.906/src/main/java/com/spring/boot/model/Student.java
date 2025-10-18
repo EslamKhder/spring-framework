@@ -28,11 +28,10 @@ public class Student {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
     public Student(String name, String userName, String password, String phoneNumber) {
-        this.id = id;
         this.name = name;
         this.userName = userName;
         this.password = password;

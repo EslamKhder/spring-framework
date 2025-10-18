@@ -9,5 +9,5 @@ public interface AuthService {
 
 
     AuthResponseVm login(AuthRequestVm authRequestVm) throws SystemException;
-    AuthResponseVm signup(StudentDto studentDto);
+    AuthResponseVm signup(StudentDto studentDto) throws SystemException;
 }

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -18,30 +20,34 @@ public class AuthServiceImpl implements AuthService {
 
     private TokenHandler tokenHandler;
 
-
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthServiceImpl(StudentService studentService, TokenHandler tokenHandler) {
+    public AuthServiceImpl(StudentService studentService, TokenHandler tokenHandler, PasswordEncoder passwordEncoder) {
         this.studentService = studentService;
         this.tokenHandler = tokenHandler;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public AuthResponseVm login(AuthRequestVm authRequestVm) throws SystemException {
-
         StudentDto studentDto = studentService.getStudentsByUserName(authRequestVm.getUserName());
 
-        if (!studentDto.getPassword().equals(authRequestVm.getPassword())) {
+        if (!passwordEncoder.matches(authRequestVm.getPassword(), studentDto.getPassword())) {
             throw new SystemException("invalid Password");
         }
-
 
         return new AuthResponseVm(tokenHandler.createToken(studentDto));
     }
 
     @Override
-    public AuthResponseVm signup(StudentDto studentDto) {
-        // student   user
-        return null;
+    public AuthResponseVm signup(StudentDto studentDto) throws SystemException {
+        studentDto =  studentService.saveStudent(studentDto);
+        if (Objects.isNull(studentDto)) {
+            throw new SystemException("account not created");
+        }
+
+        return new AuthResponseVm(tokenHandler.createToken(studentDto));
     }
+
 }

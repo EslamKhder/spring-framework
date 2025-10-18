@@ -1,4 +1,4 @@
-package com.spring.boot908.config;
+package com.spring.boot908.config.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

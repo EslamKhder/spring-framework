@@ -2,13 +2,17 @@ package com.spring.boot.service.impl;
 
 import com.spring.boot.dto.StudentDto;
 import com.spring.boot.mapper.StudentMapper;
+import com.spring.boot.model.Role;
 import com.spring.boot.model.Student;
+import com.spring.boot.repo.RoleRepo;
 import com.spring.boot.repo.StudentRepo;
 import com.spring.boot.service.StudentService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -25,17 +29,37 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepo roleRepo;
+
     @Override
     public StudentDto saveStudent(StudentDto studentDto)  throws SystemException {
+
         if (Objects.nonNull(studentDto.getId())) {
             throw new SystemException("student.id.not.required");
         }
 
+        Optional<Student> studentOptional = studentRepo.findByUserName(studentDto.getUserName());
+
+        if (studentOptional.isPresent()) {
+            throw new RuntimeException("Student found with name " + studentDto.getUserName());
+        }
+
         Student student = studentMapper.toEntity(studentDto);
 
-        student = studentRepo.save(student);
-        studentDto.setId(student.getId());
-        return studentDto;
+        //
+        student.setPassword(passwordEncoder.encode(studentDto.getPassword()));
+        Optional<Role> role = roleRepo.findByName("USER");
+        if (role.isEmpty()) {
+            throw new SystemException("role user not exist");
+        }
+
+        List<Role> roles = Collections.singletonList(role.get());
+        student.setRoles(roles);
+        return studentMapper.toDto(studentRepo.save(student));
     }
 
     @Override

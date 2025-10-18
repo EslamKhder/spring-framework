@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -17,9 +19,8 @@ public class Role {
 
     private String roleName;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @ManyToMany
+    private List<Account> account;
 
     public Role() {
     }

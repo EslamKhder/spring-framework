@@ -29,7 +29,7 @@ public class Account {
 
     private String address;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany
     private List<Role> roles;
 
 }
