@@ -12,7 +12,10 @@ import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
 
-// http://localhost:4200/
+// routes: Routes = [];
+
+
+// http://localhost:4200/bkhj
 export const routes: Routes = [
 
   // http://localhost:4200/active
