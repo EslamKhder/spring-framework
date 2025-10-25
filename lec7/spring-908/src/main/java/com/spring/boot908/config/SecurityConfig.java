@@ -3,6 +3,12 @@ package com.spring.boot908.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,32 +33,32 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                // Any request must be authenticated
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().authenticated()
+                )
 
-        http.sessionManagement(session ->  session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                // Enables default login form
+                .formLogin(Customizer.withDefaults())
 
-        //http://localhost:9090/teacher/username/{{username}}
-        http.authorizeHttpRequests(requests -> requests
-                .anyRequest().authenticated());
-
-        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
-
-        http.formLogin(AbstractHttpConfigurer::disable);
-
-        http.httpBasic(Customizer.withDefaults());
+                // Enables HTTP Basic Authentication
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
 
+
 //    @Bean
 //    public UserDetailsService userDetailsService(){
 //
-//        UserDetails userDetails1 = User.withUsername("ahmed").password("{bcrypt}$2a$12$67bBo6YdvJDu0.hxbXygCuMtnaZkwGzfCH2uzphv1SracrOyJ05OO")
-//                .roles("USER").build();
-//
-//        UserDetails userDetails2 = User.withUsername("eslam").password("{bcrypt}$2a$12$.KjWRqy15LAZwey3F3xI/.1HaibonHmsGfcdkYqMCjwA0y0mTjXza")
+//        UserDetails userDetails1 = User.withUsername("ahmed").password("{bcrypt}$2a$12$GQWXUYfscMLiFb7KCvM7WeqmPDeXxPIA4H29ZY9UuyvIgBAFY9Nji")
 //                .roles("ADMIN").build();
 //
-//        UserDetails userDetails3 = User.withUsername("mona").password("{bcrypt}$2a$12$O88wVtgYJLJkQcHGn8YCreL2Dl7YtXbef7fuBVp0WSxIY0pmq1Tb2")
+//        UserDetails userDetails2 = User.withUsername("eslam").password("{noop}eslam456")
+//                .roles("USER").build();
+//
+//        UserDetails userDetails3 = User.withUsername("mona").password("{noop}mona789")
 //                .roles("ADMIN", "USER").build();
 //
 //        return new InMemoryUserDetailsManager(userDetails1,userDetails2, userDetails3);

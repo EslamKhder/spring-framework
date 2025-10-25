@@ -7,6 +7,9 @@ import com.spring.boot908.repo.TeacherRepo;
 import com.spring.boot908.service.TeacherService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<TeacherDto> getAllTeachers() {
+
+        
         List<Teacher> teachers = teacherRepo.findAll();
 
         List<TeacherDto> teacherDtos = teachers.stream().map(teacher ->

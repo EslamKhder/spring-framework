@@ -23,7 +23,7 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<TeacherDto>> getTeacher(){
         return ResponseEntity.ok(teacherService.getAllTeachers());
     }
@@ -65,7 +65,6 @@ public class TeacherController {
     }
 
     @GetMapping("/teacher/username")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TeacherDto> getTeacher(@RequestParam String userName){
         return ResponseEntity.ok(teacherService.getTeacherByUserName(userName));
     }

@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -29,24 +28,20 @@ public class AuthProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userName = authentication.getPrincipal().toString();
-        String password = authentication.getCredentials().toString();
+        String password = authentication.getCredentials().toString(); // not
 
         TeacherDto teacherDto = teacherService.getTeacherByUserName(userName);
-//        if (!teacherDto.getPassword().equals(password)) {
-//            throw new BadCredentialsException("invalid password");
-//        }
+
         if (!passwordEncoder.matches(password, teacherDto.getPassword())) {
             throw new BadCredentialsException("invalid password");
         }
 
-        List<SimpleGrantedAuthority> roles = teacherDto.getRoles().stream().map(
-                roleDto -> new SimpleGrantedAuthority("ROLE_" + roleDto.getCode())
-        ).collect(Collectors.toList());
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(userName, password, roles);
+        List<SimpleGrantedAuthority> roles =  teacherDto.getRoles().stream()
+                .map(roleDto -> new SimpleGrantedAuthority("ROLE_" + roleDto.getCode())).collect(Collectors.toList());
 
-        return usernamePasswordAuthenticationToken;
+        return new UsernamePasswordAuthenticationToken(teacherDto.getUserName(), password, roles);
+
     }
 
     @Override
