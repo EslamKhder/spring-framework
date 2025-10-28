@@ -1,6 +1,6 @@
 <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
   <li *ngFor="let cat of categories" class="nav-item">
-    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+    <a [routerLink]="cat.name === 'ALL'? '/products': '/category/' + cat.id" class="d-flex align-items-center text-start mx-3 ms-0 pb-3" [ngClass]="{'active': cat.name === 'ALL'}"  data-bs-toggle="pill" href="#tab-1">
       <i class="{{cat.logo}} fa-2x text-primary"></i>
       <div class="ps-3">
         <small class="text-body">{{cat.flag}}</small>
