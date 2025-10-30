@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class CategoryService {
 
-  url = 'http://localhost:9090/api/categories/getAll';
+  url = 'http://localhost:6060/api/categories/getAll';
 
   constructor(private http: HttpClient) {}
 

@@ -49,6 +49,6 @@ public class TeacherController {
     }
 
     // find teacher by id
-    // api   id
+
 
 }

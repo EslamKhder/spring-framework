@@ -1,0 +1,25 @@
+<div class="login-container container">
+  <h2>Login</h2>
+  <div>
+    <div class="form-group">
+      <label for="username">Username or Email</label>
+      <input type="text" id="username" name="username" required #userName/>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required #password/>
+    </div>
+
+    <button type="submit" class="login-button" (click)="login(userName.value, password.value)">Log In</button>
+  </div>
+
+  <div class="login-footer">
+    Don't have an account? <a routerLink="/signup">Register</a>
+  </div>
+
+  <div *ngIf="messageEn || messageAr" class="notification container">
+    <p>{{messageEn}}</p>
+    <p>{{messageAr}}</p>
+  </div>
+</div>

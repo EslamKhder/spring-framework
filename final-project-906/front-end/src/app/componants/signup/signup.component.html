@@ -1,0 +1,31 @@
+<div class="signup-container container">
+  <h2>Create Account</h2>
+  <div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required #userName/>
+<!--      <div class="error-message">Invalid user name | اسم المستخدم إجباري</div>-->
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required #password/>
+    </div>
+
+    <div class="form-group">
+      <label for="confirm">Confirm Password</label>
+      <input type="password" id="confirm" name="confirm" required #confirmPassword/>
+    </div>
+
+    <button type="submit" class="signup-button" (click)="createAccount(userName.value, password.value, confirmPassword.value)">Sign Up</button>
+  </div>
+
+  <div class="signup-footer">
+    Already have an account? <a routerLink="/login">Login</a>
+  </div>
+
+  <div *ngIf="messageEn || messageAr" class="notification container">
+    <p>{{messageEn}}</p>
+    <p>{{messageAr}}</p>
+  </div>
+</div>
