@@ -2,6 +2,7 @@ package com.spring.boot908.controller;
 
 import com.spring.boot908.dto.TeacherDto;
 import com.spring.boot908.service.TeacherService;
+import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<List<TeacherDto>> getTeacher(){
         return ResponseEntity.ok(teacherService.getAllTeachers());
     }
@@ -32,7 +33,7 @@ public class TeacherController {
     // URL http://localhost:9090/teacher/save
     // /teacher/save
     @PostMapping("/teacher/save")
-    public ResponseEntity<TeacherDto> saveTeacher(@RequestBody @Valid TeacherDto teacherDto) throws URISyntaxException {
+    public ResponseEntity<TeacherDto> saveTeacher(@RequestBody @Valid TeacherDto teacherDto) throws URISyntaxException, SystemException {
         return ResponseEntity.created(new URI("/teacher/save")).body(teacherService.saveTeacher(teacherDto));
     }
 

@@ -1,5 +1,7 @@
 package com.spring.boot908.config;
 
+import com.spring.boot908.config.filter.AuthFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,6 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -24,6 +27,8 @@ import javax.sql.DataSource;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private AuthFilter authFilter;
 
 //    @Bean
 //    public UserDetailsService userDetailsManager(DataSource source){
@@ -32,20 +37,19 @@ public class SecurityConfig {
 //    }
 
     @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                // Any request must be authenticated
-                .authorizeHttpRequests(authorize -> authorize
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        httpSecurity.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+
+        httpSecurity.authorizeHttpRequests(
+                api -> api
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
-                )
+        );
 
-                // Enables default login form
-                .formLogin(Customizer.withDefaults())
-
-                // Enables HTTP Basic Authentication
-                .httpBasic(Customizer.withDefaults());
-
-        return http.build();
+        httpSecurity.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+        return httpSecurity.build();
     }
 
 

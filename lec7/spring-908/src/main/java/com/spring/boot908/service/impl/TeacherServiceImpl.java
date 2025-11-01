@@ -1,17 +1,24 @@
 package com.spring.boot908.service.impl;
 
+import com.spring.boot908.dto.RoleDto;
 import com.spring.boot908.dto.TeacherDto;
+import com.spring.boot908.enums.Role;
+import com.spring.boot908.mapper.RoleMapper;
 import com.spring.boot908.mapper.TeacherMapper;
 import com.spring.boot908.model.Teacher;
 import com.spring.boot908.repo.TeacherRepo;
 import com.spring.boot908.service.TeacherService;
+import jakarta.transaction.SystemException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,10 +31,19 @@ public class TeacherServiceImpl implements TeacherService {
 
     private TeacherMapper teacherMapper;
 
+    private PasswordEncoder passwordEncoder;
+
+    private RoleService roleService;
+
+    private RoleMapper roleMapper;
+
     @Autowired
-    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapper teacherMapper) {
+    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapper teacherMapper, @Lazy PasswordEncoder passwordEncoder, RoleService roleService, RoleMapper roleMapper) {
         this.teacherRepo = teacherRepo;
         this.teacherMapper = teacherMapper;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
+        this.roleMapper = roleMapper;
     }
 
     @Override
@@ -51,7 +67,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TeacherDto saveTeacher(TeacherDto teacherDto) {
+    public TeacherDto saveTeacher(TeacherDto teacherDto) throws SystemException { // ssasdm,
 
         if (Objects.nonNull(teacherDto.getTeacherId())) {
             throw new RuntimeException("id.teacher.not.required");
@@ -62,9 +78,15 @@ public class TeacherServiceImpl implements TeacherService {
             throw new RuntimeException("exist Teacher with same userName: " + teacherDto.getUserName());
         }
 
-        Teacher teacher = teacherRepo.save(teacherMapper.toEntity(teacherDto));
+        Teacher teacher = teacherMapper.toEntity(teacherDto);
+        teacher.setPassword(passwordEncoder.encode(teacherDto.getPassword()));
 
-        teacherDto.setTeacherId(teacher.getId());
+        RoleDto roleDto = roleService.findByCode(Role.USER.toString());
+        teacher.setRoles(Arrays.asList(roleMapper.toEntity(roleDto)));
+
+        Teacher teacherSaved = teacherRepo.save(teacher);
+
+        teacherDto.setTeacherId(teacherSaved.getId());
         return teacherDto;
     }
 

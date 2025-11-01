@@ -1,6 +1,7 @@
 package com.spring.boot908.service;
 
 import com.spring.boot908.dto.TeacherDto;
+import jakarta.transaction.SystemException;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface TeacherService {
 
     List<TeacherDto> getAllTeachers();
 
-    TeacherDto saveTeacher(TeacherDto teacherDto);
+    TeacherDto saveTeacher(TeacherDto teacherDto) throws SystemException;
 
     TeacherDto updateTeacher(TeacherDto teacherDto);
 

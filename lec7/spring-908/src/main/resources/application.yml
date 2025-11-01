@@ -23,3 +23,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+token:
+  secret: hjfs46687kjsfkj@#@$#$@$%ffeddf@#sADDS
+  time: 20s

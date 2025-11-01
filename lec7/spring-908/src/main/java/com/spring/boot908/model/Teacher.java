@@ -4,6 +4,7 @@ import com.spring.boot908.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,6 +28,6 @@ public class Teacher {
     private Gender gender;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
 }
