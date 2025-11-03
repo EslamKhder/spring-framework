@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 
 export class CardComponent {
 
+  totalElementSize: number = 0;
+  totalElementPrice: number = 0;
 }

@@ -12,6 +12,13 @@ export class ProductsComponent implements OnInit{
 
   products: Product[]=[];
 
+  messageAr: string = "";
+  messageEn: string = "";
+
+  page: number = 1;
+  pageLength: number = 10;
+  collectionSize: number;
+
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(
       () => this.loadProducts()
@@ -29,45 +36,71 @@ export class ProductsComponent implements OnInit{
     // category/id
     if (isHasCategoryId) {
       let categoryId = this.activatedRoute.snapshot.paramMap.get("id");
-      this.getProductsByCategoryId(categoryId);
+      this.getProductsByCategoryId(categoryId, this.page, this.pageLength);
       return;
     }
 
     // search/key
     if (isHasKeyWord) {
       let key = this.activatedRoute.snapshot.paramMap.get("key");
-      this.search(key);
+      this.search(key, this.page, this.pageLength);
       return;
     }
 
-    this.getProducts();
+    this.getProducts(this.page, this.pageLength);
   }
 
 
-  getProducts(){
-    this.productService.getAllProducts().subscribe(
+  getProducts(pageNumber, pageSize){
+    this.productService.getAllProducts(pageNumber, pageSize).subscribe(
       value => {
-        this.products = value;
-        console.log(this.products)
+        this.products = value.products;
+        this.collectionSize = value.totalProducts;
+        this.messageAr = "";
+        this.messageEn = "";
+      }, invalidResponse => {
+        this.products = [];
+        this.messageAr = invalidResponse.error.bundleMessage.message_ar
+        this.messageEn = invalidResponse.error.bundleMessage.message_en
       }
     );
   }
 
-  getProductsByCategoryId(id){
-    this.productService.getProductsByCategoryId(id).subscribe(
+  getProductsByCategoryId(id, pageNumber, pageSize){
+    this.productService.getProductsByCategoryId(id, pageNumber, pageSize).subscribe(
       value => {
-        this.products = value;
-        console.log(this.products)
+        this.products = value.products;
+        this.collectionSize = value.totalProducts;
+        this.messageAr = "";
+        this.messageEn = "";
+      }, invalidResponse => {
+        this.products = [];
+        this.messageAr = invalidResponse.error.bundleMessage.message_ar
+        this.messageEn = invalidResponse.error.bundleMessage.message_en
       }
     );
   }
-  search(key){
-    this.productService.search(key).subscribe(
+  search(key, pageNumber, pageSize){
+    this.productService.search(key, pageNumber, pageSize).subscribe(
       value => {
-        this.products = value;
-        console.log(this.products)
+        this.products = value.products;
+        this.collectionSize = value.totalProducts;
+        this.messageAr = "";
+        this.messageEn = "";
+      }, invalidResponse => {
+        this.products = [];
+        this.messageAr = invalidResponse.error.bundleMessage.message_ar
+        this.messageEn = invalidResponse.error.bundleMessage.message_en
       }
     );
   }
 
+  pageChange(){
+    this.loadProducts()
+  }
+
+  changePageSize(event: Event) {
+    this.pageLength = +(<HTMLInputElement>event.target).value;
+    this.loadProducts()
+  }
 }

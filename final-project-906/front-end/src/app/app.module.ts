@@ -17,6 +17,7 @@ import { SignupComponent } from './componants/signup/signup.component';
 import {AuthInterceptor} from "../service/interceptor/auth.interceptor";
 import {AuthGuard} from "../service/guard/auth.guard";
 import {NoauthGuard} from "../service/guard/noauth.guard";
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 // routes: Routes = [];
 
@@ -62,7 +63,8 @@ export const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbPaginationModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' }

@@ -14,63 +14,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(
-        name = "Product Controller",
-        description = "get all products"
-)
 @RestController
 @RequestMapping("/products")
-
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Operation(
-            summary = "get all products",
-            description = "all products in resturant"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Http Status get all products"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Http Status internal server error",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-    })
     @GetMapping("/all-products")
     public ResponseEntity<ProductResponseVm> getAllProducts(@RequestParam int page, @RequestParam int size)
             throws SystemException {
         return ResponseEntity.ok(productService.getAllProducts(page, size));
     }
 
-    @Operation(
-            summary = "get all products by category id"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Http Status get all products by category id"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Http Status internal server error",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Http Status Not Found",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-    })
+
     @GetMapping("/all-products/{id}")
     public ResponseEntity<ProductResponseVm> getAllProductsByCategoryId(@PathVariable Long id, @RequestParam int page, @RequestParam int size)
             throws SystemException {
