@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../../service/product.service";
 import {Product} from "../../../model/product";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CardService} from "../../../service/card.service";
+import {CardItem} from "../../../model/card-item";
 
 @Component({
   selector: 'app-products',
@@ -25,7 +27,8 @@ export class ProductsComponent implements OnInit{
     );
   }
 
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute){
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
+              private cardService: CardService){
   }
 
 
@@ -102,5 +105,10 @@ export class ProductsComponent implements OnInit{
   changePageSize(event: Event) {
     this.pageLength = +(<HTMLInputElement>event.target).value;
     this.loadProducts()
+  }
+
+  addProduct(product: Product){
+    let cardItem = new CardItem(product);
+    this.cardService.addProduct(cardItem);
   }
 }

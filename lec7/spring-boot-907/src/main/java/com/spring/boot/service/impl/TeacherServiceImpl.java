@@ -1,11 +1,13 @@
 package com.spring.boot.service.impl;
 
 import com.spring.boot.dto.TeacherDto;
+import com.spring.boot.mapper.TeacherMapper;
 import com.spring.boot.model.Teacher;
 import com.spring.boot.repo.TeacherRepo;
 import com.spring.boot.service.TeacherService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,19 +20,18 @@ public class TeacherServiceImpl implements TeacherService {
 
     private TeacherRepo teacherRepo;
 
+    private TeacherMapper teacherMapper;
+
     @Autowired
-    public TeacherServiceImpl(TeacherRepo teacherRepo) {
+    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapper teacherMapper) {
         this.teacherRepo = teacherRepo;
+        this.teacherMapper = teacherMapper;
     }
 
     @Override
     public List<TeacherDto> findTeachers() {
         List<Teacher> teachers = teacherRepo.findAll();
-
-        return teachers.stream().map(teacher -> new TeacherDto(
-                teacher.getId(), teacher.getName(), teacher.getUserName(), teacher.getPassword(), teacher.getPhoneNumber(),
-                teacher.getName() + " - " + teacher.getUserName()
-        )).collect(Collectors.toList());
+        return teachers.stream().map(teacher -> teacherMapper.toDto(teacher)).collect(Collectors.toList());
     }
 
     @Override
@@ -39,7 +40,10 @@ public class TeacherServiceImpl implements TeacherService {
             throw new IllegalArgumentException("New teacher must not have an ID before saving.");
         }
 
-        Teacher teacher = new Teacher(teacherDto.getName(), teacherDto.getUserName(), teacherDto.getPassword(), teacherDto.getPhoneNumber());
+        if (teacherRepo.findByUserName(teacherDto.getUserName()).isPresent()) {
+            throw new IllegalArgumentException("teacher already exist with same username " + teacherDto.getUserName());
+        }
+        Teacher teacher = teacherMapper.toEntity(teacherDto);
         teacher = teacherRepo.save(teacher);
 
         teacherDto.setId(teacher.getId());
@@ -52,7 +56,7 @@ public class TeacherServiceImpl implements TeacherService {
             throw new IllegalArgumentException("updated teacher must have an ID before update.");
         }
 
-        Teacher teacher = new Teacher(teacherDto.getId(), teacherDto.getName(), teacherDto.getUserName(), teacherDto.getPassword(), teacherDto.getPhoneNumber());
+        Teacher teacher = teacherMapper.toEntity(teacherDto);
         teacherRepo.save(teacher);
 
         return teacherDto;
@@ -83,9 +87,7 @@ public class TeacherServiceImpl implements TeacherService {
 
         Teacher teacher = teacherOptional.get();
 
-        return new TeacherDto(
-                teacher.getId(), teacher.getName(), teacher.getUserName(), teacher.getPassword(), teacher.getPhoneNumber()
-        );
+        return teacherMapper.toDto(teacher);
     }
 
     @Override
@@ -98,8 +100,7 @@ public class TeacherServiceImpl implements TeacherService {
         }
 
         Teacher teacher = teacherOptional.get();
-        return new TeacherDto(
-                teacher.getId(), teacher.getName(), teacher.getUserName(), teacher.getPassword(), teacher.getPhoneNumber()
-        );
+
+        return teacherMapper.toDto(teacher);
     }
 }

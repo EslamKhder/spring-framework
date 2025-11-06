@@ -1,5 +1,6 @@
 package com.spring.boot.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
@@ -11,17 +12,18 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TeacherDto {
 
     private Long id;
 
     @NotBlank(message = "Name must be not null")
-    private String name;
+    private String myName;
 
-    @NotBlank(message = "UserName be not null")
+    @NotBlank(message = "UserName must be not null")
     private String userName;
 
-    @NotBlank(message = "Password be not null.")
+    @NotBlank(message = "Password must be not null.")
     private String password;
 
     @NotBlank
@@ -31,7 +33,7 @@ public class TeacherDto {
 
     public TeacherDto(Long id, String name, String userName, String password, String phoneNumber) {
         this.id = id;
-        this.name = name;
+        this.myName = name;
         this.userName = userName;
         this.password = password;
         this.phoneNumber = phoneNumber;

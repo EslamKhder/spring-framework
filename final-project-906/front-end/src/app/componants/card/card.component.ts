@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CardService} from "../../../service/card.service";
 
 @Component({
   selector: 'app-card',
@@ -6,8 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./card.component.css']
 })
 
-export class CardComponent {
+export class CardComponent implements OnInit{
 
   totalElementSize: number = 0;
   totalElementPrice: number = 0;
+
+  constructor(private cardService: CardService) {
+  }
+
+  ngOnInit(): void {
+    this.cardService.totalNumber.subscribe(value => {
+      this.totalElementSize = value;
+    })
+
+    this.cardService.totalPrice.subscribe(value => {
+      this.totalElementPrice = value;
+    })
+
+  }
+
+
 }

@@ -8,7 +8,6 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
 public interface AccountMapper {
 
     AccountMapper ACCOUNT_MAPPER = Mappers.getMapper(AccountMapper.class);

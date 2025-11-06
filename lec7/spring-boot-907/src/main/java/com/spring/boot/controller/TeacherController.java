@@ -5,8 +5,11 @@ import com.spring.boot.service.TeacherService;
 import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -20,33 +23,34 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    public List<TeacherDto> getAllTeachers(){
-        return teacherService.findTeachers();
+    public ResponseEntity<List<TeacherDto>> getAllTeachers(){
+        return ResponseEntity.ok(teacherService.findTeachers());
     }
 
     @PostMapping("/save/teacher")
-    public TeacherDto saveTeacher(@RequestBody @Valid TeacherDto teacherDto){
-        return teacherService.addTeacher(teacherDto);
+    public ResponseEntity<TeacherDto> saveTeacher(@RequestBody @Valid TeacherDto teacherDto) throws URISyntaxException {
+        return ResponseEntity.created(new URI("/save/teacher")).body(teacherService.addTeacher(teacherDto));
     }
 
     @PutMapping("/edit/teacher")
-    public TeacherDto editTeacher(@RequestBody @Valid TeacherDto teacherDto){
-        return teacherService.editTeacher(teacherDto);
+    public ResponseEntity<TeacherDto> editTeacher(@RequestBody @Valid TeacherDto teacherDto){
+        return ResponseEntity.ok(teacherService.editTeacher(teacherDto));
     }
 
     @DeleteMapping("/delete/teacher")
-    public void removeTeacher(@RequestBody TeacherDto teacherDto){
+    public ResponseEntity<Void> removeTeacher(@RequestBody TeacherDto teacherDto){
         teacherService.removeTeacher(teacherDto.getId());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/teacher")
-    public TeacherDto getTeacherByUserName(@RequestParam String userName) throws SystemException {
-        return teacherService.getByUserName(userName);
+    public ResponseEntity<TeacherDto> getTeacherByUserName(@RequestParam String userName) throws SystemException {
+        return ResponseEntity.ok(teacherService.getByUserName(userName));
     }
 
     @GetMapping("/teacher/{id}")
-    public TeacherDto getTeacherById(@PathVariable Long id) throws SystemException {
-        return teacherService.getById(id);
+    public ResponseEntity<TeacherDto> getTeacherById(@PathVariable Long id) throws SystemException {
+        return ResponseEntity.ok(teacherService.getById(id));
     }
 
     // request param
