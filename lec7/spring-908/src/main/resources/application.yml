@@ -26,4 +26,4 @@ spring:
 
 token:
   secret: hjfs46687kjsfkj@#@$#$@$%ffeddf@#sADDS
-  time: 20s
+  time: 24h

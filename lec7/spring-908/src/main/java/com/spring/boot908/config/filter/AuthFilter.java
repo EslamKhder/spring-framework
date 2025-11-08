@@ -30,7 +30,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
         String token = request.getHeader("Authorization");
 
-        if (Objects.isNull(token) || !token.startsWith("Bearer")) {
+        if (Objects.isNull(token) || !token.startsWith("Bearer")) { // Bearer sdljdskjkdsdsjds
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
