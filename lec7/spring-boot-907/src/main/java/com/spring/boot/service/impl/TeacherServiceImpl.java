@@ -37,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherDto addTeacher(TeacherDto teacherDto) {
         if (Objects.nonNull(teacherDto.getId())) {
-            throw new IllegalArgumentException("New teacher must not have an ID before saving.");
+            throw new IllegalArgumentException("teacher.id.mustBeNull");
         }
 
         if (teacherRepo.findByUserName(teacherDto.getUserName()).isPresent()) {

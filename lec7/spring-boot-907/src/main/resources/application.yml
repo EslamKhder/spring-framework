@@ -1,7 +1,11 @@
 server:
-  port: 9090
+  port: 9091
 
 spring:
+  security:
+    user:
+      name: eslam
+      password: eslam123
   application:
     name: spring-boot-907
   datasource:
@@ -13,4 +17,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  messages:
+    baseName: i18n/messages
 
+
+token:
+  secret: kjdshfdjksh@#@$$#@dnsd!23223WE@#@#@asd
+  time: 24h

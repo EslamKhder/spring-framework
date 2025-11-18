@@ -1,6 +1,6 @@
 package com.spring.boot.resturantbackend.controllers.vm;
 
-import jakarta.validation.constraints.NotEmpty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@Schema(
+       name = "Order",
+        description = "save order related to user with products"
+)
 public class RequestOrderVm {
-    private Long id;
-    @NotEmpty(message = "error.user_id.not_empty")
-    private Long userId;
-    @NotEmpty(message = "error.total_price.not_empty")
-    private double totalPrice;
-    @NotEmpty(message = "error.total_number.not_empty")
-    private double totalNumber;
-    @NotEmpty(message = "error.products_ids.not_empty")
-    List<Long> productsIds;
+    @Schema(
+            description = "this list of OrderVm"
+    )
+    private List<OrderVm> products;
 }

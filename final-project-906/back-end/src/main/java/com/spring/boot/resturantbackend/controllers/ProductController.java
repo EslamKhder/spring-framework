@@ -14,12 +14,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(
+        name = "ProductController",
+        description = "Product Controller api"
+)
 @RestController
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
+
+    @Operation(
+            summary = "get all products",
+            description = "all products in resturant"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status ok"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP SystemException",
+                    content = @Content(
+                            schema = @Schema(implementation = ExceptionDto.class)
+                    )
+            ),
+    })
     @GetMapping("/all-products")
     public ResponseEntity<ProductResponseVm> getAllProducts(@RequestParam int page, @RequestParam int size)
             throws SystemException {
@@ -34,58 +56,13 @@ public class ProductController {
     }
 
 
-    @Operation(
-            summary = "get all products by key"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Http Status get all products by key"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Http Status internal server error",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Http Status Not Found",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-    })
+
     @GetMapping("/all-products-by-key")
     public ResponseEntity<ProductResponseVm> getAllProductsByKey(@RequestParam String key, @RequestParam int page, @RequestParam int size)
             throws SystemException {
         return ResponseEntity.ok(productService.getAllProductsByKey(key, page, size));
     }
 
-    @Operation(
-            summary = "get all products by key and category id"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Http Status get all products by key and category id"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Http Status internal server error",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Http Status Not Found",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-    })
     @GetMapping("/all-products-by-key-and-category-id")
     public ResponseEntity<ProductResponseVm> getAllProductsByKeyAndCategoryId(
             @RequestParam Long categoryId,

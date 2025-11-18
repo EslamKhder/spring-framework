@@ -1,0 +1,1 @@
+apply redis on all services

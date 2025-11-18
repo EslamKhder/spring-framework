@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ExceptionResponse {
+public class MessageResponse {
 
-    private String message;
+    private String messageAr;
+    private String messageEn;
 }

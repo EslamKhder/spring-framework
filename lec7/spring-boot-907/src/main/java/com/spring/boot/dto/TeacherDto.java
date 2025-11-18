@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -17,20 +19,21 @@ public class TeacherDto {
 
     private Long id;
 
-    @NotBlank(message = "Name must be not null")
+    @NotBlank(message = "teacher.name.notBlank")
     private String myName;
 
-    @NotBlank(message = "UserName must be not null")
+    @NotBlank(message = "teacher.username.notBlank")
     private String userName;
 
-    @NotBlank(message = "Password must be not null.")
+    @NotBlank(message = "teacher.password.notBlank")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "teacher.phoneNumber.notBlank")
     private String phoneNumber;
 
     private String conCatNameAndUserName;
 
+    private List<RoleDto> roles;
     public TeacherDto(Long id, String name, String userName, String password, String phoneNumber) {
         this.id = id;
         this.myName = name;

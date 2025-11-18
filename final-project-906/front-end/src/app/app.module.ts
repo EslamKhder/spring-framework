@@ -18,6 +18,7 @@ import {AuthInterceptor} from "../service/interceptor/auth.interceptor";
 import {AuthGuard} from "../service/guard/auth.guard";
 import {NoauthGuard} from "../service/guard/noauth.guard";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { OrdercodeComponent } from './componants/ordercode/ordercode.component';
 
 // routes: Routes = [];
 
@@ -34,6 +35,7 @@ export const routes: Routes = [
   {path: 'search/:key', component: ProductsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate: [NoauthGuard]},
   {path: 'signup', component: SignupComponent, canActivate: [NoauthGuard]},
+  {path: 'order-code/:code/totalPrice/:totalPrice/totalNumber/:totalNumber', component: OrdercodeComponent, canActivate: [AuthGuard]},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 
@@ -58,7 +60,8 @@ export const routes: Routes = [
     ChefsComponent,
     ContactInfoComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    OrdercodeComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
