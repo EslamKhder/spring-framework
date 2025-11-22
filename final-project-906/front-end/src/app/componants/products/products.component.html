@@ -27,10 +27,10 @@
               <button class="btn btn-warning btn-sm text-white" (click)="addProduct(pro)">
                 <i class="bi bi-cart-plus"></i> Add to Cart
               </button>
-              <button class="btn btn-primary btn-sm" (click)="editProduct(pro)">
+              <button *ngIf="isUserAdmin()" class="btn btn-primary btn-sm" (click)="editProduct(pro)">
                 <i class="bi bi-pencil-square"></i> Edit
               </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteProduct(pro)">
+              <button *ngIf="isUserAdmin()" class="btn btn-danger btn-sm" (click)="deleteProduct(pro)">
                 <i class="bi bi-trash"></i> Delete
               </button>
             </div>

@@ -15,17 +15,14 @@ import {APP_BASE_HREF} from '@angular/common';
 // http://localhost:4200/
 export const routes: Routes = [
 
-  // http://localhost:4200/active
   {path: 'products', component: ProductsComponent},
   {path: 'cardDetails', component: CardDetailsComponent},
   {path: 'contact-info', component: ContactInfoComponent},
   {path: 'chefs', component: ChefsComponent},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
-
   // if user enter thing without all routes
   {path: '**', redirectTo: '/products', pathMatch: 'full'}
-
 ];
 
 /*

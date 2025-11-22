@@ -11,18 +11,26 @@ import {FooterComponent} from './componants/footer/footer.component';
 import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './componants/login/login.component';
+import { SignupComponent } from './componants/signup/signup.component';
+import {AuthTokenInterceptor} from "../service/interceptor/auth-token.interceptor";
+import {AuthGuard} from "../service/guard/auth.guard";
+import {LoginSignUpGuard} from "../service/guard/login-sign-up.guard";
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 // http://localhost:4200
 export const routes: Routes = [
 
   // http://localhost:4200/active
-  {path: 'products', component: ProductsComponent},
-  {path: 'cardDetails', component: CardDetailsComponent},
-  {path: 'contact-info', component: ContactInfoComponent},
-  {path: 'chefs', component: ChefsComponent},
-  {path: 'category/:id', component: ProductsComponent},
-  {path: 'search/:key', component: ProductsComponent},
+  {path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'cardDetails', component: CardDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'contact-info', component: ContactInfoComponent, canActivate: [AuthGuard]},
+  {path: 'chefs', component: ChefsComponent, canActivate: [AuthGuard]},
+  {path: 'category/:id', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'search/:key', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [LoginSignUpGuard]},
+  {path: 'signup', component: SignupComponent, canActivate: [LoginSignUpGuard]},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 
@@ -45,14 +53,23 @@ export const routes: Routes = [
     CardComponent,
     FooterComponent,
     ChefsComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
+    NgbPaginationModule,
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthTokenInterceptor,
+    multi: true
+  }
+  ],
   bootstrap: [
     AppComponent
   ]

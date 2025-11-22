@@ -36,6 +36,11 @@ export class AuthService {
                           sessionStorage.getItem("token") !== "";
   }
 
+  isUserAdmin(){
+    return sessionStorage.getItem("roles") &&
+      sessionStorage.getItem("roles").includes("ADMIN");
+  }
+
   logout(){
     sessionStorage.removeItem("token");
   }

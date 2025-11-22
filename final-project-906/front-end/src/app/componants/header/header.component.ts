@@ -24,4 +24,8 @@ export class HeaderComponent {
     this.authService.logout();
     this.route.navigateByUrl("/login")
   }
+
+  isUserAdmin(){
+    return this.authService.isUserAdmin();
+  }
 }

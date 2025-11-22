@@ -35,9 +35,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
         try {
-            if (Objects.nonNull(categoryDto.getId())) {
-                throw new SystemException("id.must_be.null");
-            }
+//            if (Objects.nonNull(categoryDto.getId())) {
+//                throw new SystemException("id.must_be.null");
+//            }
             Category category = CategoryMapper.CATEGORY_MAPPER.toCategory(categoryDto);
             category = categoryRepo.save(category);
             return CategoryMapper.CATEGORY_MAPPER.toCategoryDto(category);

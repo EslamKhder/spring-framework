@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2>Login</h2>
+    <div class="form-group">
+      <label for="email">user name</label>
+      <input type="email" id="email" placeholder="Enter your user name" #userName/>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" #password/>
+    </div>
+  <div *ngIf="messageAr && messageEn" class="message-box">
+    <p>{{messageAr}}</p>
+    <p>{{messageEn}}</p>
+  </div>
+    <button type="submit" class="login-btn" (click)="login(userName.value, password.value)">Login</button>
+  <a routerLink="/signup">Don't have an account? Sign up</a>
+</div>

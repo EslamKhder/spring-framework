@@ -1,0 +1,21 @@
+<div class="login-container">
+  <h2>Signup</h2>
+    <div class="form-group">
+      <label for="userName">userName</label>
+      <input type="email" id="userName" placeholder="Enter your username" #userName/>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" #password/>
+    </div>
+    <div class="form-group">
+      <label for="confirm_password">Confirm Password</label>
+      <input type="password" id="confirm_password" placeholder="Enter your confirm password" #confirmPassword/>
+    </div>
+  <div *ngIf="messageAr && messageEn" class="message-box">
+    <p>{{messageAr}}</p>
+    <p>{{messageEn}}</p>
+  </div>
+    <button type="submit" class="login-btn" (click)="createAccount(userName.value, password.value, confirmPassword.value)">login</button>
+  <a class="footer-text" routerLink="/login">login</a>
+</div>

@@ -5,7 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,10 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Product extends BaseEntity {
+
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -30,4 +33,6 @@ public class Product {
     private Category category;
     @ManyToMany(mappedBy = "products")
     private List<Order> orders;
+
+
 }

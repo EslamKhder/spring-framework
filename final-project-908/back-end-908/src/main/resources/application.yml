@@ -1,18 +1,20 @@
-server:
-  port: 9090
-
-# Oracle Database Configuration
 spring:
+  messages:
+    basename: i18n/messages
   application:
-    name: Restaurant
+    name: backend
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@//localhost:1521/orclpdb
     username: hr
     password: hr
   jpa:
-    hibernate.ddl-auto: update
+    hibernate:
+      ddl-auto: update
     show-sql: true
-  messages:
-    basename: i18n/messages
-    local-default:
+server:
+  port: 6060
+
+token:
+  secret: 832t82eg8dgwd2fc8cg2bfghbftg8oe8g2e8hihrfghe87drf
+  time: 24h

@@ -22,9 +22,11 @@
 
 
         <div class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
           <div class="dropdown-menu m-0">
-            <a href="booking.html" class="dropdown-item"><i class="bi bi-plus-circle"></i> Add Product</a>
+            <a *ngIf="isUserAdmin()" href="booking.html" class="dropdown-item"><i class="bi bi-plus-circle"></i>Add Product</a>
+            <a href="booking.html" class="dropdown-item"><i class="bi bi-clock-history"></i>History</a>
+            <a *ngIf="isUserAdmin()" href="booking.html" class="dropdown-item"><i class="bi bi-clock-history"></i>Mange Orders</a>
           </div>
         </div>
         <a href="contact.html" class="nav-item nav-link">Contact</a>

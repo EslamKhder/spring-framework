@@ -4,6 +4,7 @@ import {Product} from "../../../model/product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CardService} from "../../../service/card.service";
 import {CardItem} from "../../../model/card-item";
+import {AuthService} from "../../../service/security/auth.service";
 
 @Component({
   selector: 'app-products',
@@ -28,7 +29,7 @@ export class ProductsComponent implements OnInit{
   }
 
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
-              private cardService: CardService){
+              private cardService: CardService, private authService: AuthService){
   }
 
 
@@ -110,5 +111,17 @@ export class ProductsComponent implements OnInit{
   addProduct(product: Product){
     let cardItem = new CardItem(product);
     this.cardService.addProduct(cardItem);
+  }
+
+  isUserAdmin(){
+    return this.authService.isUserAdmin();
+  }
+
+  editProduct(pro: Product) {
+
+  }
+
+  deleteProduct(pro: Product) {
+
   }
 }
