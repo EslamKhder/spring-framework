@@ -15,7 +15,7 @@ public class BankServiceImplV1 {
     @Autowired
     private BankAccountRepository repo;
 
-    @Transactional
+//    @Transactional
     public void transferWithRuntimeException(Long fromId, Long toId, double amount) {
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();
@@ -35,9 +35,10 @@ public class BankServiceImplV1 {
 //            rollbackFor = Exception.class,
 //            noRollbackFor = SystemException.class
 //    )
-    @Transactional(
-            rollbackFor = Exception.class
-    )
+//    @Transactional(
+//            rollbackFor = Throwable.class
+//    )
+//    @Transactional
     public void transferWithCheckedException(Long fromId, Long toId, double amount) throws Exception {
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();

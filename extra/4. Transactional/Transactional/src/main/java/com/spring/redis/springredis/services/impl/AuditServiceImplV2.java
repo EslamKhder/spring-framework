@@ -13,9 +13,10 @@ public class AuditServiceImplV2 {
     @Autowired
     private LoggerRepository loggerRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void logTransfer(String message)  {
         loggerRepository.save(new Logger(message));
-        //throw new RuntimeException("Oops!");
+        throw new RuntimeException("Oops!");
     }
 }

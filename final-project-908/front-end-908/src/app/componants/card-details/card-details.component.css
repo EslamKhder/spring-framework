@@ -1,0 +1,35 @@
+.img{
+  width: 157px !important;
+}
+
+.orderName {
+  font-weight: bold;
+}
+
+
+body {
+  background-color: #f7f9fc;
+}
+.no-orders-box {
+  max-width: 450px;
+  margin: 80px auto;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+}
+img.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+.no-order-icon {
+  font-size: 60px;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+.btn-main {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border-radius: 30px;
+}

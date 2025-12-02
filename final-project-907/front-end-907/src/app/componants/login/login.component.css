@@ -1,0 +1,19 @@
+body {
+  background: #f4f6f9;
+}
+.card {
+  border-radius: 15px;
+}
+.error-message {
+  background-color: #ffe5e5;       /* Light red background */
+  color: #b00020;                  /* Dark red text */
+  border: 1px solid #b00020;       /* Red border */
+  padding: 12px 16px;              /* Space inside box */
+  border-radius: 6px;              /* Rounded corners */
+  margin: 10px 0;                  /* Space outside box */
+  font-size: 14px;
+  font-weight: 500;
+}
+.error-message div {
+  margin: 4px 0;                   /* Space between Arabic & English text */
+}

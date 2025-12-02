@@ -19,7 +19,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column
     private String code;
     @Column(nullable = false)
     private double totalPrice;
@@ -34,6 +34,6 @@ public class Order {
     )
     List<Product> products;
     @ManyToOne
-    @JoinColumn(unique = true, nullable = false)
+    @JoinColumn(nullable = false)
     private Account account;
 }

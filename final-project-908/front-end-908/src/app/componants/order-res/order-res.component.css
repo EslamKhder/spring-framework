@@ -1,0 +1,36 @@
+body {
+  background-color: #f4f6fa;
+}
+
+.order-box {
+  width: 380px;
+  background: white;
+}
+
+.logo {
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-item {
+  background: #f8f9fc;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #222;
+  font-weight: 500;
+}

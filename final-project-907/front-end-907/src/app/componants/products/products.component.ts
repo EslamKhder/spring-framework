@@ -11,10 +11,26 @@ import {ActivatedRoute, RouterLink} from "@angular/router";
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
+  messageAr: string = "";
+  messageEn: string = "";
+
+  page: number = 1;
+  pageSize: number = 10;
+  collectionSize: number;
+
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    // this.loadProducts()
+    this.activatedRoute.paramMap.subscribe(
+      () => this.loadProducts()
+    )
+  }
+
+
+
+  loadProducts(){
     let idExist = this.activatedRoute.snapshot.paramMap.has("id");
     let keyExist = this.activatedRoute.snapshot.paramMap.has("key");
     if (idExist) {
@@ -30,19 +46,55 @@ export class ProductsComponent implements OnInit {
 
 
   getAllProducts(){
-    this.productService.getProducts().subscribe(
-      result => this.products = result
-    );
+    this.productService.getProducts(this.page, this.pageSize).subscribe(
+      result => {
+        this.products = result.products;
+        this.collectionSize = result.totalProducts;
+        this.messageAr = "";
+        this.messageEn = "";
+      }, errorResponse => {
+        this.products = [];
+        this.messageAr = errorResponse.error.bundleMessage.message_ar;
+        this.messageEn = errorResponse.error.bundleMessage.message_en;
+      }
+    )
   }
 
   getProductsByCategoryId(id){
-    this.productService.getProductsByCategoryId(id).subscribe(
-      result => this.products = result
-    );
+    this.productService.getProductsByCategoryId(id,this.page, this.pageSize).subscribe(
+      result => {
+        this.products = result.products;
+        this.collectionSize = result.totalProducts;
+        this.messageAr = "";
+        this.messageEn = "";
+      }, errorResponse => {
+        this.products = [];
+        this.messageAr = errorResponse.error.bundleMessage.message_ar;
+        this.messageEn = errorResponse.error.bundleMessage.message_en;
+      }
+    )
   }
   search(key){
-    this.productService.search(key).subscribe(
-      result => this.products = result
-    );
+    this.productService.search(key, this.page, this.pageSize).subscribe(
+      result => {
+        this.products = result.products;
+        this.collectionSize = result.totalProducts;
+        this.messageAr = "";
+        this.messageEn = "";
+      }, errorResponse => {
+        this.products = [];
+        this.messageAr = errorResponse.error.bundleMessage.message_ar;
+        this.messageEn = errorResponse.error.bundleMessage.message_en;
+      }
+    )
+  }
+
+  doPagination() {
+    this.loadProducts();
+  }
+
+  changePageSize(event: Event) {
+    this.pageSize = +(<HTMLInputElement>event.target).value;
+    this.loadProducts();
   }
 }

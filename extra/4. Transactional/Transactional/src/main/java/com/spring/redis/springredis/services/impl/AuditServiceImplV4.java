@@ -18,6 +18,6 @@ public class AuditServiceImplV4 {
     @Transactional(propagation = Propagation.SUPPORTS)
     public void logTransfer(String message) {
         loggerRepository.save(new Logger(message));// committed
-        //throw new RuntimeException("Oops!"); // rollback both transfer and log
+//        throw new RuntimeException("Oops!"); // rollback both transfer and log
     }
 }

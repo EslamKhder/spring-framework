@@ -13,9 +13,6 @@ import lombok.Setter;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseOrderVm {
-    private Long id;
-    @NotEmpty(message = "error.user_id.not_empty")
-    private Long userId;
     @NotEmpty(message = "error.code.not_empty")
     private String code;
     @NotEmpty(message = "error.total_price.not_empty")

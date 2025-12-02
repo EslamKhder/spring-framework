@@ -1,11 +1,12 @@
 
 <div class="tab-content">
   <div id="tab-1" class="tab-pane fade show p-0 active">
-    <div class="row g-4">
+
+    <div *ngIf="products.length !== 0" class="row g-4">
 
       <div *ngFor="let pro of products" class="col-lg-6">
         <div class="d-flex align-items-center">
-          <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.image}}" alt="" style="width: 80px;">
+          <img class="flex-shrink-0 img-fluid rounded" src="../../../assets/img/{{pro.imagePath}}" alt="" style="width: 80px;">
           <div class="w-100 d-flex flex-column text-start ps-4">
             <h5 class="d-flex justify-content-between border-bottom pb-2">
               <span>{{pro.name}}</span>
@@ -17,26 +18,40 @@
         </div>
       </div>
 
-      <div class="col-md-9 pag" style="padding-left: 30%">
-        <!--                <ngb-pagination-->
-        <!--                  [(page)]="page"-->
-        <!--                  [pageSize]="pageLength"-->
-        <!--                  [collectionSize]="orderSize"-->
-        <!--                  (pageChange)="doing()"-->
-        <!--                  [maxSize]="5"-->
-        <!--                  [boundaryLinks]="true"-->
-        <!--                >-->
-        <!--                </ngb-pagination>-->
+      <div  class="col-md-9 pag" style="padding-left: 30%">
+            <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize"
+              [collectionSize]="collectionSize"
+              (pageChange)="doPagination()"
+              [maxSize]="5"
+              [boundaryLinks]="true"
+            >
+            </ngb-pagination>
 
         <div class="sel">
           <span class="mr-2">Page Size</span>
-          <select>
-            <option>2</option>
-            <option>5</option>
-            <option selected="true">10</option>
-            <option>20</option>
-            <option>50</option>
+          <select (change)="changePageSize($event)">
+            <option [selected]="pageSize === 2">2</option>
+            <option [selected]="pageSize === 5">5</option>
+            <option [selected]="pageSize === 10">10</option>
+            <option [selected]="pageSize === 20">20</option>
+            <option [selected]="pageSize === 50">50</option>
           </select>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="messageAr && messageEn" class="card bundle-card">
+      <div class="card-body p-4">
+        <!-- Arabic message (RTL) -->
+        <div class="mb-3 p-3 rounded-3 border message-ar bg-white" role="status" aria-live="polite">
+          <span>{{messageAr}}</span>
+        </div>
+
+        <!-- English message (LTR) -->
+        <div class="p-3 rounded-3 border message-en bg-white" role="status" aria-live="polite">
+          <span>{{messageEn}}</span>
         </div>
       </div>
     </div>

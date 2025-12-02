@@ -1,0 +1,43 @@
+/* Small visual polish */
+.bundle-card {
+  max-width: 720px;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  border: 0;
+}
+
+.bundle-header {
+  background: linear-gradient(90deg, #7dd3fc 0%, #bae6fd 50%, #7dd3fc 100%);
+  color: #023047;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.message-ar {
+  direction: rtl;          /* ensure proper Arabic layout */
+  text-align: right;
+  font-family: "Segoe UI", "Noto Naskh Arabic", "Tahoma", sans-serif;
+  font-size: 1.05rem;
+}
+
+.message-en {
+  direction: ltr;
+  text-align: left;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.emoji {
+  font-size: 1.25rem;
+  margin-right: 0.35rem;
+  margin-left: 0.35rem;
+}
+
+/* small responsive tweak */
+@media (max-width: 576px) {
+  .bundle-card { margin: 1rem; }
+  .message-ar, .message-en { font-size: 0.98rem; }
+}

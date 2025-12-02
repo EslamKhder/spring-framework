@@ -13,13 +13,13 @@ import java.util.List;
 @Setter
 @Getter
 public class RequestOrderVm {
-    private Long id;
-    @NotEmpty(message = "error.user_id.not_empty")
-    private Long userId;
-    @NotEmpty(message = "error.total_price.not_empty")
-    private double totalPrice;
-    @NotEmpty(message = "error.total_number.not_empty")
-    private double totalNumber;
-    @NotEmpty(message = "error.products_ids.not_empty")
-    List<Long> productsIds;
+    private List<OrderVm> orderVms;
+
+    public List<OrderVm> getOrderVms() {
+        return orderVms;
+    }
+
+    public void setOrderVms(List<OrderVm> orderVms) {
+        this.orderVms = orderVms;
+    }
 }
