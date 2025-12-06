@@ -45,7 +45,7 @@ public class BankServiceImplV5 {
         }
         repo.save(to);
         // catch tx
-        throw new RuntimeException("Oops 2!");
+//        throw new RuntimeException("Oops 2!");
     }
 
 }

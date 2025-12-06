@@ -18,6 +18,7 @@ import {AuthGuard} from "../service/guard/auth.guard";
 import {GuestGuard} from "../service/guard/guest.guard";
 import {AuthInterceptor} from "../service/interceptor/auth.interceptor";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { OrderResComponent } from './componants/order-res/order-res.component';
 
 // http://localhost:4200/
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
   {path: 'signup', component: SignupComponent, canActivate: [GuestGuard]},
   {path: 'category/:id', component: ProductsComponent, canActivate: [AuthGuard]},
   {path: 'search/:key', component: ProductsComponent, canActivate: [AuthGuard]},
+  {path: 'order/code/:code/size/:size/price/:price', component: OrderResComponent, canActivate: [AuthGuard]},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   // if user enter thing without all routes
@@ -52,7 +54,8 @@ export const routes: Routes = [
     ChefsComponent,
     ContactInfoComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    OrderResComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

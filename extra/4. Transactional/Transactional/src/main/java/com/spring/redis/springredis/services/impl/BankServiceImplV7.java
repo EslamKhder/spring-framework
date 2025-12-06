@@ -44,7 +44,7 @@ public class BankServiceImplV7 {
 
 
         System.out.println("....2");
-
+        throw new RuntimeException("...1");
 
 
     }

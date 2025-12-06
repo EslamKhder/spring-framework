@@ -1,0 +1,8 @@
+.card-body .row {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.card-body .row:last-child {
+  border-bottom: none;
+}

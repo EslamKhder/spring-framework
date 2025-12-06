@@ -18,6 +18,6 @@ public class AuditServiceImplV6 {
     public void logTransfer(String message) {
         System.out.println("Propagation.NEVER");
         loggerRepository.save(new Logger(message));
-        throw new RuntimeException("Oops!");
+//        throw new RuntimeException("Oops!");
     }
 }

@@ -1,0 +1,21 @@
+.img {
+  width: 90px;
+}
+
+.itemName {
+  font-weight: bold;
+}
+
+.not-selected-box {
+  border: 1px dashed #dc3545;
+  background-color: #fff4f5;
+  color: #b01f2c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.not-selected-box i {
+  font-size: 18px;
+}
