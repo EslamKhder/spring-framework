@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit {
     this.authService.signUp(userName, password).subscribe(
       response => {
         sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("userRoles", response.userRoles);
         this.router.navigateByUrl("/product");
       } , errorResponse => {
         this.messageEn = errorResponse.error.bundleMessage.message_en;

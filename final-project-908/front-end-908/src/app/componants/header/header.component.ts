@@ -23,4 +23,10 @@ export class HeaderComponent {
   isUserLogin(): boolean{
     return this.authService.isUserLogin();
   }
+
+  isUserAdmin(): boolean{
+    return this.authService.isUserAdmin();
+  }
+
+
 }

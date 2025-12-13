@@ -1,6 +1,7 @@
 package com.spring.boot.resturantbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.spring.boot.resturantbackend.ann.PhoneNumber;
 import com.spring.boot.resturantbackend.controllers.vm.ProductVm;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -27,4 +28,7 @@ public class CategoryDto {
     @NotEmpty(message = "not_empty.flag")
     private String flag;
     private List<ProductVm> products;
+
+    @PhoneNumber(message = "phone.invalid")
+    private String phone;
 }

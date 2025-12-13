@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class SpringRedisApplicationV6 implements CommandLineRunner {
 
     @Autowired

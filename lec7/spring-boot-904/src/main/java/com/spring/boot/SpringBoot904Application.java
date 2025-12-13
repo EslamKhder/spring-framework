@@ -15,3 +15,10 @@ public class SpringBoot904Application {
     }
 
 }
+/**
+ * Class<?>[] groups() default { };  // interface
+ *
+ *     Class<? extends Payload>[] payload() default { };
+ *
+ *
+ */

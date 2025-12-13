@@ -4,6 +4,7 @@ import {ProductService} from "../../../service/product.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Item} from "../../../model/item";
 import {CartService} from "../../../service/cart.service";
+import {AuthService} from "../../../service/security/auth.service";
 
 @Component({
   selector: 'app-products',
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit {
   pageSize: number = 10;
   collectionSize: number;
 
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private cartService: CartService) {
+  constructor(private authService: AuthService, private productService: ProductService, private activatedRoute: ActivatedRoute, private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -104,5 +105,9 @@ export class ProductsComponent implements OnInit {
   addProduct(product: Product){
     let item: Item = new Item(product);
     this.cartService.addItem(item)
+  }
+
+  isUserAdmin(): boolean{
+    return this.authService.isUserAdmin();
   }
 }

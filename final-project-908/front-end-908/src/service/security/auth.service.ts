@@ -41,4 +41,11 @@ export class AuthService {
            sessionStorage.getItem("token") !== null &&
            sessionStorage.getItem("token") !== undefined;
   }
+
+  isUserAdmin(): boolean{
+    return sessionStorage.getItem("token") &&
+           sessionStorage.getItem("userRoles") &&
+           sessionStorage.getItem("userRoles").includes("ADMIN");
+  }
+
 }

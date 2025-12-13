@@ -13,10 +13,27 @@
               <span class="text-primary">${{pro.price}}</span>
             </h5>
             <small class="fst-italic">{{pro.description}}</small>
-            <button type="button" class="btn btn-danger col-lg-6" (click)="addProduct(pro)">ADD to Card</button>
+
+            <div class="mt-2 d-flex gap-2">
+              <button type="button" class="btn btn-danger col-lg-6" (click)="addProduct(pro)">
+                ADD to Cart
+              </button>
+
+              <!-- Update -->
+              <button *ngIf="isUserAdmin()" class="btn btn-warning" >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+
+              <!-- Delete -->
+              <button *ngIf="isUserAdmin()" class="btn btn-dark">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
+
 
       <div  class="col-md-9 pag" style="padding-left: 30%">
             <ngb-pagination

@@ -40,4 +40,12 @@ public class CategoryDto {
             description = "list of products (List<ProductVm>)"
     )
     private List<ProductVm> products;
+
+    @Schema(
+            name = "email",
+            description = "email of user",
+            example = "eslam@gmail.com"
+    )
+
+    private String email;
 }

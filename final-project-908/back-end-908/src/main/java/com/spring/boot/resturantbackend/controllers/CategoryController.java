@@ -1,5 +1,6 @@
 package com.spring.boot.resturantbackend.controllers;
 
+import com.spring.boot.resturantbackend.IdException;
 import com.spring.boot.resturantbackend.dto.CategoryDto;
 import com.spring.boot.resturantbackend.dto.ExceptionDto;
 import com.spring.boot.resturantbackend.services.CategoryService;
@@ -18,37 +19,50 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@Tag(
-        name = "Category Controller",
-        description = "get all categories,create,get by id"
-)
 @RestController
 @RequestMapping("/categories")
+@Tag(
+        name = "Category Controller",
+        description = "api mange category"
+)
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
     @Operation(
             summary = "get all categories",
-            description = "all categories in resturant"
+            description = "api to get all categories"
     )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Http Status get all categories"
+                    description = "Http status get all categories success",
+                    content = @Content(
+                            schema = @Schema(implementation = CategoryDto.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Http Status internal server error",
+                    description = "Http status no categories found",
                     content = @Content(
                             schema = @Schema(implementation = ExceptionDto.class)
                     )
-            ),
+            )
     })
     @GetMapping("/all-categories")
     public ResponseEntity<List<CategoryDto>> getAllCategories() throws SystemException {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
+
+
+
+
+
+
+
+
+
 
     @Operation(
             summary = "create category"
@@ -70,6 +84,12 @@ public class CategoryController {
     public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CategoryDto categoryDto) throws SystemException {
         return ResponseEntity.created(URI.create("create-category")).body(categoryService.createCategory(categoryDto));
     }
+
+
+
+
+
+
 
     @Operation(
             summary = "get category by id"

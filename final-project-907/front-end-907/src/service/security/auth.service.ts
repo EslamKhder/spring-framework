@@ -33,6 +33,11 @@ export class AuthService {
     return token && token.trim().length > 0;
   }
 
+  isUserAdmin(): boolean {
+    return sessionStorage.getItem("userRoles") &&
+      sessionStorage.getItem("userRoles").includes("ADMIN");
+  }
+
   logout(){
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userName");

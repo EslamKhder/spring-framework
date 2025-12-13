@@ -14,7 +14,7 @@
         <button class="btn btn-outline-success ms-2" type="submit" (click)="search(key.value)">Search</button>
       </div>
       <div class="navbar-nav ms-auto py-0 pe-4">
-        <div *ngIf="isUserLogin()" class="nav-item nav-link active"><a routerLink="/contact-info">Contact</a></div>
+        <div *ngIf="isUserLogin() && !isUserAdmin()" class="nav-item nav-link active"><a routerLink="/contact-info">Contact</a></div>
         <div *ngIf="isUserLogin()" class="nav-item nav-link active"><a routerLink="/chefs">Team</a></div>
         <div *ngIf="!isUserLogin()" class="nav-item nav-link active"><a routerLink="/login">login</a></div>
         <div *ngIf="!isUserLogin()" class="nav-item nav-link active"><a routerLink="/signup">signup</a></div>
@@ -22,15 +22,23 @@
 
 
         <div *ngIf="isUserLogin()" class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
           <div class="dropdown-menu m-0">
-            <a href="booking.html" class="dropdown-item">ALL</a>
-            <a href="team.html" class="dropdown-item">Breakfast</a>
-            <a href="testimonial.html" class="dropdown-item">Launch</a>
-            <a href="testimonial.html" class="dropdown-item">Dinner</a>
-            <a href="testimonial.html" class="dropdown-item">Ice Cream</a>
-            <a href="testimonial.html" class="dropdown-item">Coffee</a>
-            <a href="testimonial.html" class="dropdown-item">Cake</a>
+            <a *ngIf="isUserAdmin()" href="booking.html" class="dropdown-item">
+              <i class="bi bi-plus-circle"></i> Add Product
+            </a>
+
+            <a href="booking.html" class="dropdown-item">
+              <i class="bi bi-clock-history"></i> History
+            </a>
+
+            <a *ngIf="isUserAdmin()" href="booking.html" class="dropdown-item">
+              <i class="bi bi-people-fill"></i> All Contacts
+            </a>
+
+            <a *ngIf="!isUserAdmin()" href="booking.html" class="dropdown-item">
+              <i class="bi bi-people-fill"></i> My Contacts
+            </a>
           </div>
         </div>
         <!--<a href="contact.html" class="nav-item nav-link">Contact</a>-->
