@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(schema = "hr")
-public class Product extends BaseEntity implements Serializable {
+public class Product extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
@@ -16,6 +16,13 @@ public class Product extends BaseEntity implements Serializable {
     private String description;
     @Column(nullable = false)
     private Double price;
+
+    public Product() {
+    }
+
+    public Product(Long id) {
+        super(id);
+    }
 
     public String getName() {
         return name;

@@ -1,5 +1,6 @@
 package com.spring.boot.resturantbackend.models.security;
 
+import com.spring.boot.resturantbackend.models.BaseEntity;
 import com.spring.boot.resturantbackend.models.ContactInfo;
 import com.spring.boot.resturantbackend.models.Order;
 import jakarta.persistence.*;
@@ -17,10 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Account extends BaseEntity {
+
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)

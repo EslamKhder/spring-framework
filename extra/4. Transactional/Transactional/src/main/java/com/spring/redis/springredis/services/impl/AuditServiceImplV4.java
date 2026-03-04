@@ -15,9 +15,9 @@ public class AuditServiceImplV4 {
 
     // if Tx exist join
     // if No Tx exist ex non tx
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public void logTransfer(String message) {
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
+    public void logTransfer(String message) throws Exception {
         loggerRepository.save(new Logger(message));// committed
-//        throw new RuntimeException("Oops!"); // rollback both transfer and log
+        throw new Exception("Oops!"); // rollback both transfer and log
     }
 }

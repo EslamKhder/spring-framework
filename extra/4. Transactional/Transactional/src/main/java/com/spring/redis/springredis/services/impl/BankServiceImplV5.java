@@ -21,11 +21,17 @@ public class BankServiceImplV5 {
         BankAccount to = repo.findById(toId).orElseThrow();
 
         from.setBalance(from.getBalance() - amount);
-        to.setBalance(to.getBalance() + amount);
-
         repo.save(from);
+
+        try {
+            audit.logTransfer("No transaction context");
+        } catch (Exception exception) {
+            System.out.println("--> ex");
+        }
+
+        to.setBalance(to.getBalance() + amount);
         repo.save(to);
-        audit.logTransfer("No transaction context");
+
     }
 
 
@@ -35,15 +41,18 @@ public class BankServiceImplV5 {
         BankAccount to = repo.findById(toId).orElseThrow();
 
         from.setBalance(from.getBalance() - amount);
-        to.setBalance(to.getBalance() + amount);
-
         repo.save(from);// tx with save
-        try {
-            audit.logTransfer("Runs inside existing transaction");
-        } catch (Exception exception) {
-            System.out.println("--------> NOT_SUPPORTED");
-        }
+
+        to.setBalance(to.getBalance() + amount);
         repo.save(to);
+
+        audit.logTransfer("Runs inside existing transaction");
+//        try {
+//            audit.logTransfer("Runs inside existing transaction");
+//        } catch (Exception exception) {
+//            System.out.println("--------> NOT_SUPPORTED");
+//        }
+
         // catch tx
 //        throw new RuntimeException("Oops 2!");
     }

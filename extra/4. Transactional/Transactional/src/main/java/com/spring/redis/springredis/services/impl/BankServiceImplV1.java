@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+// CHECK EXC          Exception
+// NON CHECK EXC      RUNTIME Exception
 @Service
 public class BankServiceImplV1 {
 
@@ -15,19 +17,25 @@ public class BankServiceImplV1 {
     @Autowired
     private BankAccountRepository repo;
 
-//    @Transactional
+    @Transactional(
+            rollbackFor = RuntimeException.class
+    )
     public void transferWithRuntimeException(Long fromId, Long toId, double amount) {
-        BankAccount from = repo.findById(fromId).orElseThrow();
-        BankAccount to = repo.findById(toId).orElseThrow();
+        BankAccount from = repo.findById(fromId).orElseThrow();//1000
+        BankAccount to = repo.findById(toId).orElseThrow();// 500
 
-        from.setBalance(from.getBalance() - amount);
-        to.setBalance(to.getBalance() + amount);
-
-        repo.save(from);//
+        from.setBalance(from.getBalance() - amount);// 1000 - 300 = 700
+        repo.save(from);//700
+        if(true){
+            throw new RuntimeException("Something went wrong after saving!");
+        }
+        to.setBalance(to.getBalance() + amount); // 500 + 300 = 800
         repo.save(to);//
 
+
+
         // Unchecked exception => causes rollback
-        throw new RuntimeException("Something went wrong after saving!");
+//        throw new RuntimeException("Something went wrong after saving!");
     }
 
 
@@ -38,18 +46,30 @@ public class BankServiceImplV1 {
 //    @Transactional(
 //            rollbackFor = Throwable.class
 //    )
-//    @Transactional
+    @Transactional(
+            noRollbackFor = Exception.class
+    )
     public void transferWithCheckedException(Long fromId, Long toId, double amount) throws Exception {
-        BankAccount from = repo.findById(fromId).orElseThrow();
-        BankAccount to = repo.findById(toId).orElseThrow();
+        BankAccount from = repo.findById(fromId).orElseThrow();// 1000
+        BankAccount to = repo.findById(toId).orElseThrow(); // 500
 
         from.setBalance(from.getBalance() - amount);
-        to.setBalance(to.getBalance() + amount);
-
         repo.save(from);
+        if(true){
+            throw new Exception("Something went wrong after saving!");
+        }
+        to.setBalance(to.getBalance() + amount);
         repo.save(to);
 
         // Checked exception => does NOT rollback by default
-        throw new Exception("Checked exception thrown after saving!");
+//        throw new Exception("Checked exception thrown after saving!");
+    }
+
+
+    // @T()
+    void createAccount(){
+        // create
+        // Check    NOT CHECK
+        // assign user role
     }
 }

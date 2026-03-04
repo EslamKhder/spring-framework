@@ -1,4 +1,6 @@
 package com.spring.boot.resturantbackend.controllers.vm.Security;
+import com.spring.boot.resturantbackend.annotations.PhoneNumber;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -12,12 +14,15 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AccountAuthRequestVm {
-    @NotEmpty(message = "not_empty.username")
-    @Size(min = 7, message = "size.username")
+//    @NotEmpty()
+//    @Size(min = 7, message = "size.username")
     private String username;
-    @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{7,}$",
-            message = "error.password"
-    )
+//    @Pattern(
+//            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{7,}$",
+//            message = "error.password"
+//    )
     private String password;
+
+    @PhoneNumber
+    private String phoneNumber;
 }

@@ -18,17 +18,21 @@ public class BankServiceImplV2 {
     //Bob    500
     //
 
-//    @Transactional
+    @Transactional
     public void transfer(Long fromId, Long toId, double amount) {
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();
         from.setBalance(from.getBalance() - amount);
-        to.setBalance(to.getBalance() + amount);
         repo.save(from);
-        repo.save(to);
 
         audit.logTransfer("Transfer completed");
+
+        to.setBalance(to.getBalance() + amount);
+        repo.save(to);
+
+
         throw new RuntimeException("Oops!");
+
     }
 
 }

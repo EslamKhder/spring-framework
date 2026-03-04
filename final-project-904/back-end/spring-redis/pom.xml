@@ -8,9 +8,10 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>jar</packaging>
     <groupId>com.spring.redis</groupId>
     <artifactId>spring-redis</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1</version>
     <name>spring-redis</name>
     <description>spring-redis</description>
     <url/>

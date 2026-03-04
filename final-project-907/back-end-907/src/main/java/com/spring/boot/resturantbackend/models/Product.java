@@ -14,10 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Product extends BaseEntity {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

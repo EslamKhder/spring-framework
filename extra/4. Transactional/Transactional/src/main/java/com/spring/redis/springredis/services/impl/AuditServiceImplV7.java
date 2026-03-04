@@ -19,6 +19,7 @@ public class AuditServiceImplV7 {
         System.out.println("-------");
         loggerRepository.save(new Logger(message));
 
+        throw new RuntimeException("e");
 
     }
 }

@@ -15,8 +15,8 @@ public class AuditServiceImplV2 {
 
 //    @Transactional(propagation = Propagation.REQUIRES_NEW)
 //    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void logTransfer(String message)  {
         loggerRepository.save(new Logger(message));
-        throw new RuntimeException("Oops!");
     }
 }

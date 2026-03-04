@@ -18,24 +18,20 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@Tag(
-        name = "Category Controller",
-        description = "get all categories,create,get by id"
-)
 @RestController
 @RequestMapping("/categories")
+@Tag(
+        name = "Category Controller",
+        description = "Category Controller apis maneges Category"
+)
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @Operation(
-            summary = "get all categories",
-            description = "all categories in resturant"
-    )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Http Status get all categories"
+                    description = "Http Status get all products"
             ),
             @ApiResponse(
                     responseCode = "500",
@@ -43,57 +39,19 @@ public class CategoryController {
                     content = @Content(
                             schema = @Schema(implementation = ExceptionDto.class)
                     )
-            ),
+            )
     })
     @GetMapping("/all-categories")
     public ResponseEntity<List<CategoryDto>> getAllCategories() throws SystemException {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    @Operation(
-            summary = "create category"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Http Status create category"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Http Status internal server error",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-    })
+
     @PostMapping("/create-category")
     public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CategoryDto categoryDto) throws SystemException {
         return ResponseEntity.created(URI.create("create-category")).body(categoryService.createCategory(categoryDto));
     }
 
-    @Operation(
-            summary = "get category by id"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Http Status get category by id"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Http Status internal server error",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Http Status Not Found",
-                    content = @Content(
-                            schema = @Schema(implementation = ExceptionDto.class)
-                    )
-            ),
-    })
     @GetMapping("/get-category/{id}")
     public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Long id) throws SystemException {
         return ResponseEntity.ok(categoryService.getCategoryById(id));

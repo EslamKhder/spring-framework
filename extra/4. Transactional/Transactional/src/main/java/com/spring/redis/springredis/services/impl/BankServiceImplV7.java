@@ -38,13 +38,9 @@ public class BankServiceImplV7 {
 
         repo.save(from);
         repo.save(to);
-
-
         audit.logTransfer("Runs inside existing transaction");
 
-
-        System.out.println("....2");
-        throw new RuntimeException("...1");
+//        throw new RuntimeException("e");
 
 
     }
