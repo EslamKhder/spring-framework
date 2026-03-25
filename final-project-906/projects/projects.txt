@@ -1,6 +1,6 @@
 restaurant  (frontend and backend)
 ---------------------------------------------------------------
-frind finder  restaurant  (frontend and backend)
+friend finder  restaurant  (frontend and backend)
 https://github.com/EslamKhder/friend-finder-eraasoft/tree/main
 ---------------------------------------------------------------
 Vehicle_Registration_Licensing_System_Plan   (backend)

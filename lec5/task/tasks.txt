@@ -1,0 +1,4 @@
+on your project you apply many to many on 2 model 
+
+1. save from 2 model form model1 and save from model2
+2. priest from 2 model form model1 and save from model2
