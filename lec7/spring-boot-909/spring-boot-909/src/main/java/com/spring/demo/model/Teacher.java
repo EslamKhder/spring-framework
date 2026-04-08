@@ -9,9 +9,10 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String userName;
 
+    @Column(nullable = false)
     private String password;
 
     private String firstName;
@@ -21,6 +22,7 @@ public class Teacher {
     private String salary;
 
     private String address;
+    private String myage;
 
     public Long getId() {
         return id;
