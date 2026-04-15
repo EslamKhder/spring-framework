@@ -1,18 +1,18 @@
 package com.spring.demo.service;
 
-import com.spring.demo.model.Teacher;
+import com.spring.demo.dto.TeacherDto;
 import jakarta.transaction.SystemException;
 
 import java.util.List;
 
 public interface TeacherService {
 
-    Teacher createTeacher(Teacher teacher) throws SystemException;
-    Teacher updateTeacher(Teacher teacher) throws SystemException;
-    Teacher getTeacherById(Long id);
-    List<Teacher> getTeachers();
+    TeacherDto createTeacher(TeacherDto teacherDto) throws SystemException;
+    TeacherDto updateTeacher(TeacherDto teacherDto) throws SystemException;
+    TeacherDto getTeacherById(Long id);
+    List<TeacherDto> getTeachers();
     void removeTeacherById(Long id);
 
-    Teacher getTeacherByUserName(String userName);
-    List<Teacher> findByFirstNameStartingWithOrderByFirstNameDesc(String firstName);
+    TeacherDto getTeacherByUserName(String userName);
+    List<TeacherDto> findByFirstNameStartingWithOrderByFirstNameDesc(String firstName);
 }
