@@ -14,14 +14,14 @@ import lombok.Setter;
 public class TeacherDto {
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "userName must be not null")
     private String userName;
 
-    @NotBlank
+    @NotBlank(message = "password must be not null")
     private String password;
 
-    @Email
-    @NotBlank
+    @Email(message = "email must be with format email (eslam@gmail.com)")
+    @NotBlank(message = "email must be not null")
     private String email;
 
     @JsonProperty("first_name")

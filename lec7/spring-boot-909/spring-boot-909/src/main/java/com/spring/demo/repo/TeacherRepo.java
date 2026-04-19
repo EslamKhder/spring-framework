@@ -7,21 +7,22 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TeacherRepo extends JpaRepository<Teacher, Long> {
 
-    Teacher findByUserName(String userName); //  Teacher  List<Teacher>
-    Teacher findByUserNameAndPassword(String userName, String password);
-    Teacher findByUserNameOrPassword(String userName, String password); // Teacher   List<Teacher>
+    Optional<Teacher> findByUserName(String userName); //  Optional<Teacher>  List<Teacher>
+    Optional<Teacher> findByUserNameAndPassword(String userName, String password);
+    Optional<Teacher> findByUserNameOrPassword(String userName, String password); // Optional<Teacher>   List<Teacher>
     List<Teacher> findByFirstNameOrderByFirstNameDesc(String firstName);
     List<Teacher> findByFirstNameStartingWith(String prefix);
     List<Teacher> findByFirstNameStartingWithOrderByFirstNameAsc(String prefix);
 
-//    @Query(value = "select t from Teacher t where t.userName = :userName")
-//    Teacher extractByUserName(@Param("userName") String userName);
+//    @Query(value = "select t from Optional<Teacher> t where t.userName = :userName")
+//    Optional<Teacher> extractByUserName(@Param("userName") String userName);
 
-    //@Query(value = "select t from Teacher t where t.userName = :userName")
-    @Query(value = "select * from Teacher where USER_NAME = :userName", nativeQuery = true)
-    Teacher extractByUserName(@Param("userName")String userName);
+    //@Query(value = "select t from Optional<Teacher> t where t.userName = :userName")
+    @Query(value = "select * from Optional<Teacher> where USER_NAME = :userName", nativeQuery = true)
+    Optional<Teacher> extractByUserName(@Param("userName")String userName);
 }

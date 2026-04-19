@@ -13,6 +13,6 @@ public interface TeacherService {
     List<TeacherDto> getTeachers();
     void removeTeacherById(Long id);
 
-    TeacherDto getTeacherByUserName(String userName);
+    TeacherDto getTeacherByUserName(String userName) throws SystemException;
     List<TeacherDto> findByFirstNameStartingWithOrderByFirstNameDesc(String firstName);
 }
