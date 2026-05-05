@@ -34,7 +34,7 @@ public class TeacherServiceImpl implements TeacherService {
         Optional<Teacher> teacherOptional = teacherRepo.findByUserName(teacherDto.getUserName());
 
         if (teacherOptional.isPresent()) {
-            throw new SystemException("username is exist");
+            throw new SystemException("error.username.exist");
         }
 
         Teacher teacher = teacherMapper.toEntity(teacherDto);

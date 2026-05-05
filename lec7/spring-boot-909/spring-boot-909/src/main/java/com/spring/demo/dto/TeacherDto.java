@@ -14,7 +14,7 @@ import lombok.Setter;
 public class TeacherDto {
     private Long id;
 
-    @NotBlank(message = "userName must be not null")
+    @NotBlank(message = "error.invalid.username")
     private String userName;
 
     @NotBlank(message = "password must be not null")

@@ -11,7 +11,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
+// List<StudentDto> teacher
+// List<TeacherDto> List<StudentDto>
 public class StudentDto {
 
     private Long id;
@@ -25,6 +26,7 @@ public class StudentDto {
     private String password;
 
     private TeacherDto teacher;
+
     //@Email(message = "")
     //private String email;
 

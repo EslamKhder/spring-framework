@@ -2,6 +2,11 @@ spring:
   application:
     name: spring-boot-909
 
+  security:
+    user:
+      name: eslam
+      password: 123
+      roles: ADMIN,MANGER
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@//localhost:1521/orclpdb
@@ -12,6 +17,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  messages:
+    basename: i18n/message
 
 server:
   port: 9091

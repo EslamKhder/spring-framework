@@ -14,7 +14,7 @@ public class BundleTranslatorService {
     private static ResourceBundleMessageSource resourceBundleMessageSource;
 
 
-    public BundleTranslatorService(@Qualifier("messages") ResourceBundleMessageSource resourceBundleMessageSource) {
+    public BundleTranslatorService(ResourceBundleMessageSource resourceBundleMessageSource) {
         this.resourceBundleMessageSource = resourceBundleMessageSource;
     }
 
