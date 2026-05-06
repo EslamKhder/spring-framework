@@ -23,6 +23,6 @@ public interface TeacherRepo extends JpaRepository<Teacher, Long> {
 //    Optional<Teacher> extractByUserName(@Param("userName") String userName);
 
     //@Query(value = "select t from Optional<Teacher> t where t.userName = :userName")
-    @Query(value = "select * from Optional<Teacher> where USER_NAME = :userName", nativeQuery = true)
+    @Query(value = "select * from Teacher where USER_NAME = :userName", nativeQuery = true)
     Optional<Teacher> extractByUserName(@Param("userName")String userName);
 }

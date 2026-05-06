@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,15 +36,21 @@ public class SecurityConfig {
     // http://localhost:9091/api/teachers  DELETE
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
-//        http.authorizeHttpRequests(api -> api.requestMatchers("/api/teachers").hasRole("ADMIN"));
-//        http.authorizeHttpRequests(api -> api.requestMatchers("/api/teachers").hasRole("ADMIN"));
-//        http.authorizeHttpRequests(api -> api.requestMatchers("/api/teachers").hasAnyRole("ADMIN", "MANGER"));
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(api -> api.requestMatchers(HttpMethod.GET, "/api/teachers").hasAllRoles("MANGER","ADMIN"));
+        http.authorizeHttpRequests(api -> api.requestMatchers("/**").authenticated());
         http.httpBasic(Customizer.withDefaults());
-        http.formLogin(Customizer.withDefaults());
+        http.formLogin(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
+//        http.authorizeHttpRequests(api -> api.requestMatchers("/**").authenticated();
+//        http.authorizeHttpRequests(api -> api.requestMatchers("/**").permitAll());
+//        http.authorizeHttpRequests(api -> api.requestMatchers("/api/teachers").hasRole("ADMIN"));
+//        http.authorizeHttpRequests(api -> api.requestMatchers("/api/teachers").hasRole("ADMIN"));
+//        http.authorizeHttpRequests(api -> api.requestMatchers("/api/teachers").hasAnyRole("ADMIN", "MANGER"));
+//        http.authorizeHttpRequests(api -> api.requestMatchers(HttpMethod.GET, "/api/teachers").hasAllRoles("MANGER","ADMIN"));
 
     @Bean
     public PasswordEncoder passwordEncoder(){
