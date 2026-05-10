@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,6 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 
 
@@ -38,9 +40,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(csrf -> csrf.disable());
-        http.authorizeHttpRequests(api -> api.requestMatchers(HttpMethod.GET, "/api/teachers").hasAllRoles("MANGER","ADMIN"));
+//        http.authorizeHttpRequests(api -> api.requestMatchers(HttpMethod.GET, "/api/teachers").hasAllRoles("MANGER","ADMIN"));
+        http.authorizeHttpRequests(api -> api.requestMatchers("/api/login").permitAll());
+        http.authorizeHttpRequests(api -> api.requestMatchers("/api/signup").permitAll());
         http.authorizeHttpRequests(api -> api.requestMatchers("/**").authenticated());
-        http.httpBasic(Customizer.withDefaults());
+        http.httpBasic(AbstractHttpConfigurer::disable);
         http.formLogin(AbstractHttpConfigurer::disable);
         return http.build();
     }

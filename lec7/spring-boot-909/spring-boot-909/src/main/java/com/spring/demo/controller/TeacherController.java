@@ -6,6 +6,7 @@ import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -38,6 +39,7 @@ public class TeacherController {
 
     // http://localhost:9091/teachers
     @GetMapping("/teachers")
+    @PreAuthorize("hasAllRoles('MANGER','ADMIN')")
     public ResponseEntity<List<TeacherDto>> getAllTeachers(){
         return ResponseEntity.ok(teacherService.getTeachers());
         //return teacherService.getTeachers();

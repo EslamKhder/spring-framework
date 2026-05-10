@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class AuthProvider implements AuthenticationProvider {
 
     public static final String ROLE = "ROLE_";

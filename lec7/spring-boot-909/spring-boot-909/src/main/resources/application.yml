@@ -22,3 +22,7 @@ spring:
 
 server:
   port: 9091
+
+token:
+  secret: ahdjashdhsakuiyuib@#$#sdjk1232dssmn
+  time: 24h
