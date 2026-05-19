@@ -1,0 +1,59 @@
+Category Entity
+(id, name, logo, flag)
+
+Product Entity
+(id, name, imagePath, desc, price)
+
+one to many from Category to Product
+many to one from Product to Category
+--------------------------------------------
+
+api to get all Category  
+api to get all Product by CategoryID
+
+note:
+pls apply controller , service , and repo
+pls apply mapper and dto 
+-----------------------------------
+api to save Category
+api to save Product
+api to save List of Category
+api to save List of Product
+
+api to update Category
+api to update Product
+api to update List of Category
+api to update List of Product
+
+api to delete Category by id as requestParam
+api to delete Product  by id  as requestParam
+api to delete List of Category by list ids as requestParam
+api to delete List of Product by list ids  as requestParam
+
+pls if you need to use validation pls apply
+also dto and mapper
+
+note: 
+if not found Products pls return Bundel message
+with English and Arabic text
+
+Exceptions
+Bundel message
+-----------------------------------
+api to get all Product based on key for 
+(name or desc)
+
+note: 
+if not found Products pls return Bundel message
+with English and Arabic text
+
+Exceptions
+Bundel message
+------------------------------------------------------------------------------------------------------
+create new Entity Chef 
+(id, name , spec, logoPath, faceLink, tweLink, instaLink)
+------------------------------------------------------------------------------------------------------
+
+PLS Clean code.
+PLS TEST ALL ON POST_MAN
+------------------------------------------------------------------------------------------------------

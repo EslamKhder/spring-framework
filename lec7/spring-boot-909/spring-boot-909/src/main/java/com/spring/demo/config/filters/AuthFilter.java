@@ -1,11 +1,13 @@
-package com.eraasoft.spring.config.filters;
+package com.spring.demo.config.filters;
 
-import com.eraasoft.spring.dto.AccountDto;
-import com.eraasoft.spring.service.token.TokenHandler;
+import com.spring.demo.dto.AccountDto;
+import com.spring.demo.model.Role;
+import com.spring.demo.service.token.JwtTokenHandler;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,10 +22,24 @@ import java.util.stream.Collectors;
 @Component
 public class AuthFilter extends OncePerRequestFilter {
 
-    private TokenHandler tokenHandler;
+    @Autowired
+    private JwtTokenHandler jwtTokenHandler;
 
-    public AuthFilter(TokenHandler tokenHandler) {
-        this.tokenHandler = tokenHandler;
+    private final String ROLE = "ROLE_";
+
+    // true
+    // false
+
+    // not filter    true
+    // not filter    false
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+
+        if (request.getRequestURI().contains("login") || request.getRequestURI().contains("signup") ) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -35,41 +51,28 @@ public class AuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        // 01234567
-        // Bearer dskjdslfjlsjsdlfdk
-        token = token.substring(7);
-        AccountDto accountDto = tokenHandler.validateToken(token);
+        // Bearer asjshdkjsad
+        token = token.substring(7); // token
+
+        AccountDto accountDto = jwtTokenHandler.validateToken(token);
 
         if (Objects.isNull(accountDto)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
-
-        List<SimpleGrantedAuthority> roles = getAuthorities(accountDto);
+        // user verified
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(accountDto, accountDto.getPassword(), roles);
-
+                new UsernamePasswordAuthenticationToken(accountDto.getUserName(), accountDto.getPassword(), getAuthorities(accountDto.getRoles()));
 
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+
         filterChain.doFilter(request, response);
     }
 
-    private List<SimpleGrantedAuthority> getAuthorities(AccountDto accountDto) {
-        return accountDto.getRoles().stream().map(roleDto ->
-                new SimpleGrantedAuthority("ROLE_" + roleDto.getRoleName())).collect(Collectors.toList());
-    }
+    public List<SimpleGrantedAuthority> getAuthorities(List<Role> roles) {
 
-
-    // shouldNotFilter    false       filter     all apis    ---     (sign_up, login)
-    // shouldNotFilter    true        not filter (sign_up, login)
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        if(request.getRequestURI().contains("login") || request.getRequestURI().contains("signup")){
-            return true;
-        }
-
-        return false;
+        return roles.stream().map(role -> new SimpleGrantedAuthority(ROLE + role.getRole())).collect(Collectors.toList());
     }
 }

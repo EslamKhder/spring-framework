@@ -1,5 +1,7 @@
 package com.spring.demo.config;
 
+import com.spring.demo.config.filters.AuthFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,6 +20,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -25,6 +28,9 @@ import javax.sql.DataSource;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+
+    @Autowired
+    private AuthFilter authFilter;
 
 //    @Bean
 //    public UserDetailsManager userDetailsManager(DataSource dataSource){
@@ -46,6 +52,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(api -> api.requestMatchers("/**").authenticated());
         http.httpBasic(AbstractHttpConfigurer::disable);
         http.formLogin(AbstractHttpConfigurer::disable);
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
