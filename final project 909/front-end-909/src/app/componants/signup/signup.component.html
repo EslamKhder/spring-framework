@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center vh-20">
+    <div class="col-md-4">
+      <h3 class="text-center mb-4">Sign up</h3>
+
+        <div class="mb-3">
+          <label class="form-label">UserName</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your user name"
+            #userName
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter your password"
+            #password
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter your password"
+            #confirmPassword
+          />
+        </div>
+
+      <div class="validation-message" *ngIf="isMessageEnValid() || isMessageArValid()">
+
+        <p class="message-en" *ngIf="isMessageEnValid()">
+          {{ messageEn }}
+        </p>
+
+        <p class="message-ar" *ngIf="isMessageArValid()">
+          {{ messageAr }}
+        </p>
+
+      </div>
+    <br>
+        <button type="submit" class="btn btn-primary w-100" (click)="createAccount(userName.value, password.value, confirmPassword.value)">
+          signup
+        </button>
+
+
+<!--      <div class="text-center mt-3">-->
+<!--        <a routerLink="/login">login</a>-->
+<!--      </div>-->
+    </div>
+  </div>
+</div>

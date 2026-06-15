@@ -10,14 +10,14 @@ import {Product} from "../model/product";
 })
 export class ProductService {
 
-  baseUrl = "http://localhost:9090/api/products";
+  baseUrl = "http://localhost:6060/products";
 
   constructor(private http: HttpClient) {
   }
 
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + "/getAll").pipe(
+    return this.http.get<Product[]>(this.baseUrl + "/all-products").pipe(
       map(
         response => response
       )
@@ -25,7 +25,7 @@ export class ProductService {
   }
 
   getProductsByCategoryId(id): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + "/searchByCategoryId/" + id).pipe(
+    return this.http.get<Product[]>(this.baseUrl + "/all-products/" + id).pipe(
       map(
         response => response
       )
@@ -33,7 +33,7 @@ export class ProductService {
   }
   // http://localhost:9090/api/products
   search(key): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + "/search?keyword=" + key).pipe(
+    return this.http.get<Product[]>(this.baseUrl + "/all-products-by-key?key=" + key).pipe(
       map(
         response => response
       )

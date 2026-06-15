@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+}
+
+.form-control {
+  height: 45px;
+}
+
+.btn {
+  height: 45px;
+  font-weight: 600;
+}
+
+
+.validation-message {
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  background-color: #f8d7da;
+}
+
+.message-en,
+.message-ar {
+  margin: 0;
+  color: #842029;
+}
+
+.message-ar {
+  direction: rtl;
+  text-align: right;
+  margin-top: 4px;
+}
