@@ -12,11 +12,20 @@ import spring.core.service.impl.StudentService;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		
+		AnnotationConfigApplicationContext applicationContext 
+			= new AnnotationConfigApplicationContext(SpringConfig.class);
+		
+		StudentService studentService = applicationContext.getBean("studentService", StudentService.class);
+
+		System.out.println(studentService.getName());
+		
 		/*FacebookAccountImpl accountImpl = new FacebookAccountImpl();
 		accountImpl.createPost(1L, "bla bla bla");*/
 		
 		/*ClassPathXmlApplicationContext applicationContext = 
-				new ClassPathXmlApplicationContext("applicationContext.xml");*/
+				new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		AnnotationConfigApplicationContext applicationContext 
 			= new AnnotationConfigApplicationContext(SpringConfig.class);
