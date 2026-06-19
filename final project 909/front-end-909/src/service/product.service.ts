@@ -16,24 +16,24 @@ export class ProductService {
   }
 
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + "/all-products").pipe(
+  getAllProducts(page, size): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/all-products?page=" + page + "&size=" + size).pipe(
       map(
         response => response
       )
     );
   }
 
-  getProductsByCategoryId(id): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + "/all-products/" + id).pipe(
+  getProductsByCategoryId(id, page, size): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/all-products/" + id + "?page=" + page + "&size=" + size).pipe(
       map(
         response => response
       )
     );
   }
   // http://localhost:9090/api/products
-  search(key): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl + "/all-products-by-key?key=" + key).pipe(
+  search(key, page, size): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/all-products-by-key?key=" + key + "&page=" + page + "&size=" + size).pipe(
       map(
         response => response
       )

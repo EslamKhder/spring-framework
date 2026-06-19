@@ -15,6 +15,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './componants/login/login.component';
 import {SignupComponent} from "./componants/signup/signup.component";
 import {AuthInterceptor} from "../service/interceptor/auth.interceptor";
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 // http://localhost:4200/
@@ -55,11 +56,12 @@ export const routes: Routes = [
     LoginComponent,
     SignupComponent
   ],
-  imports: [
-    RouterModule.forRoot(routes),
-    BrowserModule,
-    HttpClientModule
-  ],
+    imports: [
+        RouterModule.forRoot(routes),
+        BrowserModule,
+        HttpClientModule,
+        NgbPaginationModule
+    ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
