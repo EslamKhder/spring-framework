@@ -104,6 +104,7 @@
 
     </dependencies>
 
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <!-- Compiler Plugin: includes both Lombok & MapStruct -->
