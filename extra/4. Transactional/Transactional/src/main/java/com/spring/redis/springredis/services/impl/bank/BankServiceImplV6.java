@@ -1,7 +1,8 @@
-package com.spring.redis.springredis.services.impl;
+package com.spring.redis.springredis.services.impl.bank;
 
 import com.spring.redis.springredis.models.BankAccount;
 import com.spring.redis.springredis.repositories.BankAccountRepository;
+import com.spring.redis.springredis.services.impl.audit.AuditServiceImplV6;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

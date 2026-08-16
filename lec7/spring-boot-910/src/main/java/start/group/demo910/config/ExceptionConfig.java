@@ -8,6 +8,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import start.group.demo910.helper.ExceptionResponse;
+import start.group.demo910.service.bundel.BundleMessageService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class ExceptionConfig {
 
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<ExceptionResponse> handelException(Throwable throwable){
-        return ResponseEntity.badRequest().body(new ExceptionResponse(throwable.getMessage()));
+        String code = throwable.getMessage();
+        return ResponseEntity.badRequest().body(BundleMessageService.getMessage(code));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -30,7 +32,9 @@ public class ExceptionConfig {
 
         List<ExceptionResponse> exceptionResponses = new ArrayList<>();
         for (FieldError fieldError : fieldErrors) {
-            exceptionResponses.add(new ExceptionResponse(fieldError.getDefaultMessage()));
+//            exceptionResponses.add(new ExceptionResponse(null, fieldError.getDefaultMessage()));
+            exceptionResponses.add(BundleMessageService.getMessage(fieldError.getDefaultMessage()));
+
         }
 
         return ResponseEntity.badRequest().body(exceptionResponses);

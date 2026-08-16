@@ -1,7 +1,8 @@
-package com.spring.redis.springredis.services.impl;
+package com.spring.redis.springredis.services.impl.bank;
 
 import com.spring.redis.springredis.models.BankAccount;
 import com.spring.redis.springredis.repositories.BankAccountRepository;
+import com.spring.redis.springredis.services.impl.audit.AuditServiceImplV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,16 +24,13 @@ public class BankServiceImplV2 {
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();
         from.setBalance(from.getBalance() - amount);
+        to.setBalance(to.getBalance() + amount);
         repo.save(from);
+        repo.save(to);
 
         audit.logTransfer("Transfer completed");
 
-        to.setBalance(to.getBalance() + amount);
-        repo.save(to);
-
-
         throw new RuntimeException("Oops!");
-
     }
 
 }

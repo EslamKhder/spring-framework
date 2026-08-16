@@ -1,4 +1,4 @@
-package com.spring.redis.springredis.services.impl;
+package com.spring.redis.springredis.services.impl.audit;
 
 import com.spring.redis.springredis.models.Logger;
 import com.spring.redis.springredis.repositories.LoggerRepository;
@@ -8,19 +8,16 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AuditServiceImplV5 {
+public class AuditServiceImplV4 {
 
     @Autowired
     private LoggerRepository loggerRepository;
 
-
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public void logTransfer(String message) {
-        loggerRepository.save(new Logger(message));
-        throw new RuntimeException("Oops 1!");
+    // if Tx exist join
+    // if No Tx exist ex non tx
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
+    public void logTransfer(String message) throws Exception {
+        loggerRepository.save(new Logger(message));// committed
+        throw new Exception("Oops!"); // rollback both transfer and log
     }
 }
-
-// EXCEPTION   TRY CATCH
-
-// RuntimeException    --->  EXCEPTION   IGNORE EX

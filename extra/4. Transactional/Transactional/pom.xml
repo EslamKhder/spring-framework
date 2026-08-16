@@ -12,7 +12,7 @@
     <artifactId>spring-redis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-redis</name>
-    <description>spring-redis</description>
+    <description>Transactional</description>
     <url/>
     <licenses>
         <license/>

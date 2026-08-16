@@ -66,7 +66,7 @@ public class PlayerServiceImpl implements PlayerService{
         Optional<Player> optionalPlayer = playerRepo.findById(id);
 
         if (optionalPlayer.isEmpty()) {
-            throw new SystemException("player not exist with id: " + id);
+            throw new SystemException("player.notExist");
         }
 
         Player player = optionalPlayer.get();

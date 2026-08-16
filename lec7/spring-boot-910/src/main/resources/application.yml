@@ -13,5 +13,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  messages:
+    basename: i18n/messages
 
 

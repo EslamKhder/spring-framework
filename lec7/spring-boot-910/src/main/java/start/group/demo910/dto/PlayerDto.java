@@ -16,10 +16,10 @@ public class PlayerDto {
 
     private Long id;
 
-    @NotBlank(message = "invalid name")
+    @NotBlank(message = "player.invalid.name")
     private String name;
 
-    @Max(value = 20, message = "invalid number")
+    @Max(value = 20, message = "player.invalid.number")
     private Integer digits;
     private Double salary;
 

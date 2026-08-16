@@ -2,12 +2,10 @@ package com.spring.redis.springredis;
 
 import com.spring.redis.springredis.models.BankAccount;
 import com.spring.redis.springredis.repositories.BankAccountRepository;
-import com.spring.redis.springredis.services.impl.BankServiceImplV3;
-import com.spring.redis.springredis.services.impl.BankServiceImplV4;
+import com.spring.redis.springredis.services.impl.bank.BankServiceImplV4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 

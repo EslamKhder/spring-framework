@@ -1,4 +1,4 @@
-package com.spring.redis.springredis.services.impl;
+package com.spring.redis.springredis.services.impl.audit;
 
 import com.spring.redis.springredis.models.Logger;
 import com.spring.redis.springredis.repositories.LoggerRepository;
@@ -8,16 +8,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AuditServiceImplV6 {
+public class AuditServiceImplV3 {
 
     @Autowired
     private LoggerRepository loggerRepository;
 
 
-    @Transactional(propagation = Propagation.NEVER)
+    @Transactional(propagation = Propagation.NESTED)
     public void logTransfer(String message) {
-        System.out.println("Propagation.NEVER");
+        System.out.println("save log");
         loggerRepository.save(new Logger(message));
-        throw new RuntimeException("Oops!");
     }
 }
