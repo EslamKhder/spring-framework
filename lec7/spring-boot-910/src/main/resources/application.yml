@@ -2,6 +2,10 @@ server:
   port: 8081
 
 spring:
+  security:
+    user:
+      name: eslam
+      password: 123
   application:
     name: spring-boot-910
   datasource:
