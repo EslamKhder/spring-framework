@@ -31,7 +31,7 @@ public class BankServiceImplV6 {
     }
 
 
-    @Transactional
+//    @Transactional
     public void transferWithTx(Long fromId, Long toId, double amount) {
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();

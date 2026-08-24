@@ -32,24 +32,18 @@ public class BankServiceImplV4 {
     }
 
 
-    @Transactional
-    public void transferWithTx(Long fromId, Long toId, double amount) {
+    //@Transactional
+    public void transferWithTx(Long fromId, Long toId, double amount) throws Exception {
         BankAccount from = repo.findById(fromId).orElseThrow();
         BankAccount to = repo.findById(toId).orElseThrow();
 
         from.setBalance(from.getBalance() - amount);
-        repo.save(from);
-
-        // java code
-        // TX DB
-        try {
-            audit.logTransfer("Runs inside existing transaction");
-        } catch (Exception e) {
-            System.out.println("---> Exception on logTransfer");
-        }
-
         to.setBalance(to.getBalance() + amount);
+
+        repo.save(from);
         repo.save(to);
+
+        audit.logTransfer("Runs inside existing transaction");
 
 //        throw new RuntimeException("Oops!");
     }

@@ -6,10 +6,11 @@ import com.spring.redis.springredis.services.impl.bank.BankServiceImplV7;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class SpringRedisApplicationV7 implements CommandLineRunner {
 
     @Autowired

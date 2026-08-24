@@ -1,4 +1,4 @@
-package start.group.demo910.service;
+package start.group.demo910.service.impl;
 
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import start.group.demo910.dto.PlayerDto;
 import start.group.demo910.mapper.PlayerMapper;
 import start.group.demo910.model.Player;
 import start.group.demo910.repo.PlayerRepo;
+import start.group.demo910.service.PlayerService;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PlayerServiceImpl implements PlayerService{
+public class PlayerServiceImpl implements PlayerService {
 
     private PlayerRepo playerRepo;
 
