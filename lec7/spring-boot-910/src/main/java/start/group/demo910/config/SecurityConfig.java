@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,11 +21,11 @@ public class SecurityConfig {
 
 
     // database
-//    @Bean
-//    public UserDetailsManager userDetailsManager(DataSource dataSource){
-//        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-//        return userDetailsManager;
-//    }
+    @Bean
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
+        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+        return userDetailsManager;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -48,5 +50,10 @@ public class SecurityConfig {
 //
 //        return new InMemoryUserDetailsManager(userDetails1, userDetails2, userDetails3);
 //    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
 }

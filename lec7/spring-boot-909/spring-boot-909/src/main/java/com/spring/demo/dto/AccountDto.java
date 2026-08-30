@@ -2,6 +2,7 @@ package com.spring.demo.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.spring.demo.ann.PhoneNumber;
 import com.spring.demo.model.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -18,10 +19,13 @@ public class AccountDto {
 
     private Long id;
 
+    @NotBlank(message = "invalid username")
     private String userName;
 
     private String password;
 
     private List<Role> roles;
 
+    @PhoneNumber(message = "phoneNumber must be start with +20")
+    private String phoneNumber;
 }

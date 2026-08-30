@@ -9,6 +9,7 @@ import jakarta.transaction.SystemException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseVM> login(@RequestBody AccountDto accountDto) throws SystemException {
+    public ResponseEntity<LoginResponseVM> login(@RequestBody @Valid AccountDto accountDto) throws SystemException {
         return ResponseEntity.ok(accountService.login(accountDto));
 //        return teacherService.createTeacher(teacherDto);
     }

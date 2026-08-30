@@ -1,6 +1,5 @@
 package com.spring.demo;
 
-import start.group.demo910.model.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

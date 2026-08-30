@@ -45,10 +45,10 @@ public class ExceptionConfig {
 
 
 
-    @ExceptionHandler(Throwable.class)
-    public ResponseEntity<String> handelException(Throwable throwable){
-        return ResponseEntity.badRequest().body(BundleMessageService.getAcceptedLanguageMessage(throwable.getMessage()));
-    }
+//    @ExceptionHandler(Throwable.class)
+//    public ResponseEntity<String> handelException(Throwable throwable){
+//        return ResponseEntity.badRequest().body(BundleMessageService.getAcceptedLanguageMessage(throwable.getMessage()));
+//    }
 
 
 //    @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -61,11 +61,26 @@ public class ExceptionConfig {
 //        return ResponseEntity.badRequest().body(errorMessages);
 //    }
 
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<List<InputErrorMessage>> handelException(MethodArgumentNotValidException exception){
+//        List<InputErrorMessage> errorMessages =
+//                exception.getBindingResult().getFieldErrors().stream()
+//                        .map(fieldError -> new InputErrorMessage(fieldError.getField(), BundleMessageService.getAcceptedLanguageMessage(fieldError.getDefaultMessage())))
+//                        .collect(Collectors.toList());
+//
+//        return ResponseEntity.badRequest().body(errorMessages);
+//    }
+
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<String> handelException(Throwable throwable){
+        return ResponseEntity.badRequest().body(throwable.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<InputErrorMessage>> handelException(MethodArgumentNotValidException exception){
-        List<InputErrorMessage> errorMessages =
+    public ResponseEntity<List<String>> handelException(MethodArgumentNotValidException exception){
+        List<String> errorMessages =
                 exception.getBindingResult().getFieldErrors().stream()
-                        .map(fieldError -> new InputErrorMessage(fieldError.getField(), BundleMessageService.getAcceptedLanguageMessage(fieldError.getDefaultMessage())))
+                        .map(fieldError -> fieldError.getDefaultMessage())
                         .collect(Collectors.toList());
 
         return ResponseEntity.badRequest().body(errorMessages);
