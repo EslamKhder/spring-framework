@@ -1,0 +1,6 @@
+i need 4 api 
+
+save player
+update player
+get player by id
+delete playe

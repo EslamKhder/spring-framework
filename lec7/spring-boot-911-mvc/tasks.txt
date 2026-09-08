@@ -1,0 +1,6 @@
+pls create app mvc for item model 
+add item 
+delete item 
+show all all items 
+update item
+show item by id
