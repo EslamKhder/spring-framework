@@ -20,4 +20,6 @@ spring:
   messages:
     basename: i18n/messages
 
-
+token:
+  secret: sdadasdas##@##123232ASsaQWQQWQ@#!
+  time: 24h

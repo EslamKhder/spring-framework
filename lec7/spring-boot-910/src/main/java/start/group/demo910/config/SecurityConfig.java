@@ -36,10 +36,11 @@ public class SecurityConfig {
                 httpManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests(auth ->
                 auth.requestMatchers("/api/**").hasAllRoles("ADMIN", "MANAGER")
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated());
 
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
-        http.httpBasic(Customizer.withDefaults());
+        http.httpBasic(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable());
         http.formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable());
         return http.build();
     }
