@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class CustomAuthProvider implements AuthenticationProvider {
 
     private AccountService accountService;

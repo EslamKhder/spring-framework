@@ -3,6 +3,7 @@ package start.group.demo910.controller;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import start.group.demo910.controller.vm.PlayerVM;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@PreAuthorize("hasAllRoles('MANAGER')")
 public class PlayerController {
 
     private PlayerService playerService;

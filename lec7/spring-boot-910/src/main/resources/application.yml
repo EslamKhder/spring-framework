@@ -22,4 +22,4 @@ spring:
 
 token:
   secret: sdadasdas##@##123232ASsaQWQQWQ@#!
-  time: 24h
+  time: 10s
