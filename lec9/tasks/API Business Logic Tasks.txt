@@ -1,0 +1,181 @@
+Spring API Business Logic Tasks
+1. Appointment Booking API
+
+Objective:
+Build an API for booking doctor appointments.
+
+Business Rules
+A doctor cannot have two appointments at the same time.
+A patient cannot book more than 2 appointments on the same day.
+Appointment duration depends on the service type.
+Booking is not allowed if the doctor is unavailable.
+Cancellation is allowed only before 2 hours of the appointment start time.
+A canceled appointment cannot be booked again.
+
+Focus:
+Date/time calculations, validation, conflict detection, and status transitions.
+
+2. Product Discount API
+
+Objective:
+Build an API for calculating the final price of products.
+
+Business Rules
+Products belong to categories.
+Each category can have a different discount.
+VIP customers receive an additional discount.
+The total discount cannot exceed 30%.
+Some products are not eligible for discounts.
+If the order total exceeds a specific amount, free shipping is applied.
+The customer cannot combine two incompatible discount codes.
+
+Focus:
+Combining multiple business rules and calculating the final result.
+
+3. Bank Transfer API
+
+Objective:
+Build a simple money transfer API.
+
+Business Rules
+Sender and receiver must be different accounts.
+Sender must have enough balance.
+The account must be active.
+Daily transfer limits are different for each account type.
+Transfers above a certain amount require additional verification.
+Failed transfers must not change account balances.
+Successful transfers must update both accounts.
+
+Focus:
+Transaction logic, validation, state changes, and edge cases.
+
+4. Library Borrowing API
+
+Objective:
+Build an API for managing book borrowing in a library.
+
+Business Rules
+A book can only be borrowed if copies are available.
+A student can borrow a maximum of 3 books.
+A normal member can borrow a book for 14 days.
+Premium members can borrow books for 30 days.
+A student with overdue books cannot borrow another book.
+Returning a book late generates a fine.
+The fine depends on the number of overdue days.
+
+Focus:
+Business rules, date calculations, and conditional logic.
+
+5. Restaurant Table Reservation API
+
+Objective:
+Build an API for restaurant table reservations.
+
+Business Rules
+A table cannot have overlapping reservations.
+The number of guests must fit the table capacity.
+Reservations are available only during restaurant working hours.
+A customer cannot have more than 2 active reservations.
+Reservations must be made at least 30 minutes in advance.
+Cancellation is allowed only before 1 hour of the reservation.
+If a reservation is not confirmed within 15 minutes, it expires.
+
+Focus:
+Time-based business logic and state management.
+
+6. Employee Leave Management API
+
+Objective:
+Build an API for managing employee vacation requests.
+
+Business Rules
+An employee submits a leave request with a start date and end date.
+The start date cannot be before today.
+An employee cannot request overlapping leave.
+Different employee types have different yearly leave limits.
+Weekends are not counted as leave days.
+A request exceeding the remaining leave balance must be rejected.
+Manager approval changes the request status.
+Rejected or canceled requests restore the employee's available balance.
+
+Focus:
+Date calculations, balance calculations, overlapping date ranges, and status flow.
+
+7. E-Commerce Order API
+
+Objective:
+Build an API for creating and managing orders.
+
+Business Rules
+Customers can order only active products.
+The requested quantity cannot exceed available stock.
+Product price must be taken from the current product price.
+Orders above a certain amount receive free shipping.
+Customers with unpaid previous orders cannot create a new order.
+Stock is reduced only after successful order creation.
+An order cannot be modified after it becomes CONFIRMED.
+
+Focus:
+Multi-step business logic, validation, and data consistency.
+
+8. Parking Management API
+
+Objective:
+Build an API for managing a parking system.
+
+Business Rules
+Each vehicle receives a parking ticket when entering.
+A vehicle cannot enter if it already has an active ticket.
+Parking fees depend on the vehicle type.
+The first hour has a fixed price.
+Every additional hour has a different price.
+VIP vehicles receive a discount.
+Lost tickets have a fixed penalty.
+Parking capacity cannot be exceeded.
+
+Focus:
+Calculations, state management, and edge cases.
+
+9. Course Enrollment API
+
+Objective:
+Build an API for managing student course enrollment.
+
+Business Rules
+Each course has a maximum number of students.
+A student cannot enroll in the same course twice.
+Some courses require prerequisite courses.
+A student cannot enroll if they failed a required prerequisite.
+Some courses are available only for specific student levels.
+Dropping a course is allowed only before the deadline.
+When a student drops a course, the seat becomes available again.
+
+Focus:
+Relationships and complex business validation.
+
+10. Delivery Order API
+
+Objective:
+Build an API for managing delivery orders.
+
+Business Rules
+Delivery fees depend on distance and package weight.
+Different vehicle types have different maximum weight limits.
+Orders above a certain distance require a specific vehicle.
+A customer can cancel an order only before the driver picks it up.
+A driver cannot accept two active deliveries at the same time.
+Order status must follow a valid sequence.
+Order Status Flow
+CREATED
+   ↓
+ASSIGNED
+   ↓
+PICKED_UP
+   ↓
+IN_TRANSIT
+   ↓
+DELIVERED
+Invalid status transitions must be rejected.
+
+Focus:
+State machines, calculations, validation, and status transitions.
