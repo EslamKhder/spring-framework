@@ -1,0 +1,44 @@
+<!-- Navbar & Hero Start -->
+<div class="container-xxl position-relative p-0">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+    <a routerLink="/products" class="navbar-brand p-0">
+      <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
+      <!-- <img src="img/logo.png" alt="Logo"> -->
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="fa fa-bars"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+      <div class="navbar-nav ms-auto py-0 pe-4">
+        <div class="nav-item nav-link active"><a routerLink="/contact-info">Contact</a></div>
+        <div class="nav-item nav-link active"> </div>
+        <div class="nav-item nav-link active"><a routerLink="/chefs">Team</a></div>
+        <div class="nav-item nav-link active"> </div>
+
+
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
+          <div class="dropdown-menu m-0">
+            <a href="booking.html" class="dropdown-item">ALL</a>
+            <a href="team.html" class="dropdown-item">Breakfast</a>
+            <a href="testimonial.html" class="dropdown-item">Launch</a>
+            <a href="testimonial.html" class="dropdown-item">Dinner</a>
+            <a href="testimonial.html" class="dropdown-item">Ice Cream</a>
+            <a href="testimonial.html" class="dropdown-item">Coffee</a>
+            <a href="testimonial.html" class="dropdown-item">Cake</a>
+          </div>
+        </div>
+        <!--<a href="contact.html" class="nav-item nav-link">Contact</a>-->
+      </div>
+
+
+    </div>
+    <app-card></app-card>
+  </nav>
+
+  <div class="container-xxl py-5 bg-dark hero-header mb-5">
+  </div>
+</div>
+<!-- Navbar & Hero End -->
