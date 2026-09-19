@@ -12,7 +12,7 @@ public interface PlayerService {
 
     PlayerDto updatePlayer(PlayerDto playerDto) throws SystemException;
 
-    List<PlayerResponseVM> getAllPlayers();
+    List<PlayerDto> getAllPlayers();
     void removePlayer(Long id);
 
     PlayerDto getPlayerById(Long id) throws SystemException;

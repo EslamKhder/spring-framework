@@ -1,0 +1,35 @@
+BASICS
+
+Generic
+---------------
+Iterators & Comparators
+----------
+SOLID principles and how they apply in OOP
+-----------
+Boxing/unboxing, autoboxing pitfalls
+---------
+Iterating: for-each, Iterator, ListIterator
+------------
+Sorting using Comparable and Comparator
+---------
+DRY, KISS, YAGNI principles
+----------------------------------------------------------------------------------------------------------------------------
+Data base :
+- savepoints
+----------
+- view
+----------
+- materialized views
+----------
+- sequence
+----------
+- Indexing Strategies (B-Tree, Bitmap, Function-Based Indexes)
+- Partitioning (Range, List, Hash, Composite)
+----------
+- Concurrency and Transactions
+----------
+- PL/SQL Programming
+----------------------------------------------------------------------------------------------------------------------------
+Spring
+https://youtube.com/playlist?list=PLq8huKQsVgUNw6RH9O8_pkLOz-MGmcKQl&si=LWiQ_yF-E9BfKRBK
+----------------------------------------------------------------------------------------------------------------------------------------

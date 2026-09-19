@@ -1,7 +1,8 @@
 package com.spring.demo911.dto;
 
 
-import com.spring.demo911.model.Player;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PlayerDto {
 
-    private Long id;
+    //@JsonProperty("ref_num")
+    private Long ref_num;
 
     @NotBlank(message = "invalid name")
     private String name;
@@ -27,8 +30,8 @@ public class PlayerDto {
 
     private Long count;
 
-    public PlayerDto(Long id, String name, Integer number, Double salary) {
-        this.id = id;
+    public PlayerDto(Long ref_num, String name, Integer number, Double salary) {
+        this.ref_num = ref_num;
         this.name = name;
         this.number = number;
         this.salary = salary;
@@ -40,18 +43,10 @@ public class PlayerDto {
         this.salary = salary;
     }
 
-    public PlayerDto toDto(Player player){
-        return new PlayerDto(
-                player.getId(),
-                player.getName(),
-                player.getNumber(),
-                player.getSalary()
-        );
-    }
     @Override
     public String toString() {
         return "Player{" +
-                "id=" + id +
+                "ref_num=" + ref_num +
                 ", name='" + name + '\'' +
                 ", number=" + number +
                 ", salary=" + salary +

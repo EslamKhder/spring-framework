@@ -1,0 +1,16 @@
+ create Product_Details model, service , service impl , controller , repo
+
+ releation one to one
+
+ create api to add product details to product
+
+ finalize component on angular for add product details
+
+ also for delete and update
+
+ create api for get request order for login user
+
+ create api for get all request order
+
+ api to add product
+

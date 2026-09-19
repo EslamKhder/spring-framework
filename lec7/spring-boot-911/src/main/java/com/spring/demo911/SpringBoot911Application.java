@@ -1,5 +1,6 @@
 package com.spring.demo911;
 
+import com.spring.demo911.model.Player;
 import com.spring.demo911.repo.PlayerRepo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
