@@ -30,7 +30,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public PlayerDto savePlayer(PlayerDto playerDto) throws SystemException {
         if (Objects.nonNull(playerDto.getRef_num())) {
-            throw new SystemException("id must be null");
+            throw new SystemException("player.id.not.required");
         }
 
         Optional<Player> playerOptional = playerRepo.extractName(playerDto.getName());

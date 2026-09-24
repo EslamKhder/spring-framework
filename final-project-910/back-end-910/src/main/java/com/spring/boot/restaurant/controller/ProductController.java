@@ -62,3 +62,7 @@ public class ProductController {
         return ResponseEntity.ok(result);
     }
 }
+
+
+// search/rice
+// search?key=rice

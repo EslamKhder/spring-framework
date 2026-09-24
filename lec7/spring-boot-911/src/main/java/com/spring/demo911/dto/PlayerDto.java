@@ -17,11 +17,11 @@ public class PlayerDto {
     //@JsonProperty("ref_num")
     private Long ref_num;
 
-    @NotBlank(message = "invalid name")
+    @NotBlank(message = "player.invalid.name")
     private String name;
 
-    @Min(message = "invalid number", value = 1)
-    @Max(message = "invalid number",value = 100)
+    @Min(message = "player.invalid.number", value = 1)
+    @Max(message = "player.invalid.number",value = 100)
     private Integer number;
 
     private Double salary;

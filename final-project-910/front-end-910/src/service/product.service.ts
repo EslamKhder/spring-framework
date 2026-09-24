@@ -10,10 +10,27 @@ import {Product} from "../model/product";
 })
 export class ProductService {
 
+  baseURL = 'http://localhost:9090/api/products';
   constructor(private httpClient: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>("http://localhost:9090/api/products/getAll").pipe(
+    return this.httpClient.get<Product[]>(this.baseURL + "/getAll").pipe(
+      map(
+        response => response
+      )
+    );
+  }
+
+  getProductsByCategoryId(id): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.baseURL + "/searchByCategoryId/" + id).pipe(
+      map(
+        response => response
+      )
+    );
+  }
+
+  search(key): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.baseURL + "/search?keyword=" + key).pipe(
       map(
         response => response
       )

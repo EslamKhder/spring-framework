@@ -1,6 +1,15 @@
 <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
-    <li *ngFor="let category of categories" class="nav-item">
-      <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3" data-bs-toggle="pill" href="#tab-1">
+  <li class="nav-item">
+    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" routerLink="/products">
+      <i class="fa fa-shopping-cart fa-2x text-primary"></i>
+      <div class="ps-3">
+        <small class="text-body">Popular</small>
+        <h6 class="mt-n1 mb-0">ALL</h6>
+      </div>
+    </a>
+  </li>
+  <li *ngFor="let category of categories" class="nav-item">
+      <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3" data-bs-toggle="pill" routerLink="/category/{{category.id}}">
         <i class="{{category.logo}} fa-2x text-primary"></i>
         <div class="ps-3">
           <small class="text-body">{{category.flag}}</small>
@@ -10,15 +19,7 @@
     </li>
 
 
-  <!--  <li class="nav-item">-->
-<!--    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">-->
-<!--      <i class="fa fa-shopping-cart fa-2x text-primary"></i>-->
-<!--      <div class="ps-3">-->
-<!--        <small class="text-body">Popular</small>-->
-<!--        <h6 class="mt-n1 mb-0">ALL</h6>-->
-<!--      </div>-->
-<!--    </a>-->
-<!--  </li>-->
+
 <!--  <li class="nav-item">-->
 <!--    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3" data-bs-toggle="pill" href="#tab-1">-->
 <!--      <i class="fa fa-bread-slice fa-2x text-primary"></i>-->
