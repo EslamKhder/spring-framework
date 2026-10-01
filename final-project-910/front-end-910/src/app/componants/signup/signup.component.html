@@ -1,0 +1,71 @@
+<div class="signup-page">
+  <div class="signup-card">
+
+    <div class="signup-header">
+      <h1>Create Account</h1>
+      <p>Sign up to get started</p>
+    </div>
+
+    <!-- Error Messages -->
+    <div class="error-message" *ngIf="messageAr || messageEn">
+      <div class="error-en" *ngIf="messageEn">
+        {{ messageEn }}
+      </div>
+
+      <div class="error-ar" *ngIf="messageAr">
+        {{ messageAr }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        #userName
+        id="username"
+        type="text"
+        placeholder="Enter your username"
+        name="username"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        #password
+        id="password"
+        type="password"
+        placeholder="Create a password"
+        name="password"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        #confirmPassword
+        id="confirmPassword"
+        type="password"
+        placeholder="Confirm your password"
+        name="confirmPassword"
+      />
+    </div>
+
+    <button
+      type="button"
+      class="signup-button"
+      (click)="createAccount(
+        userName.value,
+        password.value,
+        confirmPassword.value
+      )"
+    >
+      Create Account
+    </button>
+
+    <div class="login-section">
+      <span>Already have an account?</span>
+      <a routerLink="/login">Login</a>
+    </div>
+
+  </div>
+</div>

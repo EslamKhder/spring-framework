@@ -31,6 +31,11 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         // Enable CORS
+        http.authorizeHttpRequests()
+                .anyRequest()
+                .authenticated();
+
+
 
         http.authorizeHttpRequests(
 //                api -> api

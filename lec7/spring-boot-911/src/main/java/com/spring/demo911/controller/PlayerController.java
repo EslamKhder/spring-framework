@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/players")
 public class PlayerController {
 
     private PlayerService playerService;
@@ -22,17 +23,17 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/players")
+    @GetMapping()
     public ResponseEntity<List<PlayerDto>> getAllPlayers(){
         return ResponseEntity.ok(playerService.getAllPlayers());
     }
 
-    @PostMapping("/players")
+    @PostMapping()
     public ResponseEntity<PlayerDto> addPlayer(@RequestBody @Validated PlayerDto playerDto) throws SystemException, URISyntaxException {
         return ResponseEntity.created(new URI("/players")).body(playerService.savePlayer(playerDto));
     }
 
-    @PutMapping("/players")
+    @PutMapping()
     public ResponseEntity<PlayerDto> updatePlayer(@RequestBody PlayerDto playerDto) throws SystemException {
         return ResponseEntity.ok(playerService.updatePlayer(playerDto));
     }
@@ -44,23 +45,23 @@ public class PlayerController {
 //        playerService.removePlayer(id);
 //    }
 
-    @DeleteMapping("/players/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePayer(@PathVariable Long id){
         playerService.removePlayer(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/players/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PlayerDto> getPlayer(@PathVariable Long id) throws SystemException {
         return ResponseEntity.ok(playerService.getPlayerById(id));
     }
 
-    @GetMapping("/players/name/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<PlayerDto> getPlayerName(@PathVariable String name) throws SystemException {
         return ResponseEntity.ok(playerService.getPlayerByName(name));
     }
 
-    @GetMapping("/players/search/{name}")
+    @GetMapping("/search/{name}")
     public ResponseEntity<List<PlayerDto>> searchByName(@PathVariable String name) throws SystemException {
         return ResponseEntity.ok(playerService.searchByName(name));
     }

@@ -24,7 +24,6 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts(){
-    debugger
     // id
     let idExist = this.activatedRoute.snapshot.paramMap.has('id');
     let keyExist = this.activatedRoute.snapshot.paramMap.has('key');

@@ -1,0 +1,65 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-header">
+      <h1>Welcome Back</h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <!-- Error Messages -->
+    <div class="error-message" *ngIf="messageAr || messageEn">
+      <div class="error-en" *ngIf="messageEn">
+        {{ messageEn }}
+      </div>
+
+      <div class="error-ar" *ngIf="messageAr">
+        {{ messageAr }}
+      </div>
+    </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          #userName
+          id="username"
+          type="text"
+          placeholder="Enter your username"
+          name="username"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          #password
+          id="password"
+          type="password"
+          placeholder="Enter your password"
+          name="password"
+        />
+      </div>
+
+<!--      <div class="form-options">-->
+<!--        <label class="remember-me">-->
+<!--          <input type="checkbox" name="rememberMe" />-->
+<!--          <span>Remember me</span>-->
+<!--        </label>-->
+
+<!--        <a href="#" class="forgot-password">-->
+<!--          Forgot password?-->
+<!--        </a>-->
+<!--      </div>-->
+
+      <button type="submit" class="login-button"
+      (click)="login(userName.value, password.value)">
+        Login
+      </button>
+
+
+    <div class="register-section">
+      <span>Don't have an account?</span>
+      <a routerLink="/signup">Create account</a>
+    </div>
+
+  </div>
+</div>
