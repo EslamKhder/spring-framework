@@ -1,0 +1,1013 @@
+# Spring Boot Security Project
+
+## Secure Banking Management System
+
+### Project Objective
+
+Build a secure Banking Management System using Spring Boot and Spring Security.
+
+The application must support multiple users with different roles and permissions.
+
+The main focus of this project is to understand how Spring Security handles:
+
+* Authentication
+* Authorization
+* Roles
+* Authorities
+* Permissions
+* Password encryption
+* Custom UserDetails
+* Custom UserDetailsService
+* Custom AuthenticationProvider
+* SecurityFilterChain
+* SecurityContext
+* Method-level security
+* Authentication exceptions
+* Access denied exceptions
+
+---
+
+# Task 1 – Create the Project
+
+Create a Spring Boot project with:
+
+* Spring Web
+* Spring Security
+* Spring Data JPA
+* MySQL
+* Validation
+* Lombok
+
+Create a database:
+
+`bank_security`
+
+---
+
+# Task 2 – Create Customer Entity
+
+Create a `Customer` entity with:
+
+* `id`
+* `fullName`
+* `email`
+* `password`
+* `phone`
+* `enabled`
+* `createdAt`
+
+The email must be unique.
+
+The password must always be stored encrypted.
+
+---
+
+# Task 3 – Create Role Entity
+
+Create a `Role` entity with:
+
+* `id`
+* `name`
+
+Available roles:
+
+* ADMIN
+* BANK_MANAGER
+* CUSTOMER
+* AUDITOR
+
+A customer can have more than one role.
+
+---
+
+# Task 4 – Create Permission Entity
+
+Create a `Permission` entity with:
+
+* `id`
+* `name`
+
+Create the following permissions:
+
+* ACCOUNT_READ
+* ACCOUNT_CREATE
+* ACCOUNT_UPDATE
+* ACCOUNT_DELETE
+* TRANSFER_CREATE
+* TRANSFER_READ
+* TRANSFER_APPROVE
+* CUSTOMER_READ
+* CUSTOMER_UPDATE
+* REPORT_VIEW
+
+---
+
+# Task 5 – Role and Permission Relationship
+
+Create a relationship between:
+
+`Role → Permissions`
+
+A role can have multiple permissions.
+
+For example:
+
+### ADMIN
+
+* ACCOUNT_READ
+* ACCOUNT_CREATE
+* ACCOUNT_UPDATE
+* ACCOUNT_DELETE
+* TRANSFER_READ
+* TRANSFER_APPROVE
+* CUSTOMER_READ
+* CUSTOMER_UPDATE
+* REPORT_VIEW
+
+### BANK_MANAGER
+
+* ACCOUNT_READ
+* ACCOUNT_UPDATE
+* TRANSFER_READ
+* TRANSFER_APPROVE
+* CUSTOMER_READ
+* CUSTOMER_UPDATE
+
+### CUSTOMER
+
+* ACCOUNT_READ
+* TRANSFER_CREATE
+* TRANSFER_READ
+
+### AUDITOR
+
+* ACCOUNT_READ
+* TRANSFER_READ
+* REPORT_VIEW
+
+---
+
+# Task 6 – Customer Roles
+
+Create the relationship:
+
+`Customer → Roles`
+
+A customer can have multiple roles.
+
+For example:
+
+```text
+Ahmed
+CUSTOMER
+```
+
+Another user:
+
+```text
+Eslam
+BANK_MANAGER + AUDITOR
+```
+
+---
+
+# Task 7 – Account Entity
+
+Create a bank account entity containing:
+
+* `id`
+* `accountNumber`
+* `balance`
+* `currency`
+* `status`
+* `customer`
+
+Account status can be:
+
+* ACTIVE
+* BLOCKED
+* CLOSED
+
+The account number must be unique.
+
+---
+
+# Task 8 – Transfer Entity
+
+Create a `Transfer` entity containing:
+
+* `id`
+* `fromAccount`
+* `toAccount`
+* `amount`
+* `status`
+* `createdAt`
+* `createdBy`
+
+Transfer status:
+
+* PENDING
+* APPROVED
+* REJECTED
+* COMPLETED
+* CANCELLED
+
+---
+
+# Task 9 – Create DTOs
+
+Create DTOs for:
+
+* Customer
+* Role
+* Permission
+* Account
+* Transfer
+
+Do not expose entities directly from controllers.
+
+Do not expose:
+
+* Password
+* Internal security information
+
+---
+
+# Task 10 – Registration
+
+Create:
+
+`POST /auth/register`
+
+The request must contain:
+
+* Full name
+* Email
+* Password
+* Phone
+
+The customer must automatically receive:
+
+`CUSTOMER`
+
+role.
+
+The customer must NOT be able to specify the role during registration.
+
+---
+
+# Task 11 – Password Security
+
+Create a `PasswordEncoder`.
+
+Use BCrypt.
+
+When registering:
+
+```text
+Raw Password
+      ↓
+PasswordEncoder
+      ↓
+BCrypt Password
+      ↓
+Database
+```
+
+The raw password must never be stored.
+
+---
+
+# Task 12 – Custom UserDetails
+
+Create:
+
+`CustomUserDetails`
+
+Implement:
+
+`UserDetails`
+
+It must provide:
+
+* Username
+* Password
+* Authorities
+* Enabled status
+* Account status
+
+Authorities must be generated from the customer's roles and permissions.
+
+---
+
+# Task 13 – Authorities
+
+Convert roles into authorities.
+
+Example:
+
+```text
+ADMIN
+```
+
+becomes:
+
+```text
+ROLE_ADMIN
+```
+
+Permissions must be represented as:
+
+```text
+ACCOUNT_READ
+ACCOUNT_DELETE
+TRANSFER_APPROVE
+```
+
+A user with ADMIN should therefore have both:
+
+```text
+ROLE_ADMIN
+ACCOUNT_READ
+ACCOUNT_DELETE
+TRANSFER_APPROVE
+...
+```
+
+---
+
+# Task 14 – Custom UserDetailsService
+
+Create:
+
+`CustomUserDetailsService`
+
+Implement:
+
+`UserDetailsService`
+
+The service must:
+
+1. Receive the email.
+2. Search for the customer.
+3. Throw `UsernameNotFoundException` if the customer does not exist.
+4. Check the customer's status.
+5. Convert the customer to `CustomUserDetails`.
+6. Return the user.
+
+---
+
+# Task 15 – Custom AuthenticationProvider
+
+Create:
+
+`BankAuthenticationProvider`
+
+Implement:
+
+`AuthenticationProvider`.
+
+The provider must:
+
+1. Read email.
+2. Read password.
+3. Search for the customer.
+4. Validate the customer.
+5. Validate the password.
+6. Load roles.
+7. Load permissions.
+8. Create authorities.
+9. Return an authenticated token.
+
+---
+
+# Task 16 – Authentication Rules
+
+Authentication must fail when:
+
+* Email does not exist.
+* Password is incorrect.
+* Customer is disabled.
+* Customer account is blocked.
+* Customer has no valid role.
+
+Do not return `null` for authentication failures.
+
+Use appropriate Spring Security authentication exceptions.
+
+---
+
+# Task 17 – SecurityFilterChain
+
+Configure Spring Security.
+
+The following endpoint must be public:
+
+`/auth/register`
+
+The following endpoints require authentication:
+
+`/accounts/**`
+
+`/transfers/**`
+
+`/customers/**`
+
+`/reports/**`
+
+All other requests must be denied by default.
+
+---
+
+# Task 18 – Account Authorization
+
+Implement:
+
+`GET /accounts/{id}`
+
+Only users with:
+
+`ACCOUNT_READ`
+
+can access it.
+
+Implement:
+
+`POST /accounts`
+
+Only users with:
+
+`ACCOUNT_CREATE`
+
+can access it.
+
+Implement:
+
+`PUT /accounts/{id}`
+
+Only users with:
+
+`ACCOUNT_UPDATE`
+
+can access it.
+
+Implement:
+
+`DELETE /accounts/{id}`
+
+Only users with:
+
+`ACCOUNT_DELETE`
+
+can access it.
+
+---
+
+# Task 19 – Customer Authorization
+
+Implement:
+
+`GET /customers/{id}`
+
+Requires:
+
+`CUSTOMER_READ`
+
+Implement:
+
+`PUT /customers/{id}`
+
+Requires:
+
+`CUSTOMER_UPDATE`
+
+Only users with the appropriate permission can access these endpoints.
+
+---
+
+# Task 20 – Transfer Authorization
+
+Implement:
+
+`POST /transfers`
+
+Requires:
+
+`TRANSFER_CREATE`
+
+Implement:
+
+`GET /transfers/{id}`
+
+Requires:
+
+`TRANSFER_READ`
+
+Implement:
+
+`POST /transfers/{id}/approve`
+
+Requires:
+
+`TRANSFER_APPROVE`
+
+---
+
+# Task 21 – Customer Transfer Restriction
+
+A CUSTOMER can create transfers.
+
+However, a CUSTOMER cannot approve transfers.
+
+A CUSTOMER must never be able to call:
+
+`/transfers/{id}/approve`
+
+even if the customer knows the URL.
+
+---
+
+# Task 22 – Transfer Business Rules
+
+Implement the following rules:
+
+### Rule 1
+
+The source account must exist.
+
+### Rule 2
+
+The destination account must exist.
+
+### Rule 3
+
+Both accounts must be ACTIVE.
+
+### Rule 4
+
+Transfer amount must be greater than zero.
+
+### Rule 5
+
+Source and destination accounts cannot be the same.
+
+### Rule 6
+
+Customer cannot transfer more than the available balance.
+
+### Rule 7
+
+A customer can only create a transfer from an account that belongs to them.
+
+---
+
+# Task 23 – Transfer Approval
+
+When a customer creates a transfer:
+
+```text
+PENDING
+```
+
+The transfer must not immediately move money.
+
+A BANK_MANAGER with:
+
+`TRANSFER_APPROVE`
+
+can approve it.
+
+After approval:
+
+```text
+PENDING
+      ↓
+APPROVED
+      ↓
+COMPLETED
+```
+
+---
+
+# Task 24 – Prevent Unauthorized Approval
+
+A CUSTOMER must not be able to approve a transfer.
+
+An AUDITOR must not be able to approve a transfer.
+
+Only users with:
+
+`TRANSFER_APPROVE`
+
+can approve transfers.
+
+---
+
+# Task 25 – Auditor Role
+
+The AUDITOR can:
+
+* Read accounts
+* Read transfers
+* View reports
+
+The AUDITOR cannot:
+
+* Create accounts
+* Update accounts
+* Delete accounts
+* Create transfers
+* Approve transfers
+
+Test all these cases.
+
+---
+
+# Task 26 – Admin Role
+
+The ADMIN has all permissions.
+
+ADMIN can:
+
+* Manage customers
+* Manage roles
+* Manage permissions
+* Manage accounts
+* Read transfers
+* Approve transfers
+* View reports
+
+---
+
+# Task 27 – Method-Level Security
+
+Enable method-level security.
+
+Use:
+
+`@PreAuthorize`
+
+Protect service methods based on permissions.
+
+Examples:
+
+```text
+ACCOUNT_READ
+ACCOUNT_DELETE
+TRANSFER_CREATE
+TRANSFER_APPROVE
+```
+
+Do not rely only on controller-level security.
+
+---
+
+# Task 28 – SecurityContext
+
+Create:
+
+`GET /auth/me`
+
+Return:
+
+* Customer ID
+* Email
+* Name
+* Roles
+* Authorities
+
+Get the authenticated user from:
+
+`SecurityContext`
+
+Do not query the database using an ID supplied by the request just to determine who is logged in.
+
+---
+
+# Task 29 – Current Customer Accounts
+
+Create:
+
+`GET /accounts/my-accounts`
+
+The endpoint must return only the authenticated customer's accounts.
+
+A customer must never be able to retrieve another customer's accounts by changing an ID in the request.
+
+---
+
+# Task 30 – Ownership Authorization
+
+Create:
+
+`GET /accounts/{id}`
+
+A CUSTOMER can read an account only if the account belongs to them.
+
+For example:
+
+```text
+Customer A
+    ↓
+Account 100
+```
+
+Customer A can access:
+
+`/accounts/100`
+
+But Customer B must receive:
+
+`403 Forbidden`
+
+---
+
+# Task 31 – Block Customer
+
+Create:
+
+`PUT /admin/customers/{id}/block`
+
+Only ADMIN can access it.
+
+After blocking the customer:
+
+* Existing authentication should be handled according to your chosen security policy.
+* New login attempts must fail.
+
+---
+
+# Task 32 – Disable Customer
+
+Create:
+
+`PUT /admin/customers/{id}/disable`
+
+Only ADMIN can access it.
+
+A disabled customer cannot authenticate.
+
+---
+
+# Task 33 – Enable Customer
+
+Create:
+
+`PUT /admin/customers/{id}/enable`
+
+Only ADMIN can access it.
+
+After enabling the customer, authentication should work again if all other conditions are valid.
+
+---
+
+# Task 34 – Custom 401 Response
+
+Create a custom authentication entry point.
+
+When an unauthenticated user accesses a protected endpoint, return:
+
+`401 Unauthorized`
+
+Return a JSON response containing:
+
+* Timestamp
+* Status
+* Error
+* Message
+* Request path
+
+---
+
+# Task 35 – Custom 403 Response
+
+Create a custom access denied handler.
+
+When an authenticated user does not have the required permission, return:
+
+`403 Forbidden`
+
+Return a JSON response containing:
+
+* Timestamp
+* Status
+* Error
+* Message
+* Request path
+
+---
+
+# Task 36 – Login Testing
+
+Test the following scenarios using Postman:
+
+### Test 1
+
+Correct email + correct password.
+
+Expected:
+
+`200 / authenticated`
+
+### Test 2
+
+Correct email + wrong password.
+
+Expected:
+
+`401`
+
+### Test 3
+
+Unknown email.
+
+Expected:
+
+`401`
+
+### Test 4
+
+Disabled customer.
+
+Expected:
+
+`401`
+
+### Test 5
+
+Authenticated CUSTOMER accessing ADMIN endpoint.
+
+Expected:
+
+`403`
+
+### Test 6
+
+Authenticated BANK_MANAGER approving transfer.
+
+Expected:
+
+`200`
+
+---
+
+# Task 37 – Role vs Permission
+
+The student must implement both:
+
+### Role-based authorization
+
+Example:
+
+`ROLE_ADMIN`
+
+### Permission-based authorization
+
+Example:
+
+`TRANSFER_APPROVE`
+
+Use roles for high-level access and permissions for fine-grained access.
+
+Document when each approach should be used.
+
+---
+
+# Task 38 – Security Rules Matrix
+
+Create and implement this matrix:
+
+| Operation        | ADMIN | BANK_MANAGER | CUSTOMER | AUDITOR |
+| ---------------- | ----: | -----------: | -------: | ------: |
+| Create Customer  |     ✅ |            ❌ |        ❌ |       ❌ |
+| Read Customer    |     ✅ |            ✅ |        ❌ |       ❌ |
+| Update Customer  |     ✅ |            ✅ |        ❌ |       ❌ |
+| Create Account   |     ✅ |            ❌ |        ❌ |       ❌ |
+| Read Account     |     ✅ |            ✅ | Own only |       ✅ |
+| Update Account   |     ✅ |            ✅ |        ❌ |       ❌ |
+| Delete Account   |     ✅ |            ❌ |        ❌ |       ❌ |
+| Create Transfer  |     ✅ |            ❌ |        ✅ |       ❌ |
+| Read Transfer    |     ✅ |            ✅ | Own only |       ✅ |
+| Approve Transfer |     ✅ |            ✅ |        ❌ |       ❌ |
+| View Reports     |     ✅ |            ❌ |        ❌ |       ✅ |
+
+---
+
+# Task 39 – Security Attack Scenarios
+
+Test the application against the following scenarios:
+
+### Scenario 1
+
+A CUSTOMER sends:
+
+`ROLE_ADMIN`
+
+during registration.
+
+The application must reject this.
+
+### Scenario 2
+
+A CUSTOMER changes:
+
+`/accounts/10`
+
+to:
+
+`/accounts/20`
+
+The application must prevent access if account 20 belongs to another customer.
+
+### Scenario 3
+
+A CUSTOMER calls:
+
+`POST /transfers/10/approve`
+
+The request must be rejected.
+
+### Scenario 4
+
+An unauthenticated user calls:
+
+`GET /accounts/10`
+
+The request must be rejected.
+
+### Scenario 5
+
+A user sends another user's email in the request body.
+
+The application must not use that value to bypass ownership checks.
+
+---
+
+# Task 40 – Final Security Flow
+
+Document and explain the complete flow:
+
+```text
+Client
+   ↓
+HTTP Request
+   ↓
+SecurityFilterChain
+   ↓
+Authentication
+   ↓
+AuthenticationManager
+   ↓
+BankAuthenticationProvider
+   ↓
+CustomerService / Repository
+   ↓
+PasswordEncoder
+   ↓
+CustomUserDetails
+   ↓
+Roles
+   ↓
+Permissions
+   ↓
+GrantedAuthority
+   ↓
+SecurityContext
+   ↓
+Authorization
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Database
+```
+
+Explain the responsibility of each component.
+
+---
+
+# Final Deliverables
+
+Submit:
+
+1. Complete Spring Boot project.
+2. Database SQL script.
+3. Postman collection.
+4. Customer authentication implementation.
+5. Custom `UserDetails`.
+6. Custom `UserDetailsService`.
+7. Custom `AuthenticationProvider`.
+8. `PasswordEncoder` implementation.
+9. Role implementation.
+10. Permission implementation.
+11. SecurityFilterChain.
+12. Method-level security.
+13. Custom 401 handler.
+14. Custom 403 handler.
+15. Account ownership security.
+16. Transfer authorization.
+17. Admin management APIs.
+18. Security test cases.
+19. Security rules matrix.
+20. Authentication and authorization flow documentation.
