@@ -5,6 +5,7 @@ import com.spring.demo911.service.PlayerService;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,12 @@ public class PlayerController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<List<PlayerDto>> getAllPlayers(){
         return ResponseEntity.ok(playerService.getAllPlayers());
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<PlayerDto> addPlayer(@RequestBody @Validated PlayerDto playerDto) throws SystemException, URISyntaxException {
         return ResponseEntity.created(new URI("/players")).body(playerService.savePlayer(playerDto));
     }

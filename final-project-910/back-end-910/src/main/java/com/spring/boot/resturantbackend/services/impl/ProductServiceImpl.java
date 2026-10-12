@@ -26,6 +26,19 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryService categoryService;
 
+
+
+
+    // 1 2 3 4 5
+//    public List<ProductDto> getProducts(int pageNumber, int pageSize) {
+//            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+//            return productRepo.findAll(pageable).stream().map(ProductMapper.PRODUCT_MAPPER::toProductDto).toList();
+//    }
+
+
+
+
+
     @Override
     public ProductResponseVm getAllProducts(int page, int size) {
         try {
@@ -201,6 +214,12 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
+    // 1   10
+    // 2   10
+    // 3
+    // 4
 
     private static Pageable getPageable(int page, int size) {
         try {

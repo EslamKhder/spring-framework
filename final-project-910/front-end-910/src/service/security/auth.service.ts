@@ -25,4 +25,15 @@ export class AuthService {
       )
     );
   }
+
+  isUserLogin(): boolean{
+    return sessionStorage.getItem("token")  &&
+      sessionStorage.getItem("token") !== null &&
+      sessionStorage.getItem("token") !== undefined;
+  }
+
+  logout(): void{
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userRoles");
+  }
 }

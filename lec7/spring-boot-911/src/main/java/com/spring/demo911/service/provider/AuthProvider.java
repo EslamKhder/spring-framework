@@ -49,9 +49,9 @@ public class AuthProvider implements AuthenticationProvider {
                 return null;
             }
 
-            if (!accountDto.getEmail().startsWith("eslam")) {
-                return null;
-            }
+//            if (!accountDto.getEmail().startsWith("eslam")) {
+//                return null;
+//            }
 
             // password   999
             // accountDto.getPassword() = $2a$12$cAPK/XYvBjRXUk6myjNn9O91aZ64lAd7EDtHmyuJM1b4iE7hAIM9m

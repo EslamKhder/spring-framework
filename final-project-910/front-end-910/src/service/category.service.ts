@@ -12,7 +12,7 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) { }
 
   getCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>("http://localhost:6060/api/categories/getAll").pipe(
+    return this.httpClient.get<Category[]>("http://localhost:6060/categories/all-categories").pipe(
       map(
         response => response
       )

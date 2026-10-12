@@ -30,12 +30,12 @@ export class LoginComponent implements OnInit {
     }
 
     // call api to create account
-
     this.authService.login(userName, password).subscribe(
       response => {
+        sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("roles", response.userRoles);
         this.router.navigateByUrl("/products");
       }, failed => {
-        debugger
         this.messageAr = failed.error.bundleMessage.message_ar;
         this.messageEn = failed.error.bundleMessage.message_en;
       }
