@@ -36,7 +36,8 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(csrfToke -> csrfToke.disable());
 //        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated());
 
         http.httpBasic(Customizer.withDefaults());
         http.formLogin(AbstractHttpConfigurer::disable);

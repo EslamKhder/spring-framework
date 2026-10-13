@@ -20,3 +20,8 @@ spring:
     show-sql: true
   messages:
     basename: i18n/messages
+
+
+token:
+  secret: 1234sabnd@!#@^%&mdASFWnsabd@#@#@$$#sadsa
+  time: 2m
