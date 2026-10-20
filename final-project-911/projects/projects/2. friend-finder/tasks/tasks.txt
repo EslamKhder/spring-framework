@@ -1,0 +1,29 @@
+login feature 
+signup feature
+--------------------------------
+main profile as mention on photo with yellow line
+--------------------------------
+create post 
+text only
+text with photo
+text with video
+---------------------------------
+load all posts related to user login
+--------------------------------
+finalize time line with all feature
+Timeline
+Timeline About
+Timeline Album
+Timeline Friends
+-------------------------------------
+finalize Contact INFO
+-------------------------------------
+apply swagger
+apply redius
+apply Lombok
+apply mapper
+apply validation
+bundel message ar, en
+apply exceptions
+apply transactions if needed
+------------------------------------

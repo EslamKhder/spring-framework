@@ -1,0 +1,32 @@
+apply search by category id and key
+front + back
+--------------------------------------------------------------------
+create entity with name Order 
+(id, code, totalPrice, totalNumber)
+
+relation 
+many to many --> List<Product> 
+
+, many to one ----> User 
+--------------------------------------------------------------------
+User onetomany -----> Order
+-------------------------------------------------------------------
+
+
+create api with request
+
+List of ids (products)
+totalPrice
+totalNumber
+
+
+-----------------------------------------------------------------------
+apply pagination on all apis that get data 
+pls start page number with 1 add validation
+
+bundel message exception
+
+pls apply validation on pagination on service to prevent anyone send invalid page number
+--------------------------------------------------------------------------------------------------
+
+apply Bundel message on all cases if no data return

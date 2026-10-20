@@ -14,10 +14,10 @@ public class BundleMessageConfig {
 
     @Bean
     public ResourceBundleMessageSource messageSource(){
-        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasename(baseName);
-        source.setDefaultEncoding("UTF-8");
-        return source;
+        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
+        resourceBundleMessageSource.setBasename(baseName);
+        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+        return resourceBundleMessageSource;
     }
 
 }

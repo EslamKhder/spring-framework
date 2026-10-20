@@ -17,19 +17,12 @@ import java.util.List;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Schema(
-        name = "Category Dto",
-        description = "category dto contains (id,name,logo,flag,products)"
-)
+
 public class CategoryDto {
     private Long id;
     @NotEmpty(message = "not_empty.name")
     @Size(min = 7, max = 50, message = "size.name")
-    @Schema(
-            name = "name",
-            description = "name for category (string)",
-            example = "taher amin"
-    )
+
     private String name;
     @NotEmpty(message = "not_empty.logo")
     private String logo;

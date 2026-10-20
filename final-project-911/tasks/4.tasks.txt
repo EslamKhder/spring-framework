@@ -1,0 +1,68 @@
+Security Implementation
+Apply full security on the application using JWT (JSON Web Token).
+
+Public APIs:
+
+API for sign-up to create an account.
+
+API for login to receive a JWT token.
+
+Front-End Development (Angular)
+Create Login component.
+
+Create Sign-Up component.
+
+Add necessary routes for login, sign-up, and product page navigation.
+
+Back-End & Front-End Integration
+Finalize Login component:
+
+Back-end: Handle authentication and JWT token generation.
+
+Front-end: Send login request, handle token, and navigate on success.
+
+Finalize Sign-Up component:
+
+Back-end: Handle account creation.
+
+Front-end: Submit user data, show success/failure messages.
+
+User Flow
+After successful account creation, redirect the user to the login page.
+
+After successful login, redirect the user to the product page.
+
+If login fails, display a failure message (Arabic & English) received as bundled message from back-end.
+
+If account creation fails, display a failure message (Arabic & English) received as bundled message from back-end.
+
+Validation Rules
+Username:
+
+Must not be empty.
+
+Minimum size: 7 characters.
+
+Password:
+
+Must include:
+
+At least one uppercase letter.
+
+At least one lowercase letter.
+
+At least one number.
+
+At least one special character.
+
+Minimum size: 7 characters.
+
+Age:
+
+Mandatory.
+
+Must be between 16 and 80 inclusive.
+
+Internationalization
+Apply bundled message system on front-end to support error/success messages in Arabic and English.
+
