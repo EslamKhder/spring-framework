@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: Restaurant
+server:
+  port: 8085

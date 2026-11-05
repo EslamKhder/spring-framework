@@ -56,6 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
             if (categoriesDto.isEmpty()) {
                 throw new SystemException("error.empty.list.category");
             }
+            
             List<Category> categories = categoriesDto.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategory).toList();
             categories = categoryRepo.saveAll(categories);
             return categories.stream().map(CategoryMapper.CATEGORY_MAPPER::toCategoryDto).toList();

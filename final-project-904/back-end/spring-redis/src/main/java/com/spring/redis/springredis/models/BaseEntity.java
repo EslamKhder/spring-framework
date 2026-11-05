@@ -10,11 +10,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity  implements Serializable {
+public class BaseEntity  {
 
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

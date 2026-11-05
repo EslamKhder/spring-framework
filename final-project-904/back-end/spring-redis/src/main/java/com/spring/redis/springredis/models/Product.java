@@ -1,12 +1,17 @@
 package com.spring.redis.springredis.models;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(schema = "hr")
-public class Product extends BaseEntity {
+public class Product extends BaseEntity{
 
     @Column(nullable = false)
     private String name;
@@ -18,10 +23,6 @@ public class Product extends BaseEntity {
     private Double price;
 
     public Product() {
-    }
-
-    public Product(Long id) {
-        super(id);
     }
 
     public String getName() {
@@ -55,4 +56,5 @@ public class Product extends BaseEntity {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 }

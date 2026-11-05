@@ -6,8 +6,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableCaching
-@EnableJpaAuditing
+//@EnableCaching
+@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 public class SpringRedisApplication {
 
     public static void main(String[] args) {
