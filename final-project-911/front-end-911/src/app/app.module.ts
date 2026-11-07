@@ -21,6 +21,8 @@ export const routes: Routes = [
   {path: 'cardDetails', component: CardDetailsComponent},
   {path: 'contact-info', component: ContactInfoComponent},
   {path: 'chefs', component: ChefsComponent},
+  {path: 'search/:key', component: ProductsComponent},
+  {path: 'category/:id', component: ProductsComponent},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   //
